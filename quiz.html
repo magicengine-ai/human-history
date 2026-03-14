@@ -51,21 +51,9 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .quiz-start {
-            text-align: center;
-        }
-        
-        .quiz-start h2 {
-            font-size: 2em;
-            margin-bottom: 20px;
-            color: #4ecdc4;
-        }
-        
-        .quiz-start p {
-            color: #b0b0b0;
-            margin-bottom: 30px;
-            line-height: 1.8;
-        }
+        .quiz-start { text-align: center; }
+        .quiz-start h2 { font-size: 2em; margin-bottom: 20px; color: #4ecdc4; }
+        .quiz-start p { color: #b0b0b0; margin-bottom: 30px; line-height: 1.8; }
         
         .start-btn {
             padding: 15px 50px;
@@ -78,19 +66,13 @@
             transition: all 0.3s;
             font-weight: bold;
         }
-        
         .start-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 10px 30px rgba(78, 205, 196, 0.4);
         }
         
-        .quiz-question {
-            display: none;
-        }
-        
-        .quiz-question.active {
-            display: block;
-        }
+        .quiz-question { display: none; }
+        .quiz-question.active { display: block; }
         
         .question-text {
             font-size: 1.5em;
@@ -99,10 +81,7 @@
             line-height: 1.6;
         }
         
-        .options {
-            display: grid;
-            gap: 15px;
-        }
+        .options { display: grid; gap: 15px; }
         
         .option {
             padding: 20px;
@@ -113,37 +92,23 @@
             transition: all 0.3s;
             font-size: 1.05em;
             user-select: none;
-            -webkit-user-select: none;
         }
-        
         .option:hover {
             background: rgba(255, 255, 255, 0.1);
             border-color: #4ecdc4;
             transform: translateX(10px);
         }
-        
-        .option:active {
-            transform: scale(0.98);
-        }
-        
         .option.correct {
             background: rgba(78, 205, 196, 0.3);
             border-color: #4ecdc4;
         }
-        
         .option.incorrect {
             background: rgba(255, 107, 107, 0.3);
             border-color: #ff6b6b;
         }
         
-        .quiz-result {
-            display: none;
-            text-align: center;
-        }
-        
-        .quiz-result.active {
-            display: block;
-        }
+        .quiz-result { display: none; text-align: center; }
+        .quiz-result.active { display: block; }
         
         .score {
             font-size: 4em;
@@ -173,7 +138,6 @@
             font-weight: bold;
             margin: 10px;
         }
-        
         .restart-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
@@ -187,7 +151,6 @@
             margin-bottom: 30px;
             overflow: hidden;
         }
-        
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, #4ecdc4, #45b7d1);
@@ -209,20 +172,9 @@
             border-radius: 0 10px 10px 0;
             display: none;
         }
-        
-        .explanation.show {
-            display: block;
-        }
-        
-        .explanation h4 {
-            color: #4ecdc4;
-            margin-bottom: 10px;
-        }
-        
-        .explanation p {
-            color: #b0b0b0;
-            line-height: 1.7;
-        }
+        .explanation.show { display: block; }
+        .explanation h4 { color: #4ecdc4; margin-bottom: 10px; }
+        .explanation p { color: #b0b0b0; line-height: 1.7; }
         
         .next-btn {
             padding: 12px 40px;
@@ -237,14 +189,8 @@
             margin-top: 20px;
             display: none;
         }
-        
-        .next-btn.show {
-            display: inline-block;
-        }
-        
-        .next-btn:hover {
-            transform: scale(1.05);
-        }
+        .next-btn.show { display: inline-block; }
+        .next-btn:hover { transform: scale(1.05); }
         
         .era-nav {
             display: flex;
@@ -307,7 +253,7 @@
                     每题有 4 个选项，答对后可以看到详细解释。<br>
                     让我们看看你对人类历史了解多少！
                 </p>
-                <button class="start-btn" onclick="startQuiz()">开始测验 🚀</button>
+                <button class="start-btn" id="startBtn">开始测验 🚀</button>
             </div>
 
             <div class="quiz-question" id="quizQuestion">
@@ -321,225 +267,138 @@
                     <h4>💡 解析</h4>
                     <p id="explanationText"></p>
                 </div>
-                <button class="next-btn" id="nextBtn" onclick="nextQuestion()">下一题 →</button>
+                <button class="next-btn" id="nextBtn">下一题 →</button>
             </div>
 
             <div class="quiz-result" id="quizResult">
                 <div class="score" id="scoreDisplay">0/20</div>
                 <div class="result-text" id="resultText"></div>
-                <button class="restart-btn" onclick="restartQuiz()">🔄 重新测验</button>
+                <button class="restart-btn" id="restartBtn">🔄 重新测验</button>
                 <button class="restart-btn" onclick="location.href='index.html'">🏠 返回主页</button>
             </div>
         </div>
     </div>
 
     <script>
+    (function() {
         const questions = [
-            {
-                question: "人类最早出现在哪个大陆？",
-                options: ["亚洲", "非洲", "欧洲", "美洲"],
-                correct: 1,
-                explanation: "根据考古和遗传学证据，人类（人属）最早出现在非洲东部，约 300 万年前。所有现代人类都是非洲智人的后代。"
-            },
-            {
-                question: "农业革命大约发生在什么时候？",
-                options: ["约 100 万年前", "约 10 万年前", "约 1 万年前", "约 1 千年前"],
-                correct: 2,
-                explanation: "农业革命（新石器革命）发生在约 1 万年前（公元前 8000 年左右），人类开始种植作物和驯养动物，从狩猎采集转向定居农业。"
-            },
-            {
-                question: "已知最早的文字系统是哪个？",
-                options: ["埃及象形文字", "中国甲骨文", "苏美尔楔形文字", "腓尼基字母"],
-                correct: 2,
-                explanation: "苏美尔楔形文字约公元前 3500 年发明，是已知最早的文字系统，用芦苇杆在泥板上压印而成。"
-            },
-            {
-                question: "古埃及大金字塔是哪个法老的陵墓？",
-                options: ["拉美西斯二世", "图坦卡蒙", "胡夫", "哈夫拉"],
-                correct: 2,
-                explanation: "吉萨大金字塔是法老胡夫的陵墓，建于约公元前 2580-2560 年，原高 146.6 米，是古代世界七大奇迹中唯一现存的。"
-            },
-            {
-                question: "孔子生活在哪个时期？",
-                options: ["夏朝", "商朝", "春秋时期", "汉朝"],
-                correct: 2,
-                explanation: "孔子（公元前 551-479 年）生活在春秋时期，是鲁国人，儒家学派创始人，被尊为"至圣先师"。"
-            },
-            {
-                question: "罗马帝国建立于哪一年？",
-                options: ["公元前 509 年", "公元前 27 年", "公元 476 年", "公元 1453 年"],
-                correct: 1,
-                explanation: "公元前 27 年，屋大维被元老院授予"奥古斯都"称号，罗马共和国转变为帝国，开启罗马和平时代。"
-            },
-            {
-                question: "伊斯兰教兴起于哪个世纪？",
-                options: ["5 世纪", "6 世纪", "7 世纪", "8 世纪"],
-                correct: 2,
-                explanation: "伊斯兰教于 7 世纪初（610 年）由穆罕默德在阿拉伯半岛创立，迅速扩张为横跨亚非欧的大帝国。"
-            },
-            {
-                question: "活字印刷术是谁发明的？",
-                options: ["蔡伦", "毕昇", "古腾堡", "王祯"],
-                correct: 1,
-                explanation: "毕昇于约 1040 年发明活字印刷术，使用胶泥活字，比古腾堡早约 400 年。"
-            },
-            {
-                question: "蒙古帝国的建立者是？",
-                options: ["忽必烈", "窝阔台", "成吉思汗", "帖木儿"],
-                correct: 2,
-                explanation: "成吉思汗（铁木真）于 1206 年统一蒙古各部，建立蒙古帝国，后成为人类历史上最大的连续帝国。"
-            },
-            {
-                question: "文艺复兴起源于哪个国家？",
-                options: ["法国", "德国", "意大利", "英国"],
-                correct: 2,
-                explanation: "文艺复兴起源于 14 世纪的意大利，以佛罗伦萨为中心，后传播至整个欧洲。"
-            },
-            {
-                question: "哥伦布发现美洲是在哪一年？",
-                options: ["1492 年", "1498 年", "1502 年", "1519 年"],
-                correct: 0,
-                explanation: "1492 年，哥伦布在西班牙王室支持下横渡大西洋到达美洲，开启了欧洲殖民美洲的时代。"
-            },
-            {
-                question: "《九十五条论纲》是谁发表的？",
-                options: ["加尔文", "马丁·路德", "亨利八世", "慈运理"],
-                correct: 1,
-                explanation: "1517 年，马丁·路德发表《九十五条论纲》，反对出售赎罪券，引发宗教改革运动。"
-            },
-            {
-                question: "牛顿的《自然哲学的数学原理》发表于哪一年？",
-                options: ["1609 年", "1687 年", "1751 年", "1803 年"],
-                correct: 1,
-                explanation: "1687 年，牛顿发表《自然哲学的数学原理》，提出万有引力定律和三大运动定律，奠定经典力学基础。"
-            },
-            {
-                question: "法国大革命爆发于哪一年？",
-                options: ["1776 年", "1789 年", "1799 年", "1815 年"],
-                correct: 1,
-                explanation: "1789 年 7 月 14 日，巴黎人民攻占巴士底狱，法国大革命爆发，推翻君主专制。"
-            },
-            {
-                question: "第一次世界大战发生在哪一年至哪一年？",
-                options: ["1912-1916", "1914-1918", "1916-1920", "1918-1922"],
-                correct: 1,
-                explanation: "第一次世界大战发生于 1914-1918 年，同盟国对阵协约国，造成约 1700 万人死亡。"
-            },
-            {
-                question: "联合国成立于哪一年？",
-                options: ["1919 年", "1939 年", "1945 年", "1950 年"],
-                correct: 2,
-                explanation: "1945 年 10 月 24 日，联合国正式成立，50 个国家签署《联合国宪章》，总部设在纽约。"
-            },
-            {
-                question: "人类首次登月是在哪一年？",
-                options: ["1959 年", "1965 年", "1969 年", "1972 年"],
-                correct: 2,
-                explanation: "1969 年 7 月 20 日，阿波罗 11 号成功登月，阿姆斯特朗成为第一个踏上月球的人类。"
-            },
-            {
-                question: "万维网（World Wide Web）是谁发明的？",
-                options: ["比尔·盖茨", "史蒂夫·乔布斯", "蒂姆·伯纳斯 - 李", "马克·扎克伯格"],
-                correct: 2,
-                explanation: "1989 年，英国科学家蒂姆·伯纳斯 - 李发明万维网，1991 年向公众开放，开启互联网时代。"
-            },
-            {
-                question: "iPhone 是哪一年发布的？",
-                options: ["2005 年", "2007 年", "2009 年", "2011 年"],
-                correct: 1,
-                explanation: "2007 年 1 月 9 日，史蒂夫·乔布斯发布第一代 iPhone，开启智能手机和移动互联网时代。"
-            },
-            {
-                question: "Transformer 架构（现代 AI 基础）是哪一年提出的？",
-                options: ["2015 年", "2017 年", "2019 年", "2021 年"],
-                correct: 1,
-                explanation: "2017 年，Google 团队发表论文《Attention Is All You Need》，提出 Transformer 架构，成为现代大语言模型的基础。"
-            }
+            { question: "人类最早出现在哪个大陆？", options: ["亚洲", "非洲", "欧洲", "美洲"], correct: 1, explanation: "根据考古和遗传学证据，人类（人属）最早出现在非洲东部，约 300 万年前。" },
+            { question: "农业革命大约发生在什么时候？", options: ["约 100 万年前", "约 10 万年前", "约 1 万年前", "约 1 千年前"], correct: 2, explanation: "农业革命发生在约 1 万年前（公元前 8000 年左右），人类开始种植作物和驯养动物。" },
+            { question: "已知最早的文字系统是哪个？", options: ["埃及象形文字", "中国甲骨文", "苏美尔楔形文字", "腓尼基字母"], correct: 2, explanation: "苏美尔楔形文字约公元前 3500 年发明，是已知最早的文字系统。" },
+            { question: "古埃及大金字塔是哪个法老的陵墓？", options: ["拉美西斯二世", "图坦卡蒙", "胡夫", "哈夫拉"], correct: 2, explanation: "吉萨大金字塔是法老胡夫的陵墓，建于约公元前 2580-2560 年。" },
+            { question: "孔子生活在哪个时期？", options: ["夏朝", "商朝", "春秋时期", "汉朝"], correct: 2, explanation: "孔子（公元前 551-479 年）生活在春秋时期，是鲁国人。" },
+            { question: "罗马帝国建立于哪一年？", options: ["公元前 509 年", "公元前 27 年", "公元 476 年", "公元 1453 年"], correct: 1, explanation: "公元前 27 年，屋大维被元老院授予'奥古斯都'称号，罗马帝国建立。" },
+            { question: "伊斯兰教兴起于哪个世纪？", options: ["5 世纪", "6 世纪", "7 世纪", "8 世纪"], correct: 2, explanation: "伊斯兰教于 7 世纪初（610 年）由穆罕默德在阿拉伯半岛创立。" },
+            { question: "活字印刷术是谁发明的？", options: ["蔡伦", "毕昇", "古腾堡", "王祯"], correct: 1, explanation: "毕昇于约 1040 年发明活字印刷术，使用胶泥活字。" },
+            { question: "蒙古帝国的建立者是？", options: ["忽必烈", "窝阔台", "成吉思汗", "帖木儿"], correct: 2, explanation: "成吉思汗（铁木真）于 1206 年统一蒙古各部，建立蒙古帝国。" },
+            { question: "文艺复兴起源于哪个国家？", options: ["法国", "德国", "意大利", "英国"], correct: 2, explanation: "文艺复兴起源于 14 世纪的意大利，以佛罗伦萨为中心。" },
+            { question: "哥伦布发现美洲是在哪一年？", options: ["1492 年", "1498 年", "1502 年", "1519 年"], correct: 0, explanation: "1492 年，哥伦布横渡大西洋到达美洲。" },
+            { question: "《九十五条论纲》是谁发表的？", options: ["加尔文", "马丁·路德", "亨利八世", "慈运理"], correct: 1, explanation: "1517 年，马丁·路德发表《九十五条论纲》，引发宗教改革。" },
+            { question: "牛顿的《自然哲学的数学原理》发表于哪一年？", options: ["1609 年", "1687 年", "1751 年", "1803 年"], correct: 1, explanation: "1687 年，牛顿发表《自然哲学的数学原理》，提出万有引力定律。" },
+            { question: "法国大革命爆发于哪一年？", options: ["1776 年", "1789 年", "1799 年", "1815 年"], correct: 1, explanation: "1789 年 7 月 14 日，巴黎人民攻占巴士底狱，法国大革命爆发。" },
+            { question: "第一次世界大战发生在哪一年至哪一年？", options: ["1912-1916", "1914-1918", "1916-1920", "1918-1922"], correct: 1, explanation: "第一次世界大战发生于 1914-1918 年。" },
+            { question: "联合国成立于哪一年？", options: ["1919 年", "1939 年", "1945 年", "1950 年"], correct: 2, explanation: "1945 年 10 月 24 日，联合国正式成立。" },
+            { question: "人类首次登月是在哪一年？", options: ["1959 年", "1965 年", "1969 年", "1972 年"], correct: 2, explanation: "1969 年 7 月 20 日，阿波罗 11 号成功登月。" },
+            { question: "万维网是谁发明的？", options: ["比尔·盖茨", "史蒂夫·乔布斯", "蒂姆·伯纳斯 - 李", "马克·扎克伯格"], correct: 2, explanation: "1989 年，蒂姆·伯纳斯 - 李发明万维网。" },
+            { question: "iPhone 是哪一年发布的？", options: ["2005 年", "2007 年", "2009 年", "2011 年"], correct: 1, explanation: "2007 年 1 月 9 日，史蒂夫·乔布斯发布第一代 iPhone。" },
+            { question: "Transformer 架构是哪一年提出的？", options: ["2015 年", "2017 年", "2019 年", "2021 年"], correct: 1, explanation: "2017 年，Google 团队提出 Transformer 架构。" }
         ];
 
         let currentQuestion = 0;
         let score = 0;
         let answered = false;
 
-        function startQuiz() {
-            document.getElementById('quizStart').style.display = 'none';
-            document.getElementById('quizQuestion').classList.add('active');
-            document.getElementById('totalNum').textContent = questions.length;
+        const quizStart = document.getElementById('quizStart');
+        const quizQuestion = document.getElementById('quizQuestion');
+        const quizResult = document.getElementById('quizResult');
+        const startBtn = document.getElementById('startBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const restartBtn = document.getElementById('restartBtn');
+        const currentNum = document.getElementById('currentNum');
+        const totalNum = document.getElementById('totalNum');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const optionsDiv = document.getElementById('options');
+        const explanation = document.getElementById('explanation');
+        const explanationText = document.getElementById('explanationText');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const resultText = document.getElementById('resultText');
+
+        totalNum.textContent = questions.length;
+
+        startBtn.addEventListener('click', function() {
+            quizStart.style.display = 'none';
+            quizQuestion.classList.add('active');
             showQuestion();
-        }
+        });
 
-        function showQuestion() {
-            answered = false;
-            const q = questions[currentQuestion];
-            document.getElementById('currentNum').textContent = currentQuestion + 1;
-            document.getElementById('progressFill').style.width = ((currentQuestion) / questions.length * 100) + '%';
-            document.getElementById('questionText').textContent = q.question;
-            document.getElementById('explanation').classList.remove('show');
-            document.getElementById('nextBtn').classList.remove('show');
-            
-            const optionsDiv = document.getElementById('options');
-            optionsDiv.innerHTML = '';
-            q.options.forEach((opt, i) => {
-                const div = document.createElement('div');
-                div.className = 'option';
-                div.textContent = opt;
-                div.style.cursor = 'pointer';
-                div.addEventListener('click', function() { selectOption(i, div); });
-                optionsDiv.appendChild(div);
-            });
-        }
-
-        function selectOption(index, element) {
-            if (answered) return;
-            answered = true;
-            
-            const q = questions[currentQuestion];
-            const options = document.querySelectorAll('.option');
-            
-            if (index === q.correct) {
-                element.classList.add('correct');
-                score++;
-            } else {
-                element.classList.add('incorrect');
-                if (options[q.correct]) {
-                    options[q.correct].classList.add('correct');
-                }
-            }
-            
-            document.getElementById('explanationText').textContent = q.explanation;
-            document.getElementById('explanation').classList.add('show');
-            document.getElementById('nextBtn').classList.add('show');
-        }
-
-        function nextQuestion() {
+        nextBtn.addEventListener('click', function() {
             currentQuestion++;
             if (currentQuestion >= questions.length) {
                 showResult();
             } else {
                 showQuestion();
             }
+        });
+
+        restartBtn.addEventListener('click', function() {
+            currentQuestion = 0;
+            score = 0;
+            quizResult.classList.remove('active');
+            quizStart.style.display = 'block';
+        });
+
+        function showQuestion() {
+            answered = false;
+            const q = questions[currentQuestion];
+            currentNum.textContent = currentQuestion + 1;
+            progressFill.style.width = (currentQuestion / questions.length * 100) + '%';
+            questionText.textContent = q.question;
+            explanation.classList.remove('show');
+            nextBtn.classList.remove('show');
+            
+            optionsDiv.innerHTML = '';
+            q.options.forEach((opt, i) => {
+                const div = document.createElement('div');
+                div.className = 'option';
+                div.textContent = opt;
+                div.addEventListener('click', function() {
+                    if (answered) return;
+                    answered = true;
+                    
+                    const options = document.querySelectorAll('.option');
+                    if (i === q.correct) {
+                        div.classList.add('correct');
+                        score++;
+                    } else {
+                        div.classList.add('incorrect');
+                        if (options[q.correct]) {
+                            options[q.correct].classList.add('correct');
+                        }
+                    }
+                    
+                    explanationText.textContent = q.explanation;
+                    explanation.classList.add('show');
+                    nextBtn.classList.add('show');
+                });
+                optionsDiv.appendChild(div);
+            });
         }
 
         function showResult() {
-            document.getElementById('quizQuestion').classList.remove('active');
-            document.getElementById('quizResult').classList.add('active');
-            document.getElementById('scoreDisplay').textContent = `${score}/${questions.length}`;
+            quizQuestion.classList.remove('active');
+            quizResult.classList.add('active');
+            scoreDisplay.textContent = score + '/' + questions.length;
             
-            let text = '';
             const percent = score / questions.length * 100;
+            let text = '';
             if (percent >= 90) text = '🏆 太厉害了！你是历史专家！';
             else if (percent >= 70) text = '👏 很不错！你对历史有深入了解！';
             else if (percent >= 50) text = '👍 还可以！继续学习会更好！';
             else text = '📚 加油！多看看历史内容再来挑战！';
-            document.getElementById('resultText').textContent = text;
+            resultText.textContent = text;
         }
-
-        function restartQuiz() {
-            currentQuestion = 0;
-            score = 0;
-            document.getElementById('quizResult').classList.remove('active');
-            document.getElementById('quizStart').style.display = 'block';
-        }
+    })();
     </script>
 </body>
 </html>
