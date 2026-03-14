@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>历史人物 - 人类历史发展进程</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #ffd700, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle { color: #a0a0a0; font-size: 1.3em; }
+        .back-link {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+        .back-link:hover { background: rgba(255, 255, 255, 0.2); border-color: #ffd700; }
+        
+        .filter-bar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 10px 25px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #ffd700;
+        }
+        
+        .people-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .people-card {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .people-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: #ffd700;
+        }
+        .people-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffd700, #ff6b6b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+        .people-name {
+            font-size: 1.5em;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .people-time {
+            text-align: center;
+            color: #4ecdc4;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+        }
+        .people-desc {
+            color: #b0b0b0;
+            line-height: 1.6;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .people-tags {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .tag {
+            padding: 5px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            font-size: 0.8em;
+            color: #a0a0a0;
+        }
+        .tag.politics { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag.science { background: rgba(255, 215, 0, 0.2); color: #ffd700; }
+        .tag.philosophy { background: rgba(78, 205, 196, 0.2); color: #4ecdc4; }
+        .tag.art { background: rgba(69, 183, 209, 0.2); color: #45b7d1; }
+        .tag.military { background: rgba(255, 100, 100, 0.2); color: #ff6464; }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 25px;
+            padding: 50px;
+            max-width: 800px;
+            width: 90%;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2.5em;
+            cursor: pointer;
+            color: #a0a0a0;
+            transition: all 0.3s;
+        }
+        .modal-close:hover { color: #ffd700; transform: rotate(90deg); }
+        .modal-title {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffd700, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .modal-time {
+            font-size: 1.3em;
+            color: #4ecdc4;
+            margin-bottom: 25px;
+            padding: 10px 20px;
+            background: rgba(78, 205, 196, 0.1);
+            border-radius: 10px;
+            display: inline-block;
+        }
+        .modal-body { line-height: 1.9; color: #d0d0d0; font-size: 1.05em; }
+        .modal-body h3 { color: #ffd700; margin: 25px 0 15px 0; font-size: 1.4em; }
+        .modal-body ul { margin-left: 25px; margin-bottom: 20px; }
+        .modal-body li { margin-bottom: 10px; color: #b0b0b0; }
+        .modal-body strong { color: #fff; }
+        .quote {
+            font-style: italic;
+            padding: 20px;
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 4px solid #ffd700;
+            border-radius: 0 10px 10px 0;
+            margin: 20px 0;
+            color: #e0e0e0;
+        }
+        
+        .era-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .era-nav a {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+        .era-nav a:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #ffd700;
+            transform: translateY(-2px);
+        }
+        .era-nav a.active {
+            background: linear-gradient(135deg, #ff6b6b, #ffd700);
+            border-color: #ffd700;
+            color: #000;
+        }
+        
+        .fade-in { animation: fadeIn 0.8s ease-in; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="fade-in">
+            <h1>👤 历史人物</h1>
+            <p class="subtitle">Historical Figures - 改变世界的人物</p>
+            <a href="index.html" class="back-link">← 返回主时间线</a>
+            <div class="era-nav">
+                <a href="index.html">🏠 主页</a>
+                <a href="prehistoric.html">🪨 史前</a>
+                <a href="ancient.html">🏛️ 古代</a>
+                <a href="medieval.html">🏰 中世纪</a>
+                <a href="early-modern.html">⛵ 近代</a>
+                <a href="modern.html">🚀 现代</a>
+                <a href="people.html" class="active">👤 人物</a>
+                <a href="quiz.html">📝 测验</a>
+            </div>
+        </header>
+
+        <div class="filter-bar fade-in">
+            <button class="filter-btn active" onclick="filterPeople('all')">全部</button>
+            <button class="filter-btn" onclick="filterPeople('politics')">🏛️ 政治家</button>
+            <button class="filter-btn" onclick="filterPeople('science')">🔬 科学家</button>
+            <button class="filter-btn" onclick="filterPeople('philosophy')">💭 哲学家</button>
+            <button class="filter-btn" onclick="filterPeople('art')">🎨 艺术家</button>
+            <button class="filter-btn" onclick="filterPeople('military')">⚔️ 军事家</button>
+        </div>
+
+        <div class="people-grid" id="peopleGrid"></div>
+    </div>
+
+    <div class="modal" id="peopleModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        const peopleData = [
+            {
+                id: 'confucius',
+                name: '孔子',
+                time: '公元前 551-479 年',
+                avatar: '📚',
+                category: 'philosophy',
+                desc: '中国古代最伟大的思想家和教育家，儒家学派创始人',
+                tags: ['哲学', '教育', '文化'],
+                detail: {
+                    title: '孔子 - 万世师表',
+                    content: `
+                        <h3>生平简介</h3>
+                        <p>孔子（名丘，字仲尼），春秋时期鲁国人，中国古代最伟大的思想家、教育家，儒家学派创始人。</p>
+                        
+                        <h3>核心思想</h3>
+                        <ul>
+                            <li><strong>仁：</strong>"仁者爱人"，"己所不欲，勿施于人"</li>
+                            <li><strong>礼：</strong>社会秩序和行为规范</li>
+                            <li><strong>孝：</strong>尊敬父母和祖先</li>
+                            <li><strong>君子：</strong>理想人格，德才兼备</li>
+                        </ul>
+                        
+                        <h3>教育贡献</h3>
+                        <ul>
+                            <li>开创私学，"有教无类"</li>
+                            <li>弟子三千，贤人七十二</li>
+                            <li>因材施教，启发式教学</li>
+                            <li>整理六经：《诗》《书》《礼》《乐》《易》《春秋》</li>
+                        </ul>
+                        
+                        <h3>历史影响</h3>
+                        <ul>
+                            <li>汉代成为官方意识形态</li>
+                            <li>影响中国及东亚两千多年</li>
+                            <li>儒家文化圈形成</li>
+                            <li>被尊为"至圣先师"</li>
+                        </ul>
+                        
+                        <div class="quote">"学而时习之，不亦说乎？有朋自远方来，不亦乐乎？"</div>
+                    `
+                }
+            },
+            {
+                id: 'alexander',
+                name: '亚历山大大帝',
+                time: '公元前 356-323 年',
+                avatar: '⚔️',
+                category: 'military',
+                desc: '马其顿国王，建立横跨欧亚非的大帝国',
+                tags: ['军事', '政治', '征服'],
+                detail: {
+                    title: '亚历山大大帝 - 征服世界的王者',
+                    content: `
+                        <h3>生平简介</h3>
+                        <p>亚历山大三世，马其顿国王，20 岁即位，13 年征战建立横跨欧亚非的庞大帝国。</p>
+                        
+                        <h3>主要战绩</h3>
+                        <ul>
+                            <li><strong>格拉尼库斯战役（前 334）：</strong>击败波斯</li>
+                            <li><strong>伊苏斯战役（前 333）：</strong>大败大流士三世</li>
+                            <li><strong>高加米拉战役（前 331）：</strong>灭亡波斯帝国</li>
+                            <li><strong>东征印度（前 327）：</strong>抵达印度河流域</li>
+                        </ul>
+                        
+                        <h3>帝国疆域</h3>
+                        <ul>
+                            <li>东起印度河，西至希腊</li>
+                            <li>北抵中亚，南达埃及</li>
+                            <li>面积约 500 万平方公里</li>
+                        </ul>
+                        
+                        <h3>历史影响</h3>
+                        <ul>
+                            <li>希腊化时代开启</li>
+                            <li>东西方文化交流</li>
+                            <li>建立 20 多座亚历山大城</li>
+                            <li>军事战术影响后世</li>
+                        </ul>
+                        
+                        <div class="quote">"我不是世界的征服者，我是世界的统一者。"</div>
+                    `
+                }
+            },
+            {
+                id: 'caesar',
+                name: '凯撒',
+                time: '公元前 100-44 年',
+                avatar: '👑',
+                category: 'politics',
+                desc: '罗马共和国末期政治家、军事家，罗马帝国奠基人',
+                tags: ['政治', '军事', '改革'],
+                detail: {
+                    title: '凯撒 - 罗马的独裁官',
+                    content: `
+                        <h3>生平简介</h3>
+                        <p>盖乌斯·尤利乌斯·凯撒，罗马共和国末期杰出的政治家、军事家，罗马帝国的实际奠基人。</p>
+                        
+                        <h3>主要成就</h3>
+                        <ul>
+                            <li><strong>高卢战争（前 58-50）：</strong>征服高卢，扩展罗马疆域</li>
+                            <li><strong>跨越卢比孔河（前 49）：</strong>"我来，我见，我征服"</li>
+                            <li><strong>内战胜利：</strong>击败庞培，成为独裁官</li>
+                            <li><strong>儒略历：</strong>改革历法，沿用 1600 多年</li>
+                        </ul>
+                        
+                        <h3>改革措施</h3>
+                        <ul>
+                            <li>土地改革，安置老兵</li>
+                            <li>扩大公民权</li>
+                            <li>改革行省管理</li>
+                            <li>建设公共工程</li>
+                        </ul>
+                        
+                        <h3>遇刺身亡</h3>
+                        <ul>
+                            <li>前 44 年 3 月 15 日，被元老院成员刺杀</li>
+                            <li>临终遗言："还有你吗，布鲁图？"</li>
+                            <li>引发新一轮内战，最终导致共和国灭亡</li>
+                        </ul>
+                        
+                        <div class="quote">"Veni, Vidi, Vici（我来，我见，我征服）"</div>
+                    `
+                }
+            },
+            {
+                id: 'newton',
+                name: '牛顿',
+                time: '1643-1727 年',
+                avatar: '🍎',
+                category: 'science',
+                desc: '英国物理学家、数学家，经典力学奠基人',
+                tags: ['物理', '数学', '天文'],
+                detail: {
+                    title: '牛顿 - 经典力学之父',
+                    content: `
+                        <h3>生平简介</h3>
+                        <p>艾萨克·牛顿，英国物理学家、数学家、天文学家，科学革命的关键人物，被认为是历史上最有影响力的科学家之一。</p>
+                        
+                        <h3>主要贡献</h3>
+                        <ul>
+                            <li><strong>万有引力定律：</strong>解释天体运动和地球重力</li>
+                            <li><strong>三大运动定律：</strong>奠定经典力学基础</li>
+                            <li><strong>微积分：</strong>与莱布尼茨独立发明</li>
+                            <li><strong>光学：</strong>光的色散实验，反射望远镜</li>
+                        </ul>
+                        
+                        <h3>代表著作</h3>
+                        <ul>
+                            <li>《自然哲学的数学原理》（1687）：科学史上最重要的著作之一</li>
+                            <li>《光学》（1704）：光的本性研究</li>
+                        </ul>
+                        
+                        <h3>历史影响</h3>
+                        <ul>
+                            <li>经典力学体系建立</li>
+                            <li>科学方法的确立</li>
+                            <li>启蒙运动的科学基础</li>
+                            <li>工业革命的理论基础</li>
+                        </ul>
+                        
+                        <div class="quote">"如果说我看得比别人更远，那是因为我站在巨人的肩膀上。"</div>
+                    `
+                }
+            },
+            {
+                id: 'napoleon',
+                name: '拿破仑',
+                time: '1769-1821 年',
+                avatar: '🎖️',
+                category: 'military',
+                desc: '法国军事家、政治家，法兰西第一帝国皇帝',
+                tags: ['军事', '政治', '法律'],
+                detail: {
+                    title: '拿破仑 - 法兰西的皇帝',
+                    content: `
+                        <h3>生平简介</h3>
+                        <p>拿破仑·波拿巴，法国军事家、政治家，法兰西第一帝国皇帝，欧洲历史上最伟大的军事统帅之一。</p>
+                        
+                        <h3>主要战绩</h3>
+                        <ul>
+                            <li><strong>意大利战役（1796-97）：</strong>击败奥地利</li>
+                            <li><strong>埃及远征（1798）：</strong>发现罗塞塔石碑</li>
+                            <li><strong>奥斯特里茨战役（1805）：</strong>"三皇会战"，最辉煌胜利</li>
+                            <li><strong>征服欧洲：</strong>控制大半个欧洲</li>
+                        </ul>
+                        
+                        <h3>内政成就</h3>
+                        <ul>
+                            <li><strong>拿破仑法典：</strong>现代民法体系基础</li>
+                            <li>改革教育制度</li>
+                            <li>建立法兰西银行</li>
+                            <li>修建凯旋门等建筑</li>
+                        </ul>
+                        
+                        <h3>最终结局</h3>
+                        <ul>
+                            <li>1814 年第一次退位，流放厄尔巴岛</li>
+                            <li>1815 年百日王朝</li>
+                            <li>滑铁卢战败，流放圣赫勒拿岛</li>
+                            <li>1821 年逝世</li>
+                        </ul>
+                        
+                        <div class="quote">"不想当将军的士兵不是好士兵。"</div>
+                    `
+                }
+            },
+            {
+                id: 'einstein',
+                name: '爱因斯坦',
+                time: '1879-1955 年',
+                avatar: '🧠',
+                category: 'science',
+                desc: '德裔美国物理学家，相对论创始人，诺贝尔奖得主',
+                tags: ['物理', '相对论', '量子'],
+                detail: {
+                    title: '爱因斯坦 - 现代物理学之父',
+                    content: `
+                        <h3>生平简介</h3>
+                        <p>阿尔伯特·爱因斯坦，德裔美国理论物理学家，现代物理学两大支柱（相对论和量子力学）的奠基人之一。</p>
+                        
+                        <h3>主要贡献</h3>
+                        <ul>
+                            <li><strong>狭义相对论（1905）：</strong>E=mc²，时空统一</li>
+                            <li><strong>广义相对论（1915）：</strong>引力是时空弯曲</li>
+                            <li><strong>光电效应：</strong>证明光的粒子性，获 1921 年诺贝尔奖</li>
+                            <li><strong>布朗运动：</strong>证明原子存在</li>
+                        </ul>
+                        
+                        <h3>社会活动</h3>
+                        <ul>
+                            <li>反对纳粹，移居美国</li>
+                            <li>致信罗斯福研发原子弹</li>
+                            <li>战后倡导和平利用核能</li>
+                            <li>支持民权运动</li>
+                        </ul>
+                        
+                        <h3>历史影响</h3>
+                        <ul>
+                            <li>改变人类对时空的理解</li>
+                            <li>核能时代开启</li>
+                            <li>GPS 等现代技术基础</li>
+                            <li>成为"天才"的代名词</li>
+                        </ul>
+                        
+                        <div class="quote">"想象力比知识更重要。"</div>
+                    `
+                }
+            },
+            {
+                id: 'da Vinci',
+                name: '达·芬奇',
+                time: '1452-1519 年',
+                avatar: '🎨',
+                category: 'art',
+                desc: '意大利文艺复兴时期博学家，艺术家、科学家、发明家',
+                tags: ['艺术', '科学', '发明'],
+                detail: {
+                    title: '达·芬奇 - 文艺复兴全才',
+                    content: `
+                        <h3>生平简介</h3>
+                        <p>列奥纳多·达·芬奇，意大利文艺复兴时期杰出的博学家，在艺术、科学、工程等多个领域都有卓越贡献。</p>
+                        
+                        <h3>艺术成就</h3>
+                        <ul>
+                            <li><strong>《蒙娜丽莎》：</strong>世界最著名的画作</li>
+                            <li><strong>《最后的晚餐》：</strong>文艺复兴壁画巅峰</li>
+                            <li><strong>绘画技法：</strong>晕涂法、空气透视</li>
+                        </ul>
+                        
+                        <h3>科学研究</h3>
+                        <ul>
+                            <li>人体解剖研究，绘制精确解剖图</li>
+                            <li>飞行器设计</li>
+                            <li>军事工程设计</li>
+                            <li>水利工程研究</li>
+                        </ul>
+                        
+                        <h3>手稿遗产</h3>
+                        <ul>
+                            <li>留下约 13000 页手稿</li>
+                            <li>镜像书写（从右向左）</li>
+                            <li>包含科学、艺术、工程等多方面内容</li>
+                        </ul>
+                        
+                        <div class="quote">"简单是终极的复杂。"</div>
+                    `
+                }
+            },
+            {
+                id: 'mandela',
+                name: '曼德拉',
+                time: '1918-2013 年',
+                avatar: '✊',
+                category: 'politics',
+                desc: '南非反种族隔离革命家，南非首位黑人总统',
+                tags: ['政治', '人权', '和平'],
+                detail: {
+                    title: '曼德拉 - 和解的象征',
+                    content: `
+                        <h3>生平简介</h3>
+                        <p>纳尔逊·曼德拉，南非反种族隔离革命家、政治家和慈善家，为废除种族隔离制度奋斗终生。</p>
+                        
+                        <h3>抗争历程</h3>
+                        <ul>
+                            <li>1944 年加入非洲人国民大会（ANC）</li>
+                            <li>1964 年被判终身监禁</li>
+                            <li>在狱中度过 27 年</li>
+                            <li>1990 年获释</li>
+                        </ul>
+                        
+                        <h3>政治成就</h3>
+                        <ul>
+                            <li>1993 年获诺贝尔和平奖</li>
+                            <li>1994 年当选南非首位黑人总统</li>
+                            <li>推动种族和解</li>
+                            <li>建立真相与和解委员会</li>
+                        </ul>
+                        
+                        <h3>精神遗产</h3>
+                        <ul>
+                            <li>宽容与和解的象征</li>
+                            <li>全球人权运动偶像</li>
+                            <li>"曼德拉日"（7 月 18 日）</li>
+                        </ul>
+                        
+                        <div class="quote">"教育是最强大的武器，你可以用它来改变世界。"</div>
+                    `
+                }
+            }
+        ];
+
+        function renderPeople(filter = 'all') {
+            const grid = document.getElementById('peopleGrid');
+            grid.innerHTML = '';
+            
+            const filtered = filter === 'all' 
+                ? peopleData 
+                : peopleData.filter(p => p.category === filter);
+            
+            filtered.forEach(person => {
+                const card = document.createElement('div');
+                card.className = 'people-card fade-in';
+                card.onclick = () => showPeople(person);
+                card.innerHTML = `
+                    <div class="people-avatar">${person.avatar}</div>
+                    <div class="people-name">${person.name}</div>
+                    <div class="people-time">${person.time}</div>
+                    <div class="people-desc">${person.desc}</div>
+                    <div class="people-tags">
+                        ${person.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterPeople(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            renderPeople(category);
+        }
+
+        function showPeople(person) {
+            const modal = document.getElementById('peopleModal');
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <h2 class="modal-title">${person.avatar} ${person.detail.title}</h2>
+                <div class="modal-time">${person.time}</div>
+                <div class="modal-body">${person.detail.content}</div>
+            `;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('peopleModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('peopleModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        renderPeople();
+    </script>
+</body>
+</html>
