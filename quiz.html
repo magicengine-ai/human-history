@@ -112,12 +112,18 @@
             cursor: pointer;
             transition: all 0.3s;
             font-size: 1.05em;
+            user-select: none;
+            -webkit-user-select: none;
         }
         
         .option:hover {
             background: rgba(255, 255, 255, 0.1);
             border-color: #4ecdc4;
             transform: translateX(10px);
+        }
+        
+        .option:active {
+            transform: scale(0.98);
         }
         
         .option.correct {
@@ -477,7 +483,8 @@
                 const div = document.createElement('div');
                 div.className = 'option';
                 div.textContent = opt;
-                div.onclick = () => selectOption(i, div);
+                div.style.cursor = 'pointer';
+                div.addEventListener('click', function() { selectOption(i, div); });
                 optionsDiv.appendChild(div);
             });
         }
@@ -494,7 +501,9 @@
                 score++;
             } else {
                 element.classList.add('incorrect');
-                options[q.correct].classList.add('correct');
+                if (options[q.correct]) {
+                    options[q.correct].classList.add('correct');
+                }
             }
             
             document.getElementById('explanationText').textContent = q.explanation;
