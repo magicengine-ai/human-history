@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>古代文明 - 人类历史发展进程</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #4ecdc4, #ffd700, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #a0a0a0;
+            font-size: 1.3em;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #4ecdc4;
+        }
+
+        .era-info-box {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .era-info-box h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #4ecdc4;
+        }
+
+        .era-info-box p {
+            line-height: 1.8;
+            color: #b0b0b0;
+            margin-bottom: 15px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+            margin: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #4ecdc4, #ffd700, #4ecdc4);
+            border-radius: 2px;
+        }
+
+        .event {
+            position: relative;
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .event:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: #4ecdc4;
+        }
+
+        .event::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 35px;
+            width: 20px;
+            height: 20px;
+            background: #4ecdc4;
+            border-radius: 50%;
+            border: 4px solid #0c0c0c;
+            box-shadow: 0 0 20px rgba(78, 205, 196, 0.5);
+        }
+
+        .event-time {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #4ecdc4, #ffd700);
+            color: #000;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+
+        .event h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .event p {
+            color: #b0b0b0;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .event-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 0 20px;
+        }
+
+        .event.expanded .event-details {
+            max-height: 1500px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .event-details h4 {
+            color: #4ecdc4;
+            margin: 15px 0 10px 0;
+            font-size: 1.2em;
+        }
+
+        .event-details ul {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .event-details li {
+            margin-bottom: 8px;
+            color: #c0c0c0;
+        }
+
+        .event-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 5px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            font-size: 0.85em;
+            color: #a0a0a0;
+        }
+
+        .tag.culture { background: rgba(78, 205, 196, 0.2); color: #4ecdc4; }
+        .tag.technology { background: rgba(69, 183, 209, 0.2); color: #45b7d1; }
+        .tag.politics { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag.science { background: rgba(255, 215, 0, 0.2); color: #ffd700; }
+
+        .expand-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(78, 205, 196, 0.2);
+            border: 1px solid #4ecdc4;
+            color: #4ecdc4;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .expand-btn:hover {
+            background: rgba(78, 205, 196, 0.3);
+        }
+
+        .event.expanded .expand-btn::after {
+            content: ' 收起';
+        }
+
+        .event:not(.expanded) .expand-btn::after {
+            content: ' 展开';
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .timeline {
+                padding-left: 30px;
+            }
+
+            .timeline::before {
+                left: 10px;
+            }
+
+            .event::before {
+                left: -28px;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="fade-in">
+            <h1>🏛️ 古代文明</h1>
+            <p class="subtitle">Ancient Civilizations - 伟大帝国的崛起与衰落</p>
+            <a href="index.html" class="back-link">← 返回主时间线</a>
+        </header>
+
+        <div class="era-info-box fade-in">
+            <h2>时期概述</h2>
+            <p><strong>时间跨度：</strong>约公元前 3500 年 - 公元 476 年</p>
+            <p>古代文明时期是人类历史的第一个辉煌时代，从文字发明到西罗马帝国灭亡，见证了美索不达米亚、埃及、印度、中国、希腊、罗马等伟大文明的兴起与衰落。</p>
+            <p><strong>主要特征：</strong>文字系统、城市国家、法典、哲学思想、一神教、帝国制度、工程技术</p>
+            <p><strong>重要意义：</strong>奠定了西方和东方文明的基础，创造了影响至今的政治制度、法律体系、哲学思想和文化艺术</p>
+        </div>
+
+        <div class="timeline">
+            <div class="event fade-in" onclick="toggleEvent(this)">
+                <span class="event-time">约公元前 3500 年</span>
+                <h3>📝 文字的发明</h3>
+                <p>文字在美索不达米亚和埃及独立发明，人类从此进入有文字记载的历史时期，知识和经验可以跨代传承，文明发展加速。</p>
+                <div class="event-tags">
+                    <span class="tag culture">文化</span>
+                    <span class="tag technology">技术</span>
+                </div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>详细说明</h4>
+                    <p>文字的发明是人类历史上最重要的里程碑之一，标志着史前时期的结束和历史时期的开始。</p>
+                    
+                    <h4>主要文字系统</h4>
+                    <ul>
+                        <li><strong>楔形文字（苏美尔）：</strong>约公元前 3500 年，用芦苇杆在泥板上压印，最初用于记录商业交易</li>
+                        <li><strong>象形文字（埃及）：</strong>约公元前 3200 年，用于纪念碑、神庙和纸草文献</li>
+                        <li><strong>甲骨文（中国）：</strong>约公元前 1200 年，刻在龟甲和兽骨上，用于占卜</li>
+                        <li><strong>玛雅文字（中美洲）：</strong>约公元前 300 年，独立发展的文字系统</li>
+                        <li><strong>腓尼基字母：</strong>约公元前 1000 年，22 个辅音字母，是现代字母文字的祖先</li>
+                    </ul>
+
+                    <h4>文字的影响</h4>
+                    <ul>
+                        <li><strong>知识传承：</strong>经验、技术、历史可以准确记录并传给后代</li>
+                        <li><strong>行政管理：</strong>大型国家和帝国的治理成为可能</li>
+                        <li><strong>法律编纂：</strong>成文法典出现，如汉谟拉比法典</li>
+                        <li><strong>文学创作：</strong>史诗、诗歌、戏剧等文学形式诞生</li>
+                        <li><strong>科学发展：</strong>数学、天文学、医学知识得以积累</li>
+                    </ul>
+
+                    <h4>重要文献</h4>
+                    <ul>
+                        <li><strong>吉尔伽美什史诗：</strong>最早的文学作品之一</li>
+                        <li><strong>金字塔文：</strong>古埃及宗教文献</li>
+                        <li><strong>尚书：</strong>中国最早的历史文献</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="event fade-in" onclick="toggleEvent(this)">
+                <span class="event-time">约公元前 3100 年</span>
+                <h3>👑 埃及统一与法老时代</h3>
+                <p>上埃及和下埃及统一，美尼斯成为第一位法老，开启古埃及近 3000 年的辉煌文明。</p>
+                <div class="event-tags">
+                    <span class="tag politics">政治</span>
+                    <span class="tag culture">文化</span>
+                </div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>详细说明</h4>
+                    <p>古埃及是人类历史上最持久的文明之一，以其金字塔、木乃伊、象形文字和法老制度闻名于世。</p>
+                    
+                    <h4>历史分期</h4>
+                    <ul>
+                        <li><strong>早王朝时期（前 3100-2686）：</strong>国家统一，文字发展</li>
+                        <li><strong>古王国（前 2686-2181）：</strong>金字塔时代，中央集权</li>
+                        <li><strong>中王国（前 2055-1650）：</strong>文学艺术繁荣</li>
+                        <li><strong>新王国（前 1550-1069）：</strong>帝国时代，图坦卡蒙、拉美西斯二世</li>
+                        <li><strong>后期（前 1069-332）：</strong>外族统治，逐渐衰落</li>
+                    </ul>
+
+                    <h4>主要成就</h4>
+                    <ul>
+                        <li><strong>建筑：</strong>金字塔、神庙、方尖碑</li>
+                        <li><strong>医学：</strong>外科手术、药物学、解剖学知识</li>
+                        <li><strong>数学：</strong>几何学、分数计算</li>
+                        <li><strong>天文学：</strong>365 天历法、星座划分</li>
+                        <li><strong>艺术：</strong>壁画、雕塑、珠宝工艺</li>
+                    </ul>
+
+                    <h4>著名法老</h4>
+                    <ul>
+                        <li><strong>胡夫：</strong>建造大金字塔</li>
+                        <li><strong>哈特谢普苏特：</strong>女法老，贸易扩张</li>
+                        <li><strong>阿肯那顿：</strong>宗教改革，一神教尝试</li>
+                        <li><strong>图坦卡蒙：</strong>陵墓完整保存</li>
+                        <li><strong>拉美西斯二世：</strong>在位 67 年，建造阿布辛贝神庙</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="event fade-in" onclick="toggleEvent(this)">
+                <span class="event-time">约公元前 2600 年</span>
+                <h3>🔺 吉萨金字塔建造</h3>
+                <p>埃及吉萨大金字塔建成，这是古代世界七大奇迹中唯一现存的一个，展示了古埃及的高度文明和工程技术。</p>
+                <div class="event-tags">
+                    <span class="tag culture">文化</span>
+                    <span class="tag technology">技术</span>
+                </div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>详细说明</h4>
+                    <p>吉萨金字塔群是古王国时期第四王朝的三位法老（胡夫、哈夫拉、孟卡拉）的陵墓，代表了古埃及建筑和工程技术的巅峰。</p>
+                    
+                    <h4>胡夫金字塔（大金字塔）</h4>
+                    <ul>
+                        <li><strong>原高：</strong>146.6 米（现 138.8 米）</li>
+                        <li><strong>底边：</strong>230.4 米，几乎完美正方形</li>
+                        <li><strong>石块数量：</strong>约 230 万块</li>
+                        <li><strong>平均重量：</strong>每块 2.5 吨，最大 50 吨</li>
+                        <li><strong>建造时间：</strong>约 20 年（公元前 2580-2560 年）</li>
+                        <li><strong>精确度：</strong>底座误差小于 0.05%，对准正北</li>
+                    </ul>
+
+                    <h4>建造技术</h4>
+                    <ul>
+                        <li><strong>劳动力：</strong>约 2-3 万名熟练工人，非奴隶</li>
+                        <li><strong>运输：</strong>尼罗河水运，滑橇和滚木</li>
+                        <li><strong>坡道：</strong>直线坡道或螺旋坡道运送石块</li>
+                        <li><strong>工具：</strong>铜制工具、石锤、木楔</li>
+                        <li><strong>测量：</strong>使用铅垂线、水平仪等工具</li>
+                    </ul>
+
+                    <h4>内部结构</h4>
+                    <ul>
+                        <li>国王墓室、王后墓室、地下墓室</li>
+                        <li>大走廊、通风井</li>
+                        <li>花岗岩梁、石灰岩外壳</li>
+                    </ul>
+
+                    <h4>文化意义</h4>
+                    <ul>
+                        <li>法老神性的象征</li>
+                        <li>来世信仰的体现</li>
+                        <li>国家动员能力的展示</li>
+                        <li>古代工程技术的奇迹</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="event fade-in" onclick="toggleEvent(this)">
+                <span class="event-time">约公元前 1754 年</span>
+                <h3>⚖️ 汉谟拉比法典</h3>
+                <p>巴比伦国王汉谟拉比颁布了现存最早的系统性法典之一，确立了法律原则，影响后世法律体系。</p>
+                <div class="event-tags">
+                    <span class="tag politics">政治</span>
+                    <span class="tag culture">文化</span>
+                </div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>详细说明</h4>
+                    <p>汉谟拉比法典是古代美索不达米亚地区最完整、最系统的成文法典，刻在黑色玄武岩石碑上，现存于巴黎卢浮宫。</p>
+                    
+                    <h4>法典结构</h4>
+                    <ul>
+                        <li><strong>序言：</strong>宣扬汉谟拉比的神授权力</li>
+                        <li><strong>正文：</strong>282 条法律条文</li>
+                        <li><strong>结语：</strong>诅咒破坏法典者，祝福遵守者</li>
+                    </ul>
+
+                    <h4>法律内容</h4>
+                    <ul>
+                        <li><strong>刑法：</strong>盗窃、抢劫、伤害、杀人</li>
+                        <li><strong>民法：</strong>财产、契约、债务、继承</li>
+                        <li><strong>婚姻法：</strong>结婚、离婚、通奸</li>
+                        <li><strong>商法：</strong>贸易、借贷、利息</li>
+                        <li><strong>职业责任：</strong>医生、建筑师、船工的责任</li>
+                    </ul>
+
+                    <h4>法律原则</h4>
+                    <ul>
+                        <li><strong>同态复仇：</strong>"以眼还眼，以牙还牙"（lex talionis）</li>
+                        <li><strong>阶级差异：</strong>自由民、平民、奴隶享有不同权利</li>
+                        <li><strong>举证责任：</strong>原告需提供证据</li>
+                        <li><strong>无罪推定：</strong>被告在被证明有罪前视为无罪</li>
+                    </ul>
+
+                    <h4>历史意义</h4>
+                    <ul>
+                        <li>最早的系统性成文法典之一</li>
+                        <li>影响了希伯来法律（摩西律法）</li>
+                        <li>展示了巴比伦王国的法治传统</li>
+                        <li>为研究古代社会提供珍贵资料</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="event fade-in" onclick="toggleEvent(this)">
+                <span class="event-time">公元前 776 年</span>
+                <h3>🏃 奥林匹克运动会起源</h3>
+                <p>古希腊举办第一届奥林匹克运动会，成为西方体育文化的起源，展示了希腊人对身体和精神的和谐追求。</p>
+                <div class="event-tags">
+                    <span class="tag culture">文化</span>
+                </div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>详细说明</h4>
+                    <p>奥林匹克运动会是古希腊最重要的泛希腊节庆活动之一，每四年在奥林匹亚举行，持续了 1000 多年。</p>
+                    
+                    <h4>比赛项目</h4>
+                    <ul>
+                        <li><strong>跑步：</strong>短跑（约 192 米）、长跑、武装跑</li>
+                        <li><strong>摔跤：</strong>站立摔跤和地面摔跤</li>
+                        <li><strong>拳击：</strong>用皮条包裹拳头</li>
+                        <li><strong>五项全能：</strong>跑步、跳远、铁饼、标枪、摔跤</li>
+                        <li><strong>战车赛：</strong>四马战车比赛</li>
+                        <li><strong>赛马：</strong>无马鞍骑马</li>
+                    </ul>
+
+                    <h4>运动会特点</h4>
+                    <ul>
+                        <li><strong>神圣休战：</strong>运动会期间各城邦停止战争</li>
+                        <li><strong>参赛者：</strong>仅限希腊自由男性公民</li>
+                        <li><strong>奖励：</strong>橄榄枝花冠，无物质奖励</li>
+                        <li><strong>荣誉：</strong>获胜者被视为英雄，城邦为其立像</li>
+                        <li><strong>周期：</strong>每 4 年一届，共举办 293 届（至公元 393 年）</li>
+                    </ul>
+
+                    <h4>文化意义</h4>
+                    <ul>
+                        <li>体现希腊人对卓越（arete）的追求</li>
+                        <li>促进希腊各城邦的文化认同</li>
+                        <li>体育与宗教、艺术的结合</li>
+                        <li>现代奥运会的精神源头</li>
+                    </ul>
+
+                    <h4>著名运动员</h4>
+                    <ul>
+                        <li><strong>米隆：</strong>摔跤冠军，力大无穷</li>
+                        <li><strong>列奥尼达斯：</strong>连续 12 届跑步冠军</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="event fade-in" onclick="toggleEvent(this)">
+                <span class="event-time">公元前 551-479 年</span>
+                <h3>📚 孔子与儒家思想</h3>
+                <p>孔子创立儒家学说，强调仁、义、礼、智、信，成为中国传统文化的核心，影响东亚文明两千多年。</p>
+                <div class="event-tags">
+                    <span class="tag culture">文化</span>
+                </div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>详细说明</h4>
+                    <p>孔子（名丘，字仲尼）是中国古代最伟大的思想家和教育家，其创立的儒家学说深刻塑造了中国及东亚的文化传统。</p>
+                    
+                    <h4>核心思想</h4>
+                    <ul>
+                        <li><strong>仁：</strong>爱人，"己所不欲，勿施于人"</li>
+                        <li><strong>义：</strong>正当、适宜的行为</li>
+                        <li><strong>礼：</strong>社会秩序和行为规范</li>
+                        <li><strong>智：</strong>明辨是非的智慧</li>
+                        <li><strong>信：</strong>诚实守信</li>
+                        <li><strong>孝：</strong>尊敬父母和祖先</li>
+                        <li><strong>忠：</strong>忠诚于君主和国家</li>
+                    </ul>
+
+                    <h4>教育理念</h4>
+                    <ul>
+                        <li><strong>有教无类：</strong>教育不分贵贱</li>
+                        <li><strong>因材施教：</strong>根据学生特点教学</li>
+                        <li><strong>学而时习之：</strong>学习并实践</li>
+                        <li><strong>温故知新：</strong>复习旧知识获得新理解</li>
+                        <li><strong>弟子三千，贤人七十二：</strong>培养大量人才</li>
+                    </ul>
+
+                    <h4>经典著作</h4>
+                    <ul>
+                        <li><strong>《论语》：</strong>孔子及其弟子言行录</li>
+                        <li><strong>《春秋》：</strong>鲁国编年史</li>
+                        <li><strong>五经：</strong>《诗》《书》《礼》《易》《春秋》</li>
+                    </ul>
+
+                    <h4>历史影响</h4>
+                    <ul>
+                        <li>汉代成为官方意识形态</li>
+                        <li>科举制度的理论基础</li>
+                        <li>影响中国、韩国、日本、越南等东亚国家</li>
+                        <li>塑造东亚文化圈的价值观和社会结构</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="event fade-in" onclick="toggleEvent(this)">
+                <span class="event-time">公元前 27 年</span>
+                <h3>🏛️ 罗马帝国建立</h3>
+                <p>屋大维被元老院授予"奥古斯都"称号，罗马共和国转变为帝国，开启了长达 200 年的"罗马和平"时代。</p>
+                <div class="event-tags">
+                    <span class="tag politics">政治</span>
+                    <span class="tag culture">文化</span>
+                </div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>详细说明</h4>
+                    <p>罗马帝国的建立标志着地中海世界进入一个新的时代，罗马法、拉丁语、基督教等罗马遗产深刻影响了西方文明。</p>
+                    
+                    <h4>帝国分期</h4>
+                    <ul>
+                        <li><strong>元首制（前 27-284）：</strong>奥古斯都至戴克里先</li>
+                        <li><strong>多米那特制（284-476）：</strong>戴克里先至西罗马灭亡</li>
+                        <li><strong>五贤帝时代（96-180）：</strong>罗马最繁荣时期</li>
+                        <li><strong>三世纪危机（235-284）：</strong>内乱外患</li>
+                        <li><strong>分裂（395）：</strong>东西罗马帝国分立</li>
+                    </ul>
+
+                    <h4>主要成就</h4>
+                    <ul>
+                        <li><strong>法律：</strong>罗马法成为现代法律体系的基础</li>
+                        <li><strong>工程：</strong>道路（8 万公里）、水道（11 条）、建筑（斗兽场、万神殿）</li>
+                        <li><strong>语言：</strong>拉丁语演变为罗曼语族（法语、西班牙语、意大利语等）</li>
+                        <li><strong>行政：</strong>行省制度、公民权扩展</li>
+                        <li><strong>军事：</strong>职业军队、军团制度</li>
+                    </ul>
+
+                    <h4>著名皇帝</h4>
+                    <ul>
+                        <li><strong>奥古斯都：</strong>开国皇帝，建立元首制</li>
+                        <li><strong>图拉真：</strong>帝国疆域最大</li>
+                        <li><strong>哈德良：</strong>修建哈德良长城</li>
+                        <li><strong>马可·奥勒留：</strong>哲学家皇帝</li>
+                        <li><strong>君士坦丁：</strong>迁都君士坦丁堡，承认基督教</li>
+                    </ul>
+
+                    <h4>历史遗产</h4>
+                    <ul>
+                        <li>西方政治制度的原型</li>
+                        <li>拉丁字母和罗曼语言</li>
+                        <li>基督教成为世界宗教</li>
+                        <li>建筑、工程、法律传统</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="event fade-in" onclick="toggleEvent(this)">
+                <span class="event-time">公元 1 世纪</span>
+                <h3>✝️ 基督教诞生与传播</h3>
+                <p>耶稣基督在巴勒斯坦地区传教，基督教诞生，后成为罗马帝国国教，最终发展为世界最大宗教。</p>
+                <div class="event-tags">
+                    <span class="tag culture">文化</span>
+                </div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>详细说明</h4>
+                    <p>基督教起源于公元 1 世纪的巴勒斯坦地区，从犹太教的一个小派别发展为世界最大宗教，深刻影响了西方文明和全球历史。</p>
+                    
+                    <h4>发展历程</h4>
+                    <ul>
+                        <li><strong>耶稣传教（约 30-33 年）：</strong>在巴勒斯坦地区传教 3 年</li>
+                        <li><strong>使徒时代（33-100）：</strong>彼得、保罗等人传播福音</li>
+                        <li><strong>受迫害时期（100-313）：</strong>多次大迫害</li>
+                        <li><strong>合法化（313）：</strong>米兰敕令承认基督教</li>
+                        <li><strong>国教化（380）：</strong>狄奥多西一世定为国教</li>
+                        <li><strong>大分裂（1054）：</strong>分裂为天主教和东正教</li>
+                        <li><strong>宗教改革（1517）：</strong>新教诞生</li>
+                    </ul>
+
+                    <h4>核心教义</h4>
+                    <ul>
+                        <li><strong>三位一体：</strong>圣父、圣子、圣灵</li>
+                        <li><strong>救赎：</strong>耶稣为人类赎罪</li>
+                        <li><strong>复活：</strong>死后复活和永生</li>
+                        <li><strong>爱：</strong>爱上帝，爱人如己</li>
+                        <li><strong>十诫：</strong>道德规范</li>
+                    </ul>
+
+                    <h4>经典文献</h4>
+                    <ul>
+                        <li><strong>《圣经·旧约》：</strong>犹太教经典</li>
+                        <li><strong>《圣经·新约》：</strong>四福音书、使徒行传、书信、启示录</li>
+                    </ul>
+
+                    <h4>历史影响</h4>
+                    <ul>
+                        <li>塑造西方道德和价值观</li>
+                        <li>影响艺术、音乐、文学</li>
+                        <li>建立大学和教育体系</li>
+                        <li>推动慈善和医疗事业</li>
+                        <li>目前全球约 24 亿信徒</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="event fade-in" onclick="toggleEvent(this)">
+                <span class="event-time">公元 476 年</span>
+                <h3>💥 西罗马帝国灭亡</h3>
+                <p>日耳曼雇佣兵首领奥多亚克废黜西罗马帝国最后一位皇帝，西罗马帝国灭亡，标志着古代结束，中世纪开始。</p>
+                <div class="event-tags">
+                    <span class="tag politics">政治</span>
+                </div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>详细说明</h4>
+                    <p>公元 476 年 9 月 4 日，日耳曼雇佣兵首领奥多亚克废黜西罗马帝国最后一位皇帝罗慕路斯·奥古斯都，这一事件被历史学家视为古代结束和中世纪开始的标志。</p>
+                    
+                    <h4>灭亡原因</h4>
+                    <ul>
+                        <li><strong>经济衰退：</strong>税收减少，通货膨胀，贸易萎缩</li>
+                        <li><strong>军事衰弱：</strong>依赖蛮族雇佣兵，军队蛮族化</li>
+                        <li><strong>政治腐败：</strong>皇帝更迭频繁（284-476 年有 27 位皇帝），内斗不断</li>
+                        <li><strong>蛮族入侵：</strong>匈人、哥特人、汪达尔人、法兰克人等持续压力</li>
+                        <li><strong>社会问题：</strong>人口减少，城市衰落，贫富分化</li>
+                        <li><strong>宗教变化：</strong>基督教兴起改变传统价值观</li>
+                    </ul>
+
+                    <h4>灭亡过程</h4>
+                    <ul>
+                        <li><strong>376 年：</strong>哥特人渡过多瑙河</li>
+                        <li><strong>378 年：</strong>阿德里安堡战役，皇帝瓦伦斯战死</li>
+                        <li><strong>410 年：</strong>西哥特人洗劫罗马</li>
+                        <li><strong>455 年：</strong>汪达尔人洗劫罗马</li>
+                        <li><strong>476 年：</strong>奥多亚克废黜罗慕路斯·奥古斯都</li>
+                    </ul>
+
+                    <h4>历史影响</h4>
+                    <ul>
+                        <li>西欧进入封建时代</li>
+                        <li>基督教会在混乱中成为主要文化和政治力量</li>
+                        <li>拉丁文化在修道院中保存</li>
+                        <li>东罗马帝国（拜占庭）延续至 1453 年</li>
+                        <li>日耳曼王国在西欧兴起</li>
+                    </ul>
+
+                    <h4>后续发展</h4>
+                    <ul>
+                        <li><strong>东哥特王国（493-553）：</strong>统治意大利</li>
+                        <li><strong>法兰克王国（481-843）：</strong>高卢地区</li>
+                        <li><strong>西哥特王国（418-711）：</strong>西班牙</li>
+                        <li><strong>汪达尔王国（439-534）：</strong>北非</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleEvent(element) {
+            element.classList.toggle('expanded');
+        }
+    </script>
+</body>
+</html>

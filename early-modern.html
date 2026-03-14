@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>近代早期 - 人类历史发展进程</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #45b7d1, #ffd700, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle { color: #a0a0a0; font-size: 1.3em; }
+        .back-link {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+        .back-link:hover { background: rgba(255, 255, 255, 0.2); border-color: #45b7d1; }
+        .era-info-box {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .era-info-box h2 { font-size: 2em; margin-bottom: 20px; color: #45b7d1; }
+        .era-info-box p { line-height: 1.8; color: #b0b0b0; margin-bottom: 15px; }
+        .timeline { position: relative; padding-left: 50px; margin: 40px 0; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #45b7d1, #ffd700, #45b7d1);
+            border-radius: 2px;
+        }
+        .event {
+            position: relative;
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .event:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: #45b7d1;
+        }
+        .event::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 35px;
+            width: 20px;
+            height: 20px;
+            background: #45b7d1;
+            border-radius: 50%;
+            border: 4px solid #0c0c0c;
+            box-shadow: 0 0 20px rgba(69, 183, 209, 0.5);
+        }
+        .event-time {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #45b7d1, #ffd700);
+            color: #000;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+        .event h3 { font-size: 1.8em; margin-bottom: 15px; color: #fff; }
+        .event p { color: #b0b0b0; line-height: 1.8; margin-bottom: 20px; }
+        .event-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 0 20px;
+        }
+        .event.expanded .event-details {
+            max-height: 1500px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .event-details h4 { color: #45b7d1; margin: 15px 0 10px 0; font-size: 1.2em; }
+        .event-details ul { margin-left: 25px; margin-bottom: 15px; }
+        .event-details li { margin-bottom: 8px; color: #c0c0c0; }
+        .event-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+        .tag {
+            padding: 5px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            font-size: 0.85em;
+            color: #a0a0a0;
+        }
+        .tag.culture { background: rgba(78, 205, 196, 0.2); color: #4ecdc4; }
+        .tag.technology { background: rgba(69, 183, 209, 0.2); color: #45b7d1; }
+        .tag.politics { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag.science { background: rgba(255, 215, 0, 0.2); color: #ffd700; }
+        .expand-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(69, 183, 209, 0.2);
+            border: 1px solid #45b7d1;
+            color: #45b7d1;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        .expand-btn:hover { background: rgba(69, 183, 209, 0.3); }
+        .event.expanded .expand-btn::after { content: ' 收起'; }
+        .event:not(.expanded) .expand-btn::after { content: ' 展开'; }
+        .fade-in { animation: fadeIn 0.8s ease-in; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="fade-in">
+            <h1>⛵ 近代早期</h1>
+            <p class="subtitle">Early Modern Period - 文艺复兴与大航海时代</p>
+            <a href="index.html" class="back-link">← 返回主时间线</a>
+        </header>
+        <div class="era-info-box fade-in">
+            <h2>时期概述</h2>
+            <p><strong>时间跨度：</strong>1453 年 - 1789 年</p>
+            <p>近代早期是人类历史的重要转折期，从君士坦丁堡陷落到法国大革命，见证了文艺复兴、宗教改革、科学革命、启蒙运动和工业革命的开端，世界开始真正连为一体。</p>
+            <p><strong>主要特征：</strong>人文主义、地理大发现、科学方法、理性主义、资本主义兴起、民族国家形成</p>
+            <p><strong>重要意义：</strong>奠定了现代世界的思想、科学、政治和经济基础</p>
+        </div>
+        <div class="timeline">
+            <div class="event fade-in" onclick="this.classList.toggle('expanded')">
+                <span class="event-time">14-17 世纪</span>
+                <h3>🎨 文艺复兴</h3>
+                <p>起源于意大利的文化运动，复兴古希腊罗马文化，强调人文主义，产生众多艺术和科学巨匠。</p>
+                <div class="event-tags"><span class="tag culture">文化</span></div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>核心思想</h4>
+                    <ul>
+                        <li><strong>人文主义：</strong>强调人的价值和尊严</li>
+                        <li><strong>世俗主义：</strong>关注现世生活而非来世</li>
+                        <li><strong>个人主义：</strong>重视个人才能和成就</li>
+                        <li><strong>古典复兴：</strong>学习希腊罗马文化</li>
+                    </ul>
+                    <h4>代表人物</h4>
+                    <ul>
+                        <li><strong>达芬奇：</strong>《蒙娜丽莎》、《最后的晚餐》，全才艺术家</li>
+                        <li><strong>米开朗基罗：</strong>西斯廷天顶画、《大卫》雕像</li>
+                        <li><strong>拉斐尔：</strong>《雅典学院》等经典画作</li>
+                        <li><strong>但丁：</strong>《神曲》，意大利文学之父</li>
+                        <li><strong>莎士比亚：</strong>英国文学巨匠，戏剧大师</li>
+                    </ul>
+                    <h4>历史影响</h4>
+                    <ul>
+                        <li>打破中世纪神权束缚</li>
+                        <li>促进艺术和科学繁荣</li>
+                        <li>为宗教改革和科学革命奠定基础</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="event fade-in" onclick="this.classList.toggle('expanded')">
+                <span class="event-time">1492 年</span>
+                <h3>🌎 哥伦布发现美洲</h3>
+                <p>哥伦布横渡大西洋到达美洲，开启欧洲殖民美洲的时代，世界开始真正连为一体。</p>
+                <div class="event-tags"><span class="tag politics">政治</span><span class="tag culture">文化</span></div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>四次航行</h4>
+                    <ul>
+                        <li><strong>第一次（1492）：</strong>到达巴哈马、古巴、海地</li>
+                        <li><strong>第二次（1493）：</strong>探索小安的列斯群岛</li>
+                        <li><strong>第三次（1498）：</strong>到达南美大陆</li>
+                        <li><strong>第四次（1502）：</strong>探索中美洲</li>
+                    </ul>
+                    <h4>哥伦布大交换</h4>
+                    <ul>
+                        <li><strong>美洲→世界：</strong>玉米、马铃薯、番茄、烟草、可可</li>
+                        <li><strong>世界→美洲：</strong>小麦、马、牛、猪、疾病（天花、麻疹）</li>
+                        <li><strong>人口影响：</strong>美洲原住民人口锐减 90% 以上</li>
+                    </ul>
+                    <h4>历史影响</h4>
+                    <ul>
+                        <li>世界真正连为一体</li>
+                        <li>欧洲殖民扩张开始</li>
+                        <li>全球贸易网络形成</li>
+                        <li>资本主义原始积累</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="event fade-in" onclick="this.classList.toggle('expanded')">
+                <span class="event-time">1517 年</span>
+                <h3>⛪ 宗教改革</h3>
+                <p>马丁·路德发表《九十五条论纲》，基督教分裂为天主教和新教，深刻改变欧洲宗教格局。</p>
+                <div class="event-tags"><span class="tag culture">文化</span><span class="tag politics">政治</span></div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>起因</h4>
+                    <ul>
+                        <li>教会腐败，出售赎罪券</li>
+                        <li>民族国家兴起，王权与教权矛盾</li>
+                        <li>印刷术传播，知识普及</li>
+                        <li>人文主义影响，质疑权威</li>
+                    </ul>
+                    <h4>主要人物</h4>
+                    <ul>
+                        <li><strong>马丁·路德：</strong>德国，"因信称义"</li>
+                        <li><strong>加尔文：</strong>法国/瑞士，预定论</li>
+                        <li><strong>亨利八世：</strong>英国，建立国教</li>
+                    </ul>
+                    <h4>历史影响</h4>
+                    <ul>
+                        <li>基督教分裂为天主教、新教、东正教</li>
+                        <li>宗教战争频发（三十年战争）</li>
+                        <li>促进教育和识字率提高</li>
+                        <li>推动资本主义精神形成</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="event fade-in" onclick="this.classList.toggle('expanded')">
+                <span class="event-time">16-17 世纪</span>
+                <h3>🔬 科学革命</h3>
+                <p>哥白尼、伽利略、牛顿等科学家奠定现代科学基础，日心说、万有引力定律等发现改变人类认知。</p>
+                <div class="event-tags"><span class="tag science">科学</span><span class="tag technology">技术</span></div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>重大发现</h4>
+                    <ul>
+                        <li><strong>哥白尼（1543）：</strong>《天体运行论》，日心说</li>
+                        <li><strong>开普勒（1609-1619）：</strong>行星运动三大定律</li>
+                        <li><strong>伽利略（1610）：</strong>望远镜观测，支持日心说</li>
+                        <li><strong>哈维（1628）：</strong>血液循环理论</li>
+                        <li><strong>牛顿（1687）：</strong>《自然哲学的数学原理》，万有引力和运动定律</li>
+                    </ul>
+                    <h4>科学方法</h4>
+                    <ul>
+                        <li>观察和实验</li>
+                        <li>数学推理</li>
+                        <li>可重复性</li>
+                        <li>怀疑精神</li>
+                    </ul>
+                    <h4>历史影响</h4>
+                    <ul>
+                        <li>推翻亚里士多德 - 托勒密体系</li>
+                        <li>奠定现代科学基础</li>
+                        <li>促进启蒙运动</li>
+                        <li>推动技术革命</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="event fade-in" onclick="this.classList.toggle('expanded')">
+                <span class="event-time">17-18 世纪</span>
+                <h3>💡 启蒙运动</h3>
+                <p>伏尔泰、卢梭、洛克等思想家倡导理性、自由、平等，为现代民主制度奠定思想基础。</p>
+                <div class="event-tags"><span class="tag culture">文化</span><span class="tag politics">政治</span></div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>核心思想</h4>
+                    <ul>
+                        <li><strong>理性：</strong>用理性而非传统或权威判断</li>
+                        <li><strong>自由：</strong>言论自由、宗教自由、经济自由</li>
+                        <li><strong>平等：</strong>人生而平等</li>
+                        <li><strong>进步：</strong>人类社会可以不断进步</li>
+                        <li><strong>宽容：</strong>宗教和思想宽容</li>
+                    </ul>
+                    <h4>代表人物</h4>
+                    <ul>
+                        <li><strong>洛克：</strong>自然权利、社会契约</li>
+                        <li><strong>伏尔泰：</strong>言论自由、宗教宽容</li>
+                        <li><strong>卢梭：</strong>社会契约、人民主权</li>
+                        <li><strong>孟德斯鸠：</strong>三权分立</li>
+                        <li><strong>康德：</strong>理性批判</li>
+                    </ul>
+                    <h4>历史影响</h4>
+                    <ul>
+                        <li>美国独立战争（1776）</li>
+                        <li>法国大革命（1789）</li>
+                        <li>现代民主制度理论基础</li>
+                        <li>人权观念普及</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="event fade-in" onclick="this.classList.toggle('expanded')">
+                <span class="event-time">1760 年代开始</span>
+                <h3>🏭 工业革命</h3>
+                <p>蒸汽机的发明和应用，机器生产取代手工劳动，人类进入工业化时代。</p>
+                <div class="event-tags"><span class="tag technology">技术</span><span class="tag science">科学</span></div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>关键技术</h4>
+                    <ul>
+                        <li><strong>蒸汽机：</strong>瓦特改良（1769），提供强大动力</li>
+                        <li><strong>纺织机械：</strong>珍妮纺纱机（1764）、水力织布机（1785）</li>
+                        <li><strong>炼铁技术：</strong>焦炭炼铁，钢铁大规模生产</li>
+                        <li><strong>交通运输：</strong>蒸汽火车（1814）、蒸汽船（1807）</li>
+                    </ul>
+                    <h4>生产方式变革</h4>
+                    <ul>
+                        <li>工厂制度取代手工工场</li>
+                        <li>机器生产取代手工劳动</li>
+                        <li>标准化和规模化生产</li>
+                        <li>劳动分工细化</li>
+                    </ul>
+                    <h4>社会影响</h4>
+                    <ul>
+                        <li>城市化加速</li>
+                        <li>工人阶级诞生</li>
+                        <li>资本主义兴起</li>
+                        <li>生活水平提高</li>
+                        <li>环境污染和社会不平等</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

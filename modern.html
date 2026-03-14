@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>现代 - 人类历史发展进程</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle { color: #a0a0a0; font-size: 1.3em; }
+        .back-link {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+        .back-link:hover { background: rgba(255, 255, 255, 0.2); border-color: #ff6b6b; }
+        .era-info-box {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .era-info-box h2 { font-size: 2em; margin-bottom: 20px; color: #ff6b6b; }
+        .era-info-box p { line-height: 1.8; color: #b0b0b0; margin-bottom: 15px; }
+        .timeline { position: relative; padding-left: 50px; margin: 40px 0; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #ff6b6b, #4ecdc4, #ff6b6b);
+            border-radius: 2px;
+        }
+        .event {
+            position: relative;
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .event:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: #ff6b6b;
+        }
+        .event::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 35px;
+            width: 20px;
+            height: 20px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            border: 4px solid #0c0c0c;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+        }
+        .event-time {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            color: #000;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+        .event h3 { font-size: 1.8em; margin-bottom: 15px; color: #fff; }
+        .event p { color: #b0b0b0; line-height: 1.8; margin-bottom: 20px; }
+        .event-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 0 20px;
+        }
+        .event.expanded .event-details {
+            max-height: 1500px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .event-details h4 { color: #ff6b6b; margin: 15px 0 10px 0; font-size: 1.2em; }
+        .event-details ul { margin-left: 25px; margin-bottom: 15px; }
+        .event-details li { margin-bottom: 8px; color: #c0c0c0; }
+        .event-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+        .tag {
+            padding: 5px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            font-size: 0.85em;
+            color: #a0a0a0;
+        }
+        .tag.culture { background: rgba(78, 205, 196, 0.2); color: #4ecdc4; }
+        .tag.technology { background: rgba(69, 183, 209, 0.2); color: #45b7d1; }
+        .tag.politics { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag.science { background: rgba(255, 215, 0, 0.2); color: #ffd700; }
+        .expand-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 107, 107, 0.2);
+            border: 1px solid #ff6b6b;
+            color: #ff6b6b;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        .expand-btn:hover { background: rgba(255, 107, 107, 0.3); }
+        .event.expanded .expand-btn::after { content: ' 收起'; }
+        .event:not(.expanded) .expand-btn::after { content: ' 展开'; }
+        .fade-in { animation: fadeIn 0.8s ease-in; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="fade-in">
+            <h1>🚀 现代</h1>
+            <p class="subtitle">Modern Era - 科技飞跃与全球化</p>
+            <a href="index.html" class="back-link">← 返回主时间线</a>
+        </header>
+        <div class="era-info-box fade-in">
+            <h2>时期概述</h2>
+            <p><strong>时间跨度：</strong>1789 年 - 至今</p>
+            <p>现代时期是人类历史发展最迅猛的时期，从法国大革命至今，见证了民主制度 spread、工业革命深化、两次世界大战、冷战、信息革命和全球化，人类生活发生翻天覆地的变化。</p>
+            <p><strong>主要特征：</strong>民主化、工业化、科技进步、全球化、信息化、人工智能</p>
+            <p><strong>重要意义：</strong>人类文明达到前所未有的高度，同时面临气候变化、核威胁、不平等等全球性挑战</p>
+        </div>
+        <div class="timeline">
+            <div class="event fade-in" onclick="this.classList.toggle('expanded')">
+                <span class="event-time">1789 年</span>
+                <h3>🇫🇷 法国大革命</h3>
+                <p>推翻君主专制，发表《人权宣言》，"自由、平等、博爱"理念影响深远。</p>
+                <div class="event-tags"><span class="tag politics">政治</span></div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>重要事件</h4>
+                    <ul>
+                        <li><strong>1789.5：</strong>三级会议召开</li>
+                        <li><strong>1789.7.14：</strong>攻占巴士底狱，革命爆发</li>
+                        <li><strong>1789.8：</strong>发表《人权宣言》</li>
+                        <li><strong>1793：</strong>处决路易十六</li>
+                        <li><strong>1793-94：</strong>恐怖统治，罗伯斯庇尔专政</li>
+                        <li><strong>1799：</strong>拿破仑雾月政变</li>
+                    </ul>
+                    <h4>历史意义</h4>
+                    <ul>
+                        <li>传播民主、自由、平等理念</li>
+                        <li>动摇欧洲封建制度</li>
+                        <li>现代民族主义兴起</li>
+                        <li>影响全球革命运动</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="event fade-in" onclick="this.classList.toggle('expanded')">
+                <span class="event-time">19 世纪</span>
+                <h3>⚡ 电气时代</h3>
+                <p>法拉第、爱迪生、特斯拉等人的发明，电力广泛应用，第二次工业革命。</p>
+                <div class="event-tags"><span class="tag technology">技术</span><span class="tag science">科学</span></div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>重大发明</h4>
+                    <ul>
+                        <li><strong>法拉第（1831）：</strong>电磁感应，发电机原理</li>
+                        <li><strong>爱迪生（1879）：</strong>实用白炽灯</li>
+                        <li><strong>特斯拉（1888）：</strong>交流电系统</li>
+                        <li><strong>贝尔（1876）：</strong>电话</li>
+                        <li><strong>马可尼（1895）：</strong>无线电</li>
+                    </ul>
+                    <h4>社会影响</h4>
+                    <ul>
+                        <li>夜间照明，延长活动时间</li>
+                        <li>电车、地铁等城市交通</li>
+                        <li>家用电器普及</li>
+                        <li>通讯革命</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="event fade-in" onclick="this.classList.toggle('expanded')">
+                <span class="event-time">1914-1918 年</span>
+                <h3>💣 第一次世界大战</h3>
+                <p>人类历史上第一次全球性战争，造成约 1700 万人死亡，四大帝国崩溃。</p>
+                <div class="event-tags"><span class="tag politics">政治</span></div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>对阵双方</h4>
+                    <ul>
+                        <li><strong>同盟国：</strong>德国、奥匈帝国、奥斯曼帝国、保加利亚</li>
+                        <li><strong>协约国：</strong>英国、法国、俄罗斯、意大利、美国等</li>
+                    </ul>
+                    <h4>重要战役</h4>
+                    <ul>
+                        <li>凡尔登战役（1916）："绞肉机"</li>
+                        <li>索姆河战役（1916）：首次使用坦克</li>
+                        <li>日德兰海战（1916）：最大规模海战</li>
+                    </ul>
+                    <h4>战后影响</h4>
+                    <ul>
+                        <li>四大帝国崩溃（德意志、奥匈、奥斯曼、俄罗斯）</li>
+                        <li>国际联盟成立</li>
+                        <li>欧洲霸权衰落</li>
+                        <li>为二战埋下伏笔</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="event fade-in" onclick="this.classList.toggle('expanded')">
+                <span class="event-time">1939-1945 年</span>
+                <h3>🔥 第二次世界大战</h3>
+                <p>人类历史上最惨烈的战争，造成约 7000 万人死亡，核时代来临。</p>
+                <div class="event-tags"><span class="tag politics">政治</span></div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>对阵双方</h4>
+                    <ul>
+                        <li><strong>轴心国：</strong>德国、意大利、日本</li>
+                        <li><strong>同盟国：</strong>美国、英国、苏联、中国等</li>
+                    </ul>
+                    <h4>主要战场</h4>
+                    <ul>
+                        <li><strong>欧洲战场：</strong>斯大林格勒战役、诺曼底登陆</li>
+                        <li><strong>太平洋战场：</strong>珍珠港事件、中途岛海战</li>
+                        <li><strong>中国战场：</strong>抗日战争（1937-45）</li>
+                    </ul>
+                    <h4>战后秩序</h4>
+                    <ul>
+                        <li>联合国成立（1945）</li>
+                        <li>美苏冷战开始</li>
+                        <li>殖民体系瓦解</li>
+                        <li>核时代来临</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="event fade-in" onclick="this.classList.toggle('expanded')">
+                <span class="event-time">1945 年</span>
+                <h3>🕊️ 联合国成立</h3>
+                <p>50 个国家签署《联合国宪章》，建立维护国际和平与安全的国际组织。</p>
+                <div class="event-tags"><span class="tag politics">政治</span></div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>主要机构</h4>
+                    <ul>
+                        <li><strong>联合国大会：</strong>所有会员国参与</li>
+                        <li><strong>安理会：</strong>15 个成员国，5 个常任理事国</li>
+                        <li><strong>秘书处：</strong>行政管理</li>
+                        <li><strong>国际法院：</strong>司法机构</li>
+                        <li><strong>专门机构：</strong>WHO、UNESCO、IMF 等</li>
+                    </ul>
+                    <h4>宗旨</h4>
+                    <ul>
+                        <li>维护国际和平与安全</li>
+                        <li>促进国际合作</li>
+                        <li>保护人权</li>
+                        <li>推动可持续发展</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="event fade-in" onclick="this.classList.toggle('expanded')">
+                <span class="event-time">1969 年</span>
+                <h3>🌙 阿波罗登月</h3>
+                <p>阿姆斯特朗成为第一个踏上月球的人类，"这是一个人的一小步，却是人类的一大步"。</p>
+                <div class="event-tags"><span class="tag science">科学</span><span class="tag technology">技术</span></div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>任务详情</h4>
+                    <ul>
+                        <li><strong>发射时间：</strong>1969 年 7 月 16 日</li>
+                        <li><strong>登月时间：</strong>1969 年 7 月 20 日</li>
+                        <li><strong>宇航员：</strong>阿姆斯特朗、奥尔德林、柯林斯</li>
+                        <li><strong>名言：</strong>"这是一个人的一小步，却是人类的一大步"</li>
+                    </ul>
+                    <h4>历史意义</h4>
+                    <ul>
+                        <li>冷战太空竞赛的高潮</li>
+                        <li>展示人类科技实力</li>
+                        <li>激发全球科学热情</li>
+                        <li>至今仍是人类唯一一次登陆地外天体</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="event fade-in" onclick="this.classList.toggle('expanded')">
+                <span class="event-time">1990 年代</span>
+                <h3>🌐 互联网普及</h3>
+                <p>万维网诞生，互联网商业化，信息时代来临，世界进入全球化时代。</p>
+                <div class="event-tags"><span class="tag technology">技术</span></div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>发展历程</h4>
+                    <ul>
+                        <li><strong>1969：</strong>ARPANET，互联网前身</li>
+                        <li><strong>1989：</strong>蒂姆·伯纳斯 - 李发明万维网</li>
+                        <li><strong>1993：</strong>Mosaic 浏览器，图形化界面</li>
+                        <li><strong>1995：</strong>亚马逊、eBay 成立，电商兴起</li>
+                        <li><strong>2004：</strong>Facebook 成立，社交媒体时代</li>
+                    </ul>
+                    <h4>社会影响</h4>
+                    <ul>
+                        <li>信息获取方式革命</li>
+                        <li>电子商务兴起</li>
+                        <li>社交媒体改变沟通方式</li>
+                        <li>远程工作和学习成为可能</li>
+                        <li>数字经济崛起</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="event fade-in" onclick="this.classList.toggle('expanded')">
+                <span class="event-time">2007 年</span>
+                <h3>📱 智能手机时代</h3>
+                <p>iPhone 发布，移动互联网时代开启，彻底改变人类生活方式。</p>
+                <div class="event-tags"><span class="tag technology">技术</span></div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>关键产品</h4>
+                    <ul>
+                        <li><strong>2007：</strong>第一代 iPhone 发布</li>
+                        <li><strong>2008：</strong>App Store 上线</li>
+                        <li><strong>2008：</strong>Android 手机发布</li>
+                    </ul>
+                    <h4>社会影响</h4>
+                    <ul>
+                        <li>随时随地获取信息</li>
+                        <li>移动支付方式普及</li>
+                        <li>社交媒体随时在线</li>
+                        <li>共享经济兴起（Uber、Airbnb）</li>
+                        <li>短视频和直播文化</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="event fade-in" onclick="this.classList.toggle('expanded')">
+                <span class="event-time">2020 年代</span>
+                <h3>🤖 人工智能时代</h3>
+                <p>大语言模型和生成式 AI 技术爆发，AI 开始深刻影响各行各业，人类进入智能时代。</p>
+                <div class="event-tags"><span class="tag technology">技术</span><span class="tag science">科学</span></div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>关键技术突破</h4>
+                    <ul>
+                        <li><strong>Transformer 架构（2017）：</strong>深度学习新范式</li>
+                        <li><strong>GPT 系列：</strong>大规模语言模型</li>
+                        <li><strong>生成式 AI：</strong>文本、图像、音频、视频生成</li>
+                        <li><strong>多模态模型：</strong>同时处理多种输入</li>
+                    </ul>
+                    <h4>应用领域</h4>
+                    <ul>
+                        <li>智能助手和客服</li>
+                        <li>内容创作和编辑</li>
+                        <li>编程和软件开发</li>
+                        <li>医疗诊断和药物研发</li>
+                        <li>自动驾驶</li>
+                        <li>科学研究加速</li>
+                    </ul>
+                    <h4>未来展望</h4>
+                    <ul>
+                        <li>生产力飞跃</li>
+                        <li>就业结构变化</li>
+                        <li>伦理和安全挑战</li>
+                        <li>人机协作新时代</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

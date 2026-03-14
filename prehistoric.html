@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>史前时期 - 人类历史发展进程</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #ff6b6b, #ffd700, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #a0a0a0;
+            font-size: 1.3em;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #ffd700;
+        }
+        .era-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .era-nav a {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+        .era-nav a:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #ffd700;
+            transform: translateY(-2px);
+        }
+        .era-nav a.active {
+            background: linear-gradient(135deg, #ff6b6b, #ffd700);
+            border-color: #ffd700;
+            color: #000;
+        }
+
+        .era-info-box {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .era-info-box h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+
+        .era-info-box p {
+            line-height: 1.8;
+            color: #b0b0b0;
+            margin-bottom: 15px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+            margin: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #ff6b6b, #ffd700, #ff6b6b);
+            border-radius: 2px;
+        }
+
+        .event {
+            position: relative;
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .event:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: #ff6b6b;
+        }
+
+        .event::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 35px;
+            width: 20px;
+            height: 20px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            border: 4px solid #0c0c0c;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+        }
+
+        .event-time {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #ff6b6b, #ffd700);
+            color: #000;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+
+        .event h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .event p {
+            color: #b0b0b0;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .event-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 0 20px;
+        }
+
+        .event.expanded .event-details {
+            max-height: 1000px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .event-details h4 {
+            color: #ffd700;
+            margin: 15px 0 10px 0;
+            font-size: 1.2em;
+        }
+
+        .event-details ul {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .event-details li {
+            margin-bottom: 8px;
+            color: #c0c0c0;
+        }
+
+        .event-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 5px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            font-size: 0.85em;
+            color: #a0a0a0;
+        }
+
+        .tag.culture { background: rgba(78, 205, 196, 0.2); color: #4ecdc4; }
+        .tag.technology { background: rgba(69, 183, 209, 0.2); color: #45b7d1; }
+        .tag.science { background: rgba(255, 215, 0, 0.2); color: #ffd700; }
+
+        .expand-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 107, 107, 0.2);
+            border: 1px solid #ff6b6b;
+            color: #ff6b6b;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .expand-btn:hover {
+            background: rgba(255, 107, 107, 0.3);
+        }
+
+        .event.expanded .expand-btn::after {
+            content: ' 收起';
+        }
+
+        .event:not(.expanded) .expand-btn::after {
+            content: ' 展开';
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .timeline {
+                padding-left: 30px;
+            }
+
+            .timeline::before {
+                left: 10px;
+            }
+
+            .event::before {
+                left: -28px;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="fade-in">
+            <h1>🪨 史前时期</h1>
+            <p class="subtitle">Prehistoric Era - 人类起源与早期发展</p>
+            <a href="index.html" class="back-link">← 返回主时间线</a>
+            <div class="era-nav">
+                <a href="prehistoric.html" class="active">🪨 史前时期</a>
+                <a href="ancient.html">🏛️ 古代文明</a>
+                <a href="medieval.html">🏰 中世纪</a>
+                <a href="early-modern.html">⛵ 近代早期</a>
+                <a href="modern.html">🚀 现代</a>
+            </div>
+        </header>
+
+        <div class="era-info-box fade-in">
+            <h2>时期概述</h2>
+            <p><strong>时间跨度：</strong>约 300 万年前 - 公元前 3500 年</p>
+            <p>史前时期是人类历史的起点，从最早的人属物种出现到文字发明前的漫长时期。这一时期见证了人类从非洲起源、学会使用火、发展语言能力、创造艺术，最终发明农业并建立永久定居点的伟大历程。</p>
+            <p><strong>主要特征：</strong>石器工具的使用、火的控制、语言的产生、洞穴艺术、农业革命、定居生活</p>
+            <p><strong>重要意义：</strong>奠定了人类生物和文化进化的基础，为后续文明的诞生创造了条件</p>
+        </div>
+
+        <div class="timeline">
+            <div class="event fade-in" onclick="toggleEvent(this)">
+                <span class="event-time">约 300 万年前</span>
+                <h3>🧬 最早的人属物种出现</h3>
+                <p>在非洲东部，最早的人属（Homo）物种出现，开始制造和使用简单的石器工具，这标志着人类进化的重要里程碑。</p>
+                <div class="event-tags">
+                    <span class="tag science">科学</span>
+                    <span class="tag culture">文化</span>
+                </div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>详细说明</h4>
+                    <p>能人（Homo habilis）被认为是最早使用工具的人类祖先，其脑容量约 600-700 毫升，比南方古猿大得多。</p>
+                    
+                    <h4>重要化石发现</h4>
+                    <ul>
+                        <li><strong>OH 7（1960 年）：</strong>坦桑尼亚奥杜威峡谷，能人正模标本</li>
+                        <li><strong>KNM-ER 1470（1972 年）：</strong>肯尼亚，完整的能人头骨</li>
+                        <li><strong>LD 350-1（2013 年）：</strong>埃塞俄比亚，280 万年前的下颌骨</li>
+                    </ul>
+
+                    <h4>石器工具</h4>
+                    <ul>
+                        <li><strong>奥杜威文化（Oldowan）：</strong>约 260 万年前开始</li>
+                        <li><strong>工具类型：</strong>砍砸器、刮削器、尖状器</li>
+                        <li><strong>制作方法：</strong>用一块石头敲击另一块石头，产生锋利边缘</li>
+                    </ul>
+
+                    <h4>生活方式</h4>
+                    <ul>
+                        <li>群体生活，约 20-50 人</li>
+                        <li>狩猎采集经济</li>
+                        <li>可能已经开始使用简单的语言交流</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="event fade-in" onclick="toggleEvent(this)">
+                <span class="event-time">约 180 万年前</span>
+                <h3>🔥 火的控制与使用</h3>
+                <p>人类学会使用和控制火，这是人类历史上最重要的技术突破之一。火的使用彻底改变了人类的饮食、生活方式和生存能力。</p>
+                <div class="event-tags">
+                    <span class="tag technology">技术</span>
+                    <span class="tag culture">文化</span>
+                </div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>详细说明</h4>
+                    <p>火的控制是人类进化史上的关键转折点。直立人（Homo erectus）可能是最早系统使用火的人类物种。</p>
+                    
+                    <h4>重大影响</h4>
+                    <ul>
+                        <li><strong>烹饪食物：</strong>熟食更易消化，提供更多营养，促进大脑发育</li>
+                        <li><strong>保暖：</strong>使人类能够在寒冷地区生存和迁徙</li>
+                        <li><strong>防御：</strong>驱赶野兽，保护营地安全</li>
+                        <li><strong>社交：</strong>围绕火堆的聚会促进了语言和文化的发展</li>
+                        <li><strong>工具制造：</strong>火被用于硬化木制工具和加工材料</li>
+                    </ul>
+
+                    <h4>考古证据</h4>
+                    <ul>
+                        <li><strong>肯尼亚 Chesowanja（140 万年前）：</strong>烧焦的粘土</li>
+                        <li><strong>南非 Wonderwerk 洞穴（100 万年前）：</strong>灰烬和烧焦的骨头</li>
+                        <li><strong>以色列 Gesher Benot Ya'aqov（79 万年前）：</strong>明确的用火证据</li>
+                        <li><strong>中国周口店（50 万年前）：</strong>北京猿人用火遗迹</li>
+                    </ul>
+
+                    <h4>生物学影响</h4>
+                    <ul>
+                        <li>肠道缩短，大脑增大</li>
+                        <li>牙齿变小，咀嚼肌减弱</li>
+                        <li>睡眠时间延长（夜晚不再完全黑暗）</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="event fade-in" onclick="toggleEvent(this)">
+                <span class="event-time">约 30 万年前</span>
+                <h3>👤 智人（Homo sapiens）出现</h3>
+                <p>解剖学意义上的现代人类在非洲出现，具有更大的脑容量和更先进的认知能力，最终成为唯一存活至今的人属物种。</p>
+                <div class="event-tags">
+                    <span class="tag science">科学</span>
+                </div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>详细说明</h4>
+                    <p>智人是人属中唯一现存的物种，具有独特的解剖特征和认知能力，包括抽象思维、复杂语言和创造力。</p>
+                    
+                    <h4>关键特征</h4>
+                    <ul>
+                        <li><strong>脑容量：</strong>平均约 1350 毫升，支持复杂的思维和语言能力</li>
+                        <li><strong>直立行走：</strong>完全适应两足行走，解放双手</li>
+                        <li><strong>精细工具：</strong>能够制造更复杂、更精细的工具</li>
+                        <li><strong>符号思维：</strong>具备抽象思维和符号表达能力</li>
+                        <li><strong>语言能力：</strong>复杂的语言系统，支持知识传承</li>
+                    </ul>
+
+                    <h4>化石证据</h4>
+                    <ul>
+                        <li><strong>摩洛哥 Jebel Irhoud（30 万年前）：</strong>已知最早的智人化石</li>
+                        <li><strong>埃塞俄比亚 Omo Kibish（19.5 万年前）：</strong>完整的智人头骨</li>
+                        <li><strong>南非 Florisbad（26 万年前）：</strong>早期智人化石</li>
+                    </ul>
+
+                    <h4>与其他人种的关系</h4>
+                    <ul>
+                        <li><strong>尼安德特人：</strong>在欧洲和西亚，约 40 万 -4 万年前</li>
+                        <li><strong>丹尼索瓦人：</strong>在亚洲，约 20 万 -5 万年前</li>
+                        <li><strong>基因交流：</strong>现代非非洲人含有 1-4% 的尼安德特人基因</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="event fade-in" onclick="toggleEvent(this)">
+                <span class="event-time">约 7 万年前</span>
+                <h3>🌏 走出非洲大迁徙</h3>
+                <p>现代人类开始大规模迁徙，从非洲扩散到亚洲、欧洲、澳洲，最终到达美洲，完成全球定居，这是人类历史上最伟大的迁徙。</p>
+                <div class="event-tags">
+                    <span class="tag culture">文化</span>
+                </div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>详细说明</h4>
+                    <p>遗传学和考古学证据表明，所有现代非非洲人都是约 7 万年前一小群离开非洲的智人的后代。</p>
+                    
+                    <h4>迁徙路线</h4>
+                    <ul>
+                        <li><strong>南线（约 7 万年前）：</strong>沿亚洲南部海岸线，经印度、东南亚到达澳洲（约 6.5 万年前）</li>
+                        <li><strong>北线（约 4.5 万年前）：</strong>经中亚进入欧洲，与尼安德特人相遇</li>
+                        <li><strong>东亚（约 4 万年前）：</strong>到达中国、朝鲜半岛、日本</li>
+                        <li><strong>美洲（约 1.5 万年前）：</strong>通过白令陆桥进入北美，然后扩散到南美</li>
+                    </ul>
+
+                    <h4>遗传证据</h4>
+                    <ul>
+                        <li><strong>线粒体夏娃：</strong>所有现代人类的母系共同祖先，约 15-20 万年前生活在非洲</li>
+                        <li><strong>Y 染色体亚当：</strong>所有现代人类的父系共同祖先，约 20-30 万年前</li>
+                        <li><strong>遗传多样性：</strong>非洲人群遗传多样性最高，支持非洲起源说</li>
+                    </ul>
+
+                    <h4>迁徙动力</h4>
+                    <ul>
+                        <li>气候变化（冰期 - 间冰期循环）</li>
+                        <li>人口压力</li>
+                        <li>资源竞争</li>
+                        <li>探索本能</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="event fade-in" onclick="toggleEvent(this)">
+                <span class="event-time">约 4 万年前</span>
+                <h3>🎨 洞穴艺术与符号思维</h3>
+                <p>欧洲出现精美的洞穴壁画和雕刻作品，如法国的拉斯科洞穴和西班牙的阿尔塔米拉洞穴，展示了早期人类的艺术才能和符号思维能力。</p>
+                <div class="event-tags">
+                    <span class="tag culture">文化</span>
+                </div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>详细说明</h4>
+                    <p>洞穴艺术的出现标志着人类认知能力的重大飞跃，表明早期人类已经具备抽象思维、符号表达和审美能力。</p>
+                    
+                    <h4>著名遗址</h4>
+                    <ul>
+                        <li><strong>法国拉斯科洞穴（1.7 万年前）：</strong>被称为"史前卢浮宫"，有 600 多幅动物壁画</li>
+                        <li><strong>西班牙阿尔塔米拉洞穴（1.5 万年前）：</strong>以野牛壁画闻名，色彩鲜艳</li>
+                        <li><strong>法国肖维洞穴（3 万年前）：</strong>已知最古老的洞穴艺术之一</li>
+                        <li><strong>印度尼西亚苏拉威西（4 万年前）：</strong>已知最古老的手印和动物画</li>
+                    </ul>
+
+                    <h4>艺术形式</h4>
+                    <ul>
+                        <li><strong>动物壁画：</strong>野牛、马、鹿、猛犸象等</li>
+                        <li><strong>手印：</strong>喷绘或按印的手掌轮廓</li>
+                        <li><strong>抽象符号：</strong>点、线、几何图案</li>
+                        <li><strong>雕刻：</strong>骨雕、石雕、象牙雕</li>
+                    </ul>
+
+                    <h4>可能的意义</h4>
+                    <ul>
+                        <li><strong>狩猎巫术：</strong>祈求狩猎成功</li>
+                        <li><strong>宗教仪式：</strong>萨满教或祖先崇拜</li>
+                        <li><strong>知识传承：</strong>记录动物习性和狩猎技巧</li>
+                        <li><strong>社会凝聚：</strong>群体认同和仪式活动</li>
+                    </ul>
+
+                    <h4>技术成就</h4>
+                    <ul>
+                        <li>使用天然矿物颜料（氧化铁、锰等）</li>
+                        <li>利用洞穴地形创造立体效果</li>
+                        <li>使用火把照明</li>
+                        <li>搭建脚手架到达高处</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="event fade-in" onclick="toggleEvent(this)">
+                <span class="event-time">约 1 万年前</span>
+                <h3>🌾 农业革命（新石器革命）</h3>
+                <p>人类开始种植作物和驯养动物，从狩猎采集转向定居农业，这是人类历史上最重大的转变之一，文明的基础由此奠定。</p>
+                <div class="event-tags">
+                    <span class="tag technology">技术</span>
+                    <span class="tag culture">文化</span>
+                </div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>详细说明</h4>
+                    <p>农业革命是人类历史上最深刻的变革，人类从食物的采集者转变为食物的生产者，这一转变彻底改变了人类社会的面貌。</p>
+                    
+                    <h4>主要成就</h4>
+                    <ul>
+                        <li><strong>作物驯化：</strong>
+                            <ul>
+                                <li>西亚：小麦、大麦（约 9500 BC）</li>
+                                <li>中国：稻米（约 7000 BC）、粟（约 6000 BC）</li>
+                                <li>中美洲：玉米（约 5000 BC）</li>
+                                <li>南美洲：马铃薯（约 4000 BC）</li>
+                            </ul>
+                        </li>
+                        <li><strong>动物驯化：</strong>
+                            <ul>
+                                <li>狗（约 1.5 万年前）</li>
+                                <li>羊、山羊（约 9000 BC）</li>
+                                <li>牛（约 8000 BC）</li>
+                                <li>猪（约 7000 BC）</li>
+                                <li>马（约 4000 BC）</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>深远影响</h4>
+                    <ul>
+                        <li><strong>人口增长：</strong>稳定的食物供应支持人口大幅增加</li>
+                        <li><strong>定居生活：</strong>形成永久性村落和城镇</li>
+                        <li><strong>社会分层：</strong>剩余产品导致财富积累和阶级分化</li>
+                        <li><strong>专业化分工：</strong>农民、工匠、商人、祭司等职业出现</li>
+                        <li><strong>文字发明：</strong>记录财产和交易的需要</li>
+                        <li><strong>疾病传播：</strong>密集居住和家畜接触增加传染病</li>
+                    </ul>
+
+                    <h4>早期农业遗址</h4>
+                    <ul>
+                        <li><strong>耶利哥（约旦）：</strong>约 9000 BC，最早的城墙城市</li>
+                        <li><strong>恰塔霍裕克（土耳其）：</strong>约 7500 BC，大型定居点</li>
+                        <li><strong>河姆渡（中国）：</strong>约 5000 BC，稻作农业</li>
+                        <li><strong>贾湖（中国）：</strong>约 7000 BC，最早的酿酒证据</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="event fade-in" onclick="toggleEvent(this)">
+                <span class="event-time">约 6000 BC</span>
+                <h3>🏺 陶器发明与定居生活</h3>
+                <p>陶器的发明使人类能够储存食物和水，改善饮食结构，支持更大规模的定居生活，是新石器时代的重要标志。</p>
+                <div class="event-tags">
+                    <span class="tag technology">技术</span>
+                    <span class="tag culture">文化</span>
+                </div>
+                <span class="expand-btn"></span>
+                <div class="event-details">
+                    <h4>详细说明</h4>
+                    <p>陶器是人类第一种人造材料，通过火烧粘土制成，具有防水、耐用的特性，极大地改善了人类的生活条件。</p>
+                    
+                    <h4>技术特点</h4>
+                    <ul>
+                        <li><strong>制作方法：</strong>手制或轮制，露天烧制或窑烧</li>
+                        <li><strong>烧制温度：</strong>600-1200°C</li>
+                        <li><strong>装饰：</strong>彩绘、刻划、压印</li>
+                    </ul>
+
+                    <h4>重要用途</h4>
+                    <ul>
+                        <li>储存粮食和水</li>
+                        <li>烹饪食物</li>
+                        <li>宗教仪式用品</li>
+                        <li>贸易商品</li>
+                    </ul>
+
+                    <h4>早期陶器遗址</h4>
+                    <ul>
+                        <li><strong>中国仙人洞（约 18000 BC）：</strong>已知最早的陶器</li>
+                        <li><strong>日本绳文时代（约 14000 BC）：</strong>精美的绳纹陶器</li>
+                        <li><strong>西亚哈苏纳文化（约 6000 BC）：</strong>彩绘陶器</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleEvent(element) {
+            element.classList.toggle('expanded');
+        }
+    </script>
+</body>
+</html>
