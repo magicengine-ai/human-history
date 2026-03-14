@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>古代文明地图 - 人类历史发展进程</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #4ecdc4, #ffd700, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle { color: #a0a0a0; font-size: 1.3em; }
+        .back-link {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+        .back-link:hover { background: rgba(255, 255, 255, 0.2); border-color: #4ecdc4; }
+        
+        .civilization-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .civ-card {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .civ-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border-color: #4ecdc4;
+        }
+        
+        .civ-icon {
+            font-size: 4em;
+            margin-bottom: 15px;
+        }
+        
+        .civ-name {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: #4ecdc4;
+        }
+        
+        .civ-time {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+        
+        .civ-desc {
+            color: #b0b0b0;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .civ-location {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #a0a0a0;
+            font-size: 0.9em;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal.active { display: flex; }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 25px;
+            padding: 50px;
+            max-width: 900px;
+            width: 90%;
+            border: 2px solid rgba(78, 205, 196, 0.3);
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2.5em;
+            cursor: pointer;
+            color: #a0a0a0;
+            transition: all 0.3s;
+        }
+        
+        .modal-close:hover { color: #4ecdc4; transform: rotate(90deg); }
+        
+        .modal-title {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #4ecdc4;
+        }
+        
+        .modal-body {
+            line-height: 1.9;
+            color: #d0d0d0;
+            margin-top: 25px;
+        }
+        
+        .modal-body h3 {
+            color: #ffd700;
+            margin: 25px 0 15px 0;
+            font-size: 1.4em;
+        }
+        
+        .modal-body ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-body li {
+            margin-bottom: 10px;
+            color: #b0b0b0;
+        }
+        
+        .achievement-box {
+            background: rgba(78, 205, 196, 0.1);
+            border-left: 4px solid #4ecdc4;
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+            margin: 20px 0;
+        }
+        
+        .era-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .era-nav a {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+        .era-nav a:hover {
+            background: rgba(78, 205, 196, 0.2);
+            border-color: #4ecdc4;
+        }
+        .era-nav a.active {
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+            border-color: #4ecdc4;
+            color: #000;
+        }
+        
+        .fade-in { animation: fadeIn 0.8s ease-in; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="fade-in">
+            <h1>🗺️ 古代文明地图</h1>
+            <p class="subtitle">Ancient Civilizations Map - 探索人类早期文明</p>
+            <a href="index.html" class="back-link">← 返回主时间线</a>
+            <div class="era-nav">
+                <a href="index.html">🏠 主页</a>
+                <a href="prehistoric.html">🪨 史前</a>
+                <a href="ancient.html">🏛️ 古代</a>
+                <a href="medieval.html">🏰 中世纪</a>
+                <a href="early-modern.html">⛵ 近代</a>
+                <a href="modern.html">🚀 现代</a>
+                <a href="people.html">👤 人物</a>
+                <a href="civilizations.html" class="active">🗺️ 文明</a>
+            </div>
+        </header>
+
+        <div class="civilization-grid" id="civGrid"></div>
+    </div>
+
+    <div class="modal" id="civModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        const civilizations = [
+            {
+                icon: '🏛️',
+                name: '美索不达米亚文明',
+                time: '公元前 3500-539 年',
+                location: '📍 两河流域（今伊拉克）',
+                desc: '人类最早的文明，发明文字、车轮、法典',
+                detail: {
+                    title: '美索不达米亚文明 - 文明的摇篮',
+                    content: `
+                        <h3>文明概述</h3>
+                        <p>美索不达米亚（Mesopotamia）意为"两河之间的土地"，指幼发拉底河和底格里斯河流域，是人类文明最早诞生的地区。</p>
+                        
+                        <div class="achievement-box">
+                            <h4>主要成就</h4>
+                            <ul>
+                                <li><strong>楔形文字：</strong>约公元前 3500 年，世界最早文字</li>
+                                <li><strong>车轮：</strong>约公元前 3500 年发明</li>
+                                <li><strong>60 进制：</strong>用于时间和角度计算，沿用至今</li>
+                                <li><strong>汉谟拉比法典：</strong>现存最早的系统性法典</li>
+                                <li><strong>空中花园：</strong>古代世界七大奇迹之一</li>
+                            </ul>
+                        </div>
+                        
+                        <h3>主要王朝</h3>
+                        <ul>
+                            <li><strong>苏美尔城邦（前 3500-2334）：</strong>乌鲁克、乌尔、拉格什</li>
+                            <li><strong>阿卡德帝国（前 2334-2154）：</strong>萨尔贡大帝建立</li>
+                            <li><strong>巴比伦王国（前 1894-1595）：</strong>汉谟拉比时期最强盛</li>
+                            <li><strong>亚述帝国（前 911-609）：</strong>军事强国，铁器使用</li>
+                            <li><strong>新巴比伦（前 626-539）：</strong>尼布甲尼撒二世，空中花园</li>
+                        </ul>
+                        
+                        <h3>宗教信仰</h3>
+                        <ul>
+                            <li>多神教，主要神祇：安（天神）、恩利尔（风神）、伊什塔尔（爱神）</li>
+                            <li>建造塔庙（Ziggurat）祭祀神灵</li>
+                            <li>《吉尔伽美什史诗》：最早的文学作品，记载大洪水传说</li>
+                        </ul>
+                    `
+                }
+            },
+            {
+                icon: '🔺',
+                name: '古埃及文明',
+                time: '公元前 3100-30 年',
+                location: '📍 尼罗河流域（今埃及）',
+                desc: '金字塔、木乃伊、象形文字，延续 3000 年的辉煌',
+                detail: {
+                    title: '古埃及文明 - 尼罗河的赠礼',
+                    content: `
+                        <h3>文明概述</h3>
+                        <p>古希腊历史学家希罗多德说："埃及是尼罗河的赠礼"。尼罗河定期泛滥带来肥沃土壤，支撑了古埃及 3000 年的文明。</p>
+                        
+                        <div class="achievement-box">
+                            <h4>主要成就</h4>
+                            <ul>
+                                <li><strong>金字塔：</strong>吉萨大金字塔是古代世界七大奇迹唯一现存</li>
+                                <li><strong>象形文字：</strong>约公元前 3200 年发明</li>
+                                <li><strong>太阳历：</strong>365 天一年，现代历法基础</li>
+                                <li><strong>医学：</strong>外科手术、药物学、解剖学知识先进</li>
+                                <li><strong>纸草：</strong>最早的书写材料之一</li>
+                            </ul>
+                        </div>
+                        
+                        <h3>历史分期</h3>
+                        <ul>
+                            <li><strong>早王朝（前 3100-2686）：</strong>美尼斯统一上下埃及</li>
+                            <li><strong>古王国（前 2686-2181）：</strong>金字塔时代</li>
+                            <li><strong>中王国（前 2055-1650）：</strong>文学艺术繁荣</li>
+                            <li><strong>新王国（前 1550-1069）：</strong>帝国时代，图坦卡蒙、拉美西斯二世</li>
+                            <li><strong>后期（前 1069-332）：</strong>外族统治，逐渐衰落</li>
+                            <li><strong>托勒密王朝（前 332-30）：</strong>希腊化时代，克利奥帕特拉七世</li>
+                        </ul>
+                        
+                        <h3>著名法老</h3>
+                        <ul>
+                            <li><strong>胡夫：</strong>建造大金字塔</li>
+                            <li><strong>哈特谢普苏特：</strong>女法老，贸易扩张</li>
+                            <li><strong>阿肯那顿：</strong>宗教改革，一神教尝试</li>
+                            <li><strong>图坦卡蒙：</strong>陵墓完整保存，1922 年发现</li>
+                            <li><strong>拉美西斯二世：</strong>在位 67 年，建造阿布辛贝神庙</li>
+                        </ul>
+                    `
+                }
+            },
+            {
+                icon: '🏛️',
+                name: '古希腊文明',
+                time: '公元前 800-146 年',
+                location: '📍 希腊半岛、爱琴海诸岛',
+                desc: '民主政治、哲学、科学、艺术的发源地',
+                detail: {
+                    title: '古希腊文明 - 西方文明的摇篮',
+                    content: `
+                        <h3>文明概述</h3>
+                        <p>古希腊文明是西方文明的源头，在哲学、科学、文学、艺术、政治制度等方面都有开创性贡献，影响深远。</p>
+                        
+                        <div class="achievement-box">
+                            <h4>主要成就</h4>
+                            <ul>
+                                <li><strong>民主政治：</strong>雅典民主制，公民大会</li>
+                                <li><strong>哲学：</strong>苏格拉底、柏拉图、亚里士多德</li>
+                                <li><strong>科学：</strong>欧几里得几何、阿基米德原理</li>
+                                <li><strong>文学：</strong>荷马史诗、希腊悲剧</li>
+                                <li><strong>奥林匹克：</strong>公元前 776 年开始，每 4 年一届</li>
+                            </ul>
+                        </div>
+                        
+                        <h3>主要城邦</h3>
+                        <ul>
+                            <li><strong>雅典：</strong>民主政治、文化中心，帕特农神庙</li>
+                            <li><strong>斯巴达：</strong>军事强国，严格训练制度</li>
+                            <li><strong>科林斯：</strong>商业城邦，地峡运动会</li>
+                            <li><strong>底比斯：</strong>军事强国，短暂霸权</li>
+                        </ul>
+                        
+                        <h3>著名人物</h3>
+                        <ul>
+                            <li><strong>哲学家：</strong>苏格拉底、柏拉图、亚里士多德</li>
+                            <li><strong>科学家：</strong>毕达哥拉斯、欧几里得、阿基米德</li>
+                            <li><strong>文学家：</strong>荷马、索福克勒斯、欧里庇得斯</li>
+                            <li><strong>政治家：</strong>伯里克利、梭伦</li>
+                            <li><strong>军事家：</strong>亚历山大大帝</li>
+                        </ul>
+                    `
+                }
+            },
+            {
+                icon: '🏛️',
+                name: '古罗马文明',
+                time: '公元前 753-公元 476 年',
+                location: '📍 意大利半岛，后扩张至整个地中海',
+                desc: '法律、工程、军事、行政管理的典范',
+                detail: {
+                    title: '古罗马文明 - 永恒之城',
+                    content: `
+                        <h3>文明概述</h3>
+                        <p>古罗马从一个小城邦发展为横跨欧亚非三大洲的大帝国，其法律、工程、语言和行政制度深刻影响了西方文明。</p>
+                        
+                        <div class="achievement-box">
+                            <h4>主要成就</h4>
+                            <ul>
+                                <li><strong>罗马法：</strong>现代法律体系的基础</li>
+                                <li><strong>工程技术：</strong>道路（8 万公里）、水道、建筑</li>
+                                <li><strong>拉丁语：</strong>演变为罗曼语族（法语、西班牙语、意大利语等）</li>
+                                <li><strong>共和制度：</strong>元老院、执政官、公民大会</li>
+                                <li><strong>基督教：</strong>从被迫害到国教，成为世界宗教</li>
+                            </ul>
+                        </div>
+                        
+                        <h3>历史分期</h3>
+                        <ul>
+                            <li><strong>王政时代（前 753-509）：</strong>七位国王</li>
+                            <li><strong>共和国（前 509-27）：</strong>元老院统治，布匿战争</li>
+                            <li><strong>帝国（前 27-476）：</strong>屋大维建立元首制</li>
+                            <li><strong>五贤帝（96-180）：</strong>罗马最繁荣时期</li>
+                            <li><strong>分裂（395）：</strong>东西罗马帝国分立</li>
+                            <li><strong>西罗马灭亡（476）：</strong>中世纪开始</li>
+                        </ul>
+                        
+                        <h3>著名建筑</h3>
+                        <ul>
+                            <li><strong>斗兽场：</strong>可容纳 5-8 万观众</li>
+                            <li><strong>万神殿：</strong>保存最完好的古罗马建筑</li>
+                            <li><strong>罗马水道：</strong>11 条水道，日供水 100 万立方米</li>
+                            <li><strong>凯旋门：</strong>纪念军事胜利</li>
+                        </ul>
+                    `
+                }
+            },
+            {
+                icon: '🐉',
+                name: '古中国文明',
+                time: '公元前 1600 年 - 公元 1912 年',
+                location: '📍 黄河流域、长江流域',
+                desc: '唯一延续至今的古老文明，四大发明影响世界',
+                detail: {
+                    title: '古中国文明 - 华夏五千年',
+                    content: `
+                        <h3>文明概述</h3>
+                        <p>中国是唯一延续至今的古老文明，拥有连续的文字记录和历史传承，在科技、文化、哲学等方面都有卓越贡献。</p>
+                        
+                        <div class="achievement-box">
+                            <h4>四大发明</h4>
+                            <ul>
+                                <li><strong>造纸术：</strong>东汉蔡伦改进（105 年）</li>
+                                <li><strong>印刷术：</strong>隋唐雕版，北宋毕昇活字（1040 年）</li>
+                                <li><strong>指南针：</strong>战国司南，北宋用于航海</li>
+                                <li><strong>火药：</strong>唐代发明，宋代用于军事</li>
+                            </ul>
+                        </div>
+                        
+                        <h3>主要朝代</h3>
+                        <ul>
+                            <li><strong>夏商周（前 2070-256）：</strong>青铜时代，甲骨文</li>
+                            <li><strong>秦汉（前 221-220）：</strong>大一统帝国，丝绸之路</li>
+                            <li><strong>魏晋南北朝（220-589）：</strong>分裂时期，佛教传播</li>
+                            <li><strong>隋唐（581-907）：</strong>盛世，长安为世界最大城市</li>
+                            <li><strong>宋元（960-1368）：</strong>经济繁荣，蒙古帝国</li>
+                            <li><strong>明清（1368-1912）：</strong>最后两个王朝</li>
+                        </ul>
+                        
+                        <h3>思想文化</h3>
+                        <ul>
+                            <li><strong>儒家：</strong>孔子创立，强调仁义礼智信</li>
+                            <li><strong>道家：</strong>老子、庄子，道法自然</li>
+                            <li><strong>法家：</strong>韩非子，法治思想</li>
+                            <li><strong>佛教：</strong>东汉传入，中国化后影响深远</li>
+                        </ul>
+                    `
+                }
+            },
+            {
+                icon: '🕌',
+                name: '古印度文明',
+                time: '公元前 2600 年 - 公元 500 年',
+                location: '📍 印度河流域、恒河流域',
+                desc: '宗教、哲学、数学的发源地，种姓制度影响深远',
+                detail: {
+                    title: '古印度文明 - 恒河的智慧',
+                    content: `
+                        <h3>文明概述</h3>
+                        <p>古印度文明是世界最早的文明之一，在宗教、哲学、数学、医学等方面都有重要贡献，对亚洲文化影响深远。</p>
+                        
+                        <div class="achievement-box">
+                            <h4>主要成就</h4>
+                            <ul>
+                                <li><strong>数字系统：</strong>发明 0-9 数字（阿拉伯数字实际源于印度）</li>
+                                <li><strong>宗教：</strong>印度教、佛教、耆那教、锡克教发源地</li>
+                                <li><strong>哲学：</strong>吠陀哲学、奥义书思想</li>
+                                <li><strong>医学：</strong>阿育吠陀医学体系</li>
+                                <li><strong>文学：</strong>《摩诃婆罗多》《罗摩衍那》史诗</li>
+                            </ul>
+                        </div>
+                        
+                        <h3>历史时期</h3>
+                        <ul>
+                            <li><strong>印度河流域文明（前 2600-1900）：</strong>哈拉帕、摩亨佐达罗</li>
+                            <li><strong>吠陀时代（前 1500-600）：</strong>雅利安人迁入，吠陀经典</li>
+                            <li><strong>列国时代（前 600-321）：</strong>十六大国，佛教兴起</li>
+                            <li><strong>孔雀王朝（前 321-185）：</strong>阿育王统一大部分印度</li>
+                            <li><strong>笈多王朝（320-550）：</strong>黄金时代，文化艺术繁荣</li>
+                        </ul>
+                        
+                        <h3>社会制度</h3>
+                        <ul>
+                            <li><strong>种姓制度：</strong>婆罗门、刹帝利、吠舍、首陀罗</li>
+                            <li><strong>职业世袭：</strong>社会阶层固化</li>
+                            <li><strong>影响：</strong>延续数千年，至今仍有影响</li>
+                        </ul>
+                    `
+                }
+            },
+            {
+                icon: '🗿',
+                name: '玛雅文明',
+                time: '公元前 2000 年 - 公元 1500 年',
+                location: '📍 中美洲（墨西哥、危地马拉、洪都拉斯）',
+                desc: '美洲最发达的文明，天文、数学、建筑成就卓越',
+                detail: {
+                    title: '玛雅文明 - 丛林中的神秘文明',
+                    content: `
+                        <h3>文明概述</h3>
+                        <p>玛雅文明是美洲最发达的古代文明，在天文学、数学、建筑、文字等方面都有卓越成就，16 世纪被西班牙殖民者摧毁。</p>
+                        
+                        <div class="achievement-box">
+                            <h4>主要成就</h4>
+                            <ul>
+                                <li><strong>文字：</strong>美洲唯一完整的文字系统</li>
+                                <li><strong>历法：</strong>太阳历 365 天，金星周期精确计算</li>
+                                <li><strong>数学：</strong>使用 0 的概念，20 进制</li>
+                                <li><strong>建筑：</strong>金字塔、天文台、球场</li>
+                                <li><strong>农业：</strong>玉米驯化，梯田耕作</li>
+                            </ul>
+                        </div>
+                        
+                        <h3>历史分期</h3>
+                        <ul>
+                            <li><strong>前古典期（前 2000-250）：</strong>农业定居，早期城市</li>
+                            <li><strong>古典期（250-900）：</strong>城邦繁荣，蒂卡尔、帕伦克</li>
+                            <li><strong>后古典期（900-1500）：</strong>奇琴伊察、玛雅潘</li>
+                            <li><strong>西班牙征服（1524-1697）：</strong>文明终结</li>
+                        </ul>
+                        
+                        <h3>神秘之处</h3>
+                        <ul>
+                            <li>古典期突然衰落，原因至今不明</li>
+                            <li>长计历预言 2012 年（实际是周期结束）</li>
+                            <li>没有金属工具，建造宏伟建筑</li>
+                            <li>血腥的人祭仪式</li>
+                        </ul>
+                    `
+                }
+            },
+            {
+                icon: '🏺',
+                name: '波斯文明',
+                time: '公元前 550-651 年',
+                location: '📍 伊朗高原',
+                desc: '第一个横跨欧亚非的大帝国，宽容统治政策',
+                detail: {
+                    title: '波斯文明 - 帝国的典范',
+                    content: `
+                        <h3>文明概述</h3>
+                        <p>波斯帝国是人类历史上第一个横跨欧亚非三大洲的大帝国，以其宽容的统治政策、完善的行政制度和宏伟的建筑闻名。</p>
+                        
+                        <div class="achievement-box">
+                            <h4>主要成就</h4>
+                            <ul>
+                                <li><strong>行政制度：</strong>行省制，总督管理</li>
+                                <li><strong>道路系统：</strong>御道 2700 公里，驿站系统</li>
+                                <li><strong>宽容政策：</strong>尊重被征服民族宗教文化</li>
+                                <li><strong>建筑：</strong>波斯波利斯宫殿</li>
+                                <li><strong>宗教：</strong>祆教（拜火教），善恶二元论</li>
+                            </ul>
+                        </div>
+                        
+                        <h3>主要王朝</h3>
+                        <ul>
+                            <li><strong>阿契美尼德王朝（前 550-330）：</strong>居鲁士大帝建立，大流士一世鼎盛</li>
+                            <li><strong>帕提亚王朝（前 247-224）：</strong>与罗马对抗</li>
+                            <li><strong>萨珊王朝（224-651）：</strong>波斯文化复兴，被阿拉伯征服</li>
+                        </ul>
+                        
+                        <h3>著名君主</h3>
+                        <ul>
+                            <li><strong>居鲁士大帝：</strong>建立帝国，释放巴比伦之囚</li>
+                            <li><strong>大流士一世：</strong>帝国鼎盛，修建波斯波利斯</li>
+                            <li><strong>薛西斯一世：</strong>入侵希腊失败</li>
+                        </ul>
+                    `
+                }
+            }
+        ];
+
+        function renderCivilizations() {
+            const grid = document.getElementById('civGrid');
+            grid.innerHTML = '';
+            
+            civilizations.forEach(civ => {
+                const card = document.createElement('div');
+                card.className = 'civ-card fade-in';
+                card.onclick = () => showCiv(civ);
+                card.innerHTML = `
+                    <div class="civ-icon">${civ.icon}</div>
+                    <div class="civ-name">${civ.name}</div>
+                    <div class="civ-time">${civ.time}</div>
+                    <div class="civ-desc">${civ.desc}</div>
+                    <div class="civ-location">${civ.location}</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function showCiv(civ) {
+            const modal = document.getElementById('civModal');
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <h2 class="modal-title">${civ.icon} ${civ.detail.title}</h2>
+                <div class="modal-body">${civ.detail.content}</div>
+            `;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('civModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('civModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        renderCivilizations();
+    </script>
+</body>
+</html>

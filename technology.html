@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科技发明史 - 人类历史发展进程</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #45b7d1, #ffd700, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle { color: #a0a0a0; font-size: 1.3em; }
+        .back-link {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+        .back-link:hover { background: rgba(255, 255, 255, 0.2); border-color: #45b7d1; }
+        
+        .tech-timeline {
+            position: relative;
+            padding-left: 50px;
+            margin: 40px 0;
+        }
+        
+        .tech-timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #45b7d1, #ffd700, #45b7d1);
+            border-radius: 2px;
+        }
+        
+        .tech-item {
+            position: relative;
+            margin: 40px 0;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: #45b7d1;
+        }
+        
+        .tech-item::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: #45b7d1;
+            border-radius: 50%;
+            border: 4px solid #0c0c0c;
+            box-shadow: 0 0 20px rgba(69, 183, 209, 0.5);
+        }
+        
+        .tech-time {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #45b7d1, #ffd700);
+            color: #000;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+        
+        .tech-name {
+            font-size: 1.6em;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .tech-desc {
+            color: #b0b0b0;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        
+        .tech-inventor {
+            color: #ffd700;
+            font-size: 0.95em;
+        }
+        
+        .era-section {
+            margin: 60px 0;
+        }
+        
+        .era-title {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #45b7d1;
+            border-left: 5px solid #45b7d1;
+            padding-left: 20px;
+        }
+        
+        .era-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .era-nav a {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+        .era-nav a:hover {
+            background: rgba(69, 183, 209, 0.2);
+            border-color: #45b7d1;
+        }
+        .era-nav a.active {
+            background: linear-gradient(135deg, #45b7d1, #4ecdc4);
+            border-color: #45b7d1;
+            color: #000;
+        }
+        
+        .fade-in { animation: fadeIn 0.8s ease-in; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="fade-in">
+            <h1>💡 科技发明史</h1>
+            <p class="subtitle">History of Technology - 改变世界的发明</p>
+            <a href="index.html" class="back-link">← 返回主时间线</a>
+            <div class="era-nav">
+                <a href="index.html">🏠 主页</a>
+                <a href="prehistoric.html">🪨 史前</a>
+                <a href="ancient.html">🏛️ 古代</a>
+                <a href="medieval.html">🏰 中世纪</a>
+                <a href="early-modern.html">⛵ 近代</a>
+                <a href="modern.html">🚀 现代</a>
+                <a href="people.html">👤 人物</a>
+                <a href="civilizations.html">🗺️ 文明</a>
+                <a href="technology.html" class="active">💡 科技</a>
+            </div>
+        </header>
+
+        <div class="era-section">
+            <h2 class="era-title">🪨 史前时期</h2>
+            <div class="tech-timeline">
+                <div class="tech-item fade-in">
+                    <span class="tech-time">约 300 万年前</span>
+                    <h3 class="tech-name">🪨 石器工具</h3>
+                    <p class="tech-desc">人类最早的工具，用石头敲击制成锋利边缘，用于切割、狩猎</p>
+                    <p class="tech-inventor">👤 能人（Homo habilis）</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <span class="tech-time">约 180 万年前</span>
+                    <h3 class="tech-name">🔥 火的使用</h3>
+                    <p class="tech-desc">人类学会控制火，用于取暖、烹饪、防御野兽</p>
+                    <p class="tech-inventor">👤 直立人（Homo erectus）</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <span class="time-time">约 1 万年前</span>
+                    <h3 class="tech-name">🌾 农业</h3>
+                    <p class="tech-desc">种植作物和驯养动物，人类从狩猎采集转向定居</p>
+                    <p class="tech-inventor">👤 新石器时代人类</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="era-section">
+            <h2 class="era-title">🏛️ 古代文明</h2>
+            <div class="tech-timeline">
+                <div class="tech-item fade-in">
+                    <span class="tech-time">约公元前 3500 年</span>
+                    <h3 class="tech-name">📝 文字</h3>
+                    <p class="tech-desc">苏美尔楔形文字和埃及象形文字，知识可以记录和传承</p>
+                    <p class="tech-inventor">👤 苏美尔人、古埃及人</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <span class="tech-time">约公元前 3500 年</span>
+                    <h3 class="tech-name">🎡 车轮</h3>
+                    <p class="tech-desc">彻底改变运输方式，促进贸易和战争</p>
+                    <p class="tech-inventor">👤 美索不达米亚人</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <span class="tech-time">约公元前 3000 年</span>
+                    <h3 class="tech-name">⚓ 帆船</h3>
+                    <p class="tech-desc">利用风力航行，开启海上贸易和探索</p>
+                    <p class="tech-inventor">👤 古埃及人、美索不达米亚人</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <span class="tech-time">约公元前 1200 年</span>
+                    <h3 class="tech-name">⚔️ 铁器</h3>
+                    <p class="tech-desc">铁器时代开始，工具和武器更坚固耐用</p>
+                    <p class="tech-inventor">👤 赫梯人</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="era-section">
+            <h2 class="era-title">🏰 中世纪</h2>
+            <div class="tech-timeline">
+                <div class="tech-item fade-in">
+                    <span class="tech-time">约 105 年</span>
+                    <h3 class="tech-name">📄 造纸术</h3>
+                    <p class="tech-desc">东汉蔡伦改进造纸术，知识传播成本大幅降低</p>
+                    <p class="tech-inventor">👤 蔡伦（中国）</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <span class="tech-time">约 1040 年</span>
+                    <h3 class="tech-name">📖 活字印刷</h3>
+                    <p class="tech-desc">可重复使用的字模，印刷效率大幅提升</p>
+                    <p class="tech-inventor">👤 毕昇（中国）</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <span class="tech-time">约 9 世纪</span>
+                    <h3 class="tech-name">🧨 火药</h3>
+                    <p class="tech-desc">改变战争形态，也用于开矿、建筑</p>
+                    <p class="tech-inventor">👤 中国炼丹家</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <span class="tech-time">约 11 世纪</span>
+                    <h3 class="tech-name">🧭 指南针</h3>
+                    <p class="tech-desc">用于航海，开启大航海时代</p>
+                    <p class="tech-inventor">👤 中国人</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="era-section">
+            <h2 class="era-title">⛵ 近代早期</h2>
+            <div class="tech-timeline">
+                <div class="tech-item fade-in">
+                    <span class="tech-time">1440 年</span>
+                    <h3 class="tech-name">🖨️ 印刷机</h3>
+                    <p class="tech-desc">古腾堡改进印刷术，推动文艺复兴和宗教改革</p>
+                    <p class="tech-inventor">👤 约翰内斯·古腾堡（德国）</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <span class="tech-time">1608 年</span>
+                    <h3 class="tech-name">🔭 望远镜</h3>
+                    <p class="tech-desc">改变人类对宇宙的认知</p>
+                    <p class="tech-inventor">👤 汉斯·利伯希（荷兰）</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <span class="tech-time">1712 年</span>
+                    <h3 class="tech-name">⚙️ 蒸汽机</h3>
+                    <p class="tech-desc">提供强大动力，开启工业革命</p>
+                    <p class="tech-inventor">👤 托马斯·纽科门（英国）</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <span class="tech-time">1769 年</span>
+                    <h3 class="tech-name">🚂 改良蒸汽机</h3>
+                    <p class="tech-desc">瓦特改良蒸汽机，效率大幅提升</p>
+                    <p class="tech-inventor">👤 詹姆斯·瓦特（英国）</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="era-section">
+            <h2 class="era-title">🚀 现代</h2>
+            <div class="tech-timeline">
+                <div class="tech-item fade-in">
+                    <span class="tech-time">1879 年</span>
+                    <h3 class="tech-name">💡 电灯</h3>
+                    <p class="tech-desc">实用白炽灯，改变人类生活方式</p>
+                    <p class="tech-inventor">👤 托马斯·爱迪生（美国）</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <span class="tech-time">1876 年</span>
+                    <h3 class="tech-name">📞 电话</h3>
+                    <p class="tech-desc">实现远距离语音通信</p>
+                    <p class="tech-inventor">👤 亚历山大·贝尔（苏格兰）</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <span class="tech-time">1886 年</span>
+                    <h3 class="tech-name">🚗 汽车</h3>
+                    <p class="tech-desc">内燃机驱动的车辆，改变交通方式</p>
+                    <p class="tech-inventor">👤 卡尔·本茨（德国）</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <span class="tech-time">1903 年</span>
+                    <h3 class="tech-name">✈️ 飞机</h3>
+                    <p class="tech-desc">人类实现飞行梦想</p>
+                    <p class="tech-inventor">👤 莱特兄弟（美国）</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <span class="tech-time">1946 年</span>
+                    <h3 class="tech-name">💻 电子计算机</h3>
+                    <p class="tech-desc">ENIAC，现代计算机的开端</p>
+                    <p class="tech-inventor">👤 莫奇利和埃克特（美国）</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <span class="tech-time">1989 年</span>
+                    <h3 class="tech-name">🌐 万维网</h3>
+                    <p class="tech-desc">互联网普及，信息时代来临</p>
+                    <p class="tech-inventor">👤 蒂姆·伯纳斯 - 李（英国）</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <span class="tech-time">2007 年</span>
+                    <h3 class="tech-name">📱 智能手机</h3>
+                    <p class="tech-desc">iPhone 发布，移动互联网时代开启</p>
+                    <p class="tech-inventor">👤 史蒂夫·乔布斯（美国）</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <span class="tech-time">2017 年</span>
+                    <h3 class="tech-name">🤖 Transformer 架构</h3>
+                    <p class="tech-desc">现代 AI 的基础，大语言模型崛起</p>
+                    <p class="tech-inventor">👤 Google 团队</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
