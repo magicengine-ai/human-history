@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>饮食文化史 - 人类历史</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #d35400 0%, #e67e22 50%, #f39c12 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #ffecd2, #fcb69f, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle { color: #a0a0a0; font-size: 1.2em; }
+        .nav-back {
+            display: inline-block;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid #fff;
+        }
+        .nav-back:hover { background: rgba(255, 255, 255, 0.3); transform: translateY(-2px); }
+        .timeline { position: relative; padding: 20px 0; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #ffecd2, #fcb69f, #ff6b6b);
+            border-radius: 2px;
+        }
+        .event {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+        }
+        .event:nth-child(odd) { align-self: flex-start; }
+        .event:nth-child(even) {
+            align-self: flex-end;
+            justify-content: flex-start;
+            margin-left: 50%;
+        }
+        .event-content {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 500px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .event-content:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+        .event-title {
+            font-size: 1.4em;
+            color: #ffecd2;
+            margin-bottom: 10px;
+        }
+        .event-desc { color: #e0e0e0; line-height: 1.6; font-size: 0.95em; }
+        .event-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            top: 30px;
+        }
+        .event:nth-child(odd) .event-dot { right: -10px; }
+        .event:nth-child(even) .event-dot { left: -10px; }
+        .content-section {
+            padding: 30px;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border-left: 4px solid #ff6b6b;
+        }
+        .content-section h3 {
+            color: #ffecd2;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        .content-section p {
+            color: #e0e0e0;
+            line-height: 1.8;
+            text-align: left;
+        }
+        @media (max-width: 768px) {
+            .timeline::before { left: 20px; }
+            .event { width: 100%; padding-left: 50px; }
+            .event:nth-child(even) { margin-left: 0; }
+            .event-dot { left: 10px !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="nav-back">← 返回主页</a>
+            <h1>🍽️ 饮食文化史</h1>
+            <p class="subtitle">History of Food Culture - 从农业起源到现代美食</p>
+        </header>
+
+        <div class="timeline">
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">农业起源</h3>
+                    <p class="event-desc">公元前 10000 年，人类开始种植小麦、水稻，定居农业文明兴起。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">烹饪技术</h3>
+                    <p class="event-desc">火的控制和使用，人类开始熟食，改善营养吸收和健康。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">茶文化</h3>
+                    <p class="event-desc">中国唐代陆羽《茶经》，茶文化传入日本、欧洲，成为世界饮品。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">酒文化</h3>
+                    <p class="event-desc">古代酿酒技术，葡萄酒、啤酒、白酒等酒类产品丰富饮食文化。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">咖啡文化</h3>
+                    <p class="event-desc">15 世纪阿拉伯地区兴起，后传入欧洲，咖啡馆成为社交场所。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">快餐文化</h3>
+                    <p class="event-desc">20 世纪美国兴起，麦当劳、肯德基等连锁快餐改变饮食习惯。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">有机食品</h3>
+                    <p class="event-desc">20 世纪 70 年代兴起，追求无农药、无化肥的天然健康食品。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">分子料理</h3>
+                    <p class="event-desc">21 世纪初兴起，运用科学原理和技法创新烹饪方式。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">素食主义</h3>
+                    <p class="event-desc">健康、环保、伦理驱动，植物基饮食成为新趋势。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">无麸质饮食</h3>
+                    <p class="event-desc">针对麸质过敏人群，无麸质食品市场快速增长。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">地中海饮食</h3>
+                    <p class="event-desc">橄榄油、鱼类、蔬果为主，被公认为最健康的饮食模式。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">日本料理</h3>
+                    <p class="event-desc">寿司、刺身等精致料理，强调食材新鲜和季节感。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">法国大餐</h3>
+                    <p class="event-desc">联合国非遗，精致烹饪技艺和餐饮礼仪的代表。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">中国八大菜系</h3>
+                    <p class="event-desc">鲁、川、粤、闽、苏、浙、湘、徽，丰富多彩的地方美食。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">印度香料</h3>
+                    <p class="event-desc">咖喱、姜黄、孜然等香料，形成独特的印度饮食文化。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">墨西哥美食</h3>
+                    <p class="event-desc">玉米、豆类、辣椒为主，联合国非遗美食文化。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h3>📖 饮食文化分类</h3>
+            <p>• 发酵食品：酱油、醋、酸奶、泡菜</p>
+            <p>• 罐头食品：19 世纪发明，延长食品保质期</p>
+            <p>• 冷冻食品：20 世纪普及，方便储存和食用</p>
+            <p>• 转基因食品：现代生物技术应用</p>
+        </div>
+
+        <div class="content-section">
+            <h3>📊 未来饮食趋势</h3>
+            <p>• 人造肉：实验室培育肉类，减少畜牧业环境影响</p>
+            <p>• 3D 打印食品：个性化定制食物形状和营养</p>
+            <p>• 太空食品：长期太空任务的食品供应技术</p>
+            <p>• 功能性食品：具有特定健康益处的食品</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>经济发展史 - 人类历史</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c1e35 0%, #1a3a5c 50%, #2d5a7a 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #00d9ff, #00ff88, #a8ff60);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle { color: #a0a0a0; font-size: 1.2em; }
+        .nav-back {
+            display: inline-block;
+            padding: 12px 25px;
+            background: rgba(0, 217, 255, 0.2);
+            color: #00d9ff;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid #00d9ff;
+        }
+        .nav-back:hover { background: rgba(0, 217, 255, 0.3); transform: translateY(-2px); }
+        .timeline { position: relative; padding: 20px 0; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #00d9ff, #00ff88, #a8ff60);
+            border-radius: 2px;
+        }
+        .event {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+        }
+        .event:nth-child(odd) { align-self: flex-start; }
+        .event:nth-child(even) {
+            align-self: flex-end;
+            justify-content: flex-start;
+            margin-left: 50%;
+        }
+        .event-content {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 500px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .event-content:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+        .event-title {
+            font-size: 1.4em;
+            color: #00d9ff;
+            margin-bottom: 10px;
+        }
+        .event-desc { color: #b0b0b0; line-height: 1.6; font-size: 0.95em; }
+        .event-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #00d9ff;
+            border-radius: 50%;
+            top: 30px;
+        }
+        .event:nth-child(odd) .event-dot { right: -10px; }
+        .event:nth-child(even) .event-dot { left: -10px; }
+        .content-section {
+            padding: 30px;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border-left: 4px solid #00d9ff;
+        }
+        .content-section h3 {
+            color: #00d9ff;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        .content-section p {
+            color: #b0b0b0;
+            line-height: 1.8;
+            text-align: left;
+        }
+        @media (max-width: 768px) {
+            .timeline::before { left: 20px; }
+            .event { width: 100%; padding-left: 50px; }
+            .event:nth-child(even) { margin-left: 0; }
+            .event-dot { left: 10px !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="nav-back">← 返回主页</a>
+            <h1>💰 经济发展史</h1>
+            <p class="subtitle">Economic History - 从物物交换到数字经济的演变</p>
+        </header>
+
+        <div class="timeline">
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">农业革命</h3>
+                    <p class="event-desc">公元前 10000 年，人类从狩猎采集转向农业定居，产生剩余产品和贸易。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">货币起源</h3>
+                    <p class="event-desc">公元前 7 世纪，吕底亚王国铸造最早金属货币，取代物物交换。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">丝绸之路</h3>
+                    <p class="event-desc">公元前 2 世纪，连接东西方的贸易通道，促进商品、技术和文化交流。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">重商主义</h3>
+                    <p class="event-desc">16-18 世纪欧洲经济思想，强调贸易顺差和金银积累。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">工业革命</h3>
+                    <p class="event-desc">1760 年开始于英国，机械化生产取代手工劳动，生产力飞跃发展。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">资本主义兴起</h3>
+                    <p class="event-desc">18-19 世纪，私有制和市场经济成为主导，资本积累推动经济增长。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">经济大萧条</h3>
+                    <p class="event-desc">1929-1933 年全球经济危机，促使凯恩斯主义和宏观调控理论兴起。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">布雷顿森林体系</h3>
+                    <p class="event-desc">1944 年建立以美元为中心的国际货币体系，成立 IMF 和世界银行。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">石油危机</h3>
+                    <p class="event-desc">1973 年和 1979 年两次石油危机，引发全球经济衰退和能源政策调整。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">全球化经济</h3>
+                    <p class="event-desc">冷战后全球化加速，跨国公司、国际贸易和资本流动空前增长。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">互联网经济</h3>
+                    <p class="event-desc">1990 年代互联网普及，电子商务、在线服务和新经济模式兴起。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">金融危机</h3>
+                    <p class="event-desc">2008 年全球金融危机，源于美国次贷危机，引发全球经济衰退。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">共享经济</h3>
+                    <p class="event-desc">2010 年代兴起，Uber、Airbnb 等平台改变传统消费和就业模式。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">数字经济</h3>
+                    <p class="event-desc">数据成为新生产要素，数字技术深度融合实体经济。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">区块链经济</h3>
+                    <p class="event-desc">去中心化技术催生加密货币和分布式金融，挑战传统金融体系。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">绿色经济</h3>
+                    <p class="event-desc">21 世纪应对气候变化，发展可再生能源和可持续经济模式。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h3>📖 经济体制类型</h3>
+            <p>• 计划经济：政府主导资源配置</p>
+            <p>• 市场经济：市场机制调节供需</p>
+            <p>• 混合经济：市场与政府相结合</p>
+            <p>• 知识经济：以知识和信息为基础</p>
+        </div>
+
+        <div class="content-section">
+            <h3>📊 现代经济趋势</h3>
+            <p>• 平台经济：大型科技平台主导市场</p>
+            <p>• 零工经济：灵活就业和自由职业兴起</p>
+            <p>• 循环经济：资源回收和再利用</p>
+            <p>• 人工智能经济：AI 驱动生产力变革</p>
+        </div>
+    </div>
+</body>
+</html>

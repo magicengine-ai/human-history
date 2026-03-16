@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>法律体系发展 - 人类历史</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 50%, #3d3d5c 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #c9a56c, #e8d5b5, #f5e6d3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle { color: #a0a0a0; font-size: 1.2em; }
+        .nav-back {
+            display: inline-block;
+            padding: 12px 25px;
+            background: rgba(201, 165, 108, 0.2);
+            color: #c9a56c;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid #c9a56c;
+        }
+        .nav-back:hover { background: rgba(201, 165, 108, 0.3); transform: translateY(-2px); }
+        .timeline { position: relative; padding: 20px 0; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #c9a56c, #e8d5b5, #f5e6d3);
+            border-radius: 2px;
+        }
+        .event {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+        }
+        .event:nth-child(odd) { align-self: flex-start; }
+        .event:nth-child(even) {
+            align-self: flex-end;
+            justify-content: flex-start;
+            margin-left: 50%;
+        }
+        .event-content {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 500px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .event-content:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(201, 165, 108, 0.3);
+        }
+        .event-title {
+            font-size: 1.4em;
+            color: #c9a56c;
+            margin-bottom: 10px;
+        }
+        .event-desc { color: #b0b0b0; line-height: 1.6; font-size: 0.95em; }
+        .event-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #c9a56c;
+            border-radius: 50%;
+            top: 30px;
+        }
+        .event:nth-child(odd) .event-dot { right: -10px; }
+        .event:nth-child(even) .event-dot { left: -10px; }
+        .content-section {
+            padding: 30px;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border-left: 4px solid #c9a56c;
+        }
+        .content-section h3 {
+            color: #c9a56c;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        .content-section p {
+            color: #b0b0b0;
+            line-height: 1.8;
+            text-align: left;
+        }
+        @media (max-width: 768px) {
+            .timeline::before { left: 20px; }
+            .event { width: 100%; padding-left: 50px; }
+            .event:nth-child(even) { margin-left: 0; }
+            .event-dot { left: 10px !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="nav-back">← 返回主页</a>
+            <h1>⚖️ 法律体系发展</h1>
+            <p class="subtitle">Legal System Evolution - 从古代法典到现代法治</p>
+        </header>
+
+        <div class="timeline">
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">汉谟拉比法典</h3>
+                    <p class="event-desc">公元前 1754 年，巴比伦国王汉谟拉比颁布，现存最早成文法典之一。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">十二铜表法</h3>
+                    <p class="event-desc">公元前 450 年，古罗马第一部成文法，奠定西方法律基础。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">唐律疏议</h3>
+                    <p class="event-desc">公元 653 年，中国现存最早最完整的封建法典，影响东亚法律体系。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">大宪章</h3>
+                    <p class="event-desc">1215 年英国签署，限制王权，确立法律至上原则。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">拿破仑法典</h3>
+                    <p class="event-desc">1804 年颁布，近代第一部民法典，影响大陆法系国家。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">美国宪法</h3>
+                    <p class="event-desc">1787 年制定，世界第一部成文宪法，确立三权分立原则。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">德国民法典</h3>
+                    <p class="event-desc">1900 年生效，大陆法系代表作，体系严谨概念精确。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">联合国宪章</h3>
+                    <p class="event-desc">1945 年签署，确立国际法基本原则，维护世界和平与安全。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">世界人权宣言</h3>
+                    <p class="event-desc">1948 年通过，确立基本人权标准，影响国际人权法发展。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">日内瓦公约</h3>
+                    <p class="event-desc">1949 年修订，保护战争受难者，国际人道法核心。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">国际法体系</h3>
+                    <p class="event-desc">二战后国际法快速发展，国际法院、国际刑事法院等机构建立。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">海洋法公约</h3>
+                    <p class="event-desc">1982 年通过，确立领海、专属经济区等海洋法律制度。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">知识产权法</h3>
+                    <p class="event-desc">保护专利、商标、版权，激励创新和知识创造。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">环境保护法</h3>
+                    <p class="event-desc">20 世纪 70 年代兴起，应对环境污染和生态破坏。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">反垄断法</h3>
+                    <p class="event-desc">维护市场公平竞争，防止垄断和不正当竞争行为。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">劳动法</h3>
+                    <p class="event-desc">保护劳动者权益，规范劳动关系和工作条件。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h3>📖 法系分类</h3>
+            <p>• 大陆法系：成文法为主，代表：法国、德国、中国</p>
+            <p>• 英美法系：判例法为主，代表：英国、美国</p>
+            <p>• 伊斯兰法系：基于古兰经，代表：中东国家</p>
+            <p>• 中华法系：传统中国法律体系</p>
+        </div>
+
+        <div class="content-section">
+            <h3>📊 现代法律趋势</h3>
+            <p>• 网络法：规范互联网行为和数字权利</p>
+            <p>• 数据保护法：保护个人隐私和数据安全</p>
+            <p>• 人工智能法：规范 AI 发展和应用</p>
+            <p>• 太空法：规范外层空间活动</p>
+        </div>
+    </div>
+</body>
+</html>

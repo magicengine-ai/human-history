@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐史 - 人类历史</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #c0392b 0%, #e74c3c 50%, #ff6b6b 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #f8f9fa, #e9ecef, #dee2e6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle { color: #e0e0e0; font-size: 1.2em; }
+        .nav-back {
+            display: inline-block;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid #fff;
+        }
+        .nav-back:hover { background: rgba(255, 255, 255, 0.3); transform: translateY(-2px); }
+        .timeline { position: relative; padding: 20px 0; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #f8f9fa, #e9ecef, #dee2e6);
+            border-radius: 2px;
+        }
+        .event {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+        }
+        .event:nth-child(odd) { align-self: flex-start; }
+        .event:nth-child(even) {
+            align-self: flex-end;
+            justify-content: flex-start;
+            margin-left: 50%;
+        }
+        .event-content {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 500px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .event-content:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(248, 249, 250, 0.3);
+        }
+        .event-title {
+            font-size: 1.4em;
+            color: #f8f9fa;
+            margin-bottom: 10px;
+        }
+        .event-desc { color: #e0e0e0; line-height: 1.6; font-size: 0.95em; }
+        .event-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            top: 30px;
+        }
+        .event:nth-child(odd) .event-dot { right: -10px; }
+        .event:nth-child(even) .event-dot { left: -10px; }
+        .content-section {
+            padding: 30px;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border-left: 4px solid #f8f9fa;
+        }
+        .content-section h3 {
+            color: #f8f9fa;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        .content-section p {
+            color: #e0e0e0;
+            line-height: 1.8;
+            text-align: left;
+        }
+        @media (max-width: 768px) {
+            .timeline::before { left: 20px; }
+            .event { width: 100%; padding-left: 50px; }
+            .event:nth-child(even) { margin-left: 0; }
+            .event-dot { left: 10px !important; }
+        }
+        .music-note {
+            position: fixed;
+            font-size: 2em;
+            opacity: 0.1;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="nav-back">← 返回主页</a>
+            <h1>🎵 音乐史</h1>
+            <p class="subtitle">History of Music - 从古典乐章到数字音乐</p>
+        </header>
+
+        <div class="timeline">
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">古典音乐</h3>
+                    <p class="event-desc">1750-1820 年，海顿、莫扎特、贝多芬为代表。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">巴洛克音乐</h3>
+                    <p class="event-desc">1600-1750 年，巴赫、维瓦尔第、亨德尔为代表。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">浪漫主义音乐</h3>
+                    <p class="event-desc">19 世纪，肖邦、李斯特、瓦格纳等情感丰富。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">现代音乐</h3>
+                    <p class="event-desc">20 世纪，打破传统调性，实验性音乐兴起。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">爵士乐</h3>
+                    <p class="event-desc">19 世纪末美国新奥尔良，黑人音乐文化。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">蓝调</h3>
+                    <p class="event-desc">19 世纪美国南部，表达忧郁情感的音乐形式。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">摇滚乐</h3>
+                    <p class="event-desc">1950 年代兴起，猫王、披头士、滚石为代表。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">流行音乐</h3>
+                    <p class="event-desc">20 世纪中叶，大众化商业音乐，MTV 推动发展。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">嘻哈音乐</h3>
+                    <p class="event-desc">1970 年代纽约布朗克斯，说唱文化兴起。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">电子音乐</h3>
+                    <p class="event-desc">1970 年代合成器普及，DJ 文化和电音节兴起。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">乡村音乐</h3>
+                    <p class="event-desc">1920 年代美国南部，民谣和蓝调融合。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">民谣</h3>
+                    <p class="event-desc">传统民间歌曲，Bob Dylan 等民谣摇滚兴起。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">金属乐</h3>
+                    <p class="event-desc">1960 年代末，黑色安息日开创重金属风格。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">朋克摇滚</h3>
+                    <p class="event-desc">1970 年代中期，反叛精神和简单和弦。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">独立音乐</h3>
+                    <p class="event-desc">1980 年代，独立厂牌和非主流音乐兴起。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">世界音乐</h3>
+                    <p class="event-desc">各民族传统音乐融合，全球化音乐交流。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h3>📖 民族音乐</h3>
+            <p>• 中国民乐：古琴、二胡、琵琶等传统乐器</p>
+            <p>• 日本音乐：雅乐、能乐、三味线音乐</p>
+            <p>• 印度音乐：拉格、塔拉体系，西塔尔琴</p>
+            <p>• 非洲音乐：鼓乐为主，节奏复杂多变</p>
+        </div>
+
+        <div class="content-section">
+            <h3>📊 音乐表演形式</h3>
+            <p>• 音乐剧：戏剧、音乐、舞蹈结合的综合艺术</p>
+            <p>• 歌剧：以歌唱为主的戏剧表演</p>
+            <p>• 交响乐：大型管弦乐队演奏</p>
+            <p>• 室内乐：小型乐团精致演奏</p>
+        </div>
+
+        <div class="content-section">
+            <h3>🎧 数字音乐时代</h3>
+            <p>• 数字音乐：MP3 格式革命，iTunes 商店</p>
+            <p>• 流媒体音乐：Spotify、Apple Music、网易云</p>
+            <p>• AI 音乐：人工智能作曲和音乐生成</p>
+            <p>• 虚拟歌手：初音未来等虚拟偶像</p>
+        </div>
+    </div>
+</body>
+</html>

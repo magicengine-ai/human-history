@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>政治制度演变 - 人类历史</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #e94560, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle { color: #a0a0a0; font-size: 1.2em; }
+        .nav-back {
+            display: inline-block;
+            padding: 12px 25px;
+            background: rgba(233, 69, 96, 0.2);
+            color: #e94560;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid #e94560;
+        }
+        .nav-back:hover { background: rgba(233, 69, 96, 0.3); transform: translateY(-2px); }
+        .timeline { position: relative; padding: 20px 0; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #e94560, #ff6b6b, #feca57);
+            border-radius: 2px;
+        }
+        .event {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+        }
+        .event:nth-child(odd) { align-self: flex-start; }
+        .event:nth-child(even) {
+            align-self: flex-end;
+            justify-content: flex-start;
+            margin-left: 50%;
+        }
+        .event-content {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 500px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .event-content:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+        }
+        .event-title {
+            font-size: 1.4em;
+            color: #e94560;
+            margin-bottom: 10px;
+        }
+        .event-desc { color: #b0b0b0; line-height: 1.6; font-size: 0.95em; }
+        .event-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #e94560;
+            border-radius: 50%;
+            top: 30px;
+        }
+        .event:nth-child(odd) .event-dot { right: -10px; }
+        .event:nth-child(even) .event-dot { left: -10px; }
+        .content-section {
+            padding: 30px;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border-left: 4px solid #e94560;
+        }
+        .content-section h3 {
+            color: #e94560;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        .content-section p {
+            color: #b0b0b0;
+            line-height: 1.8;
+            text-align: left;
+        }
+        @media (max-width: 768px) {
+            .timeline::before { left: 20px; }
+            .event { width: 100%; padding-left: 50px; }
+            .event:nth-child(even) { margin-left: 0; }
+            .event-dot { left: 10px !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="nav-back">← 返回主页</a>
+            <h1>🏛️ 政治制度演变</h1>
+            <p class="subtitle">Evolution of Political Systems - 从古代到现代的政治体制发展</p>
+        </header>
+
+        <div class="timeline">
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">雅典民主制</h3>
+                    <p class="event-desc">公元前 5 世纪，雅典建立了世界上最早的民主制度，公民直接参与政治决策。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">罗马共和制</h3>
+                    <p class="event-desc">公元前 509 年，罗马建立共和制，设立元老院和执政官，影响后世政治制度。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">中国帝制</h3>
+                    <p class="event-desc">公元前 221 年秦始皇统一中国，建立中央集权的帝制，延续两千多年。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">封建制度</h3>
+                    <p class="event-desc">中世纪欧洲封建制度，以土地分封为基础，形成等级森严的社会结构。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">君主立宪制</h3>
+                    <p class="event-desc">1689 年英国《权利法案》确立君主立宪制，限制王权，议会至上。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">总统制</h3>
+                    <p class="event-desc">1787 年美国宪法确立总统制，三权分立，行政、立法、司法相互制衡。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">议会制</h3>
+                    <p class="event-desc">议会制民主国家，政府由议会产生并对议会负责，首相/总理为政府首脑。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">社会主义制度</h3>
+                    <p class="event-desc">1917 年俄国十月革命建立第一个社会主义国家，生产资料公有制为基础。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">法西斯主义</h3>
+                    <p class="event-desc">20 世纪初意大利兴起的极权主义政治体制，强调国家至上和领袖权威。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">纳粹主义</h3>
+                    <p class="event-desc">1933 年希特勒在德国建立纳粹政权，种族主义和极权主义的极端形式。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">共产主义</h3>
+                    <p class="event-desc">马克思主义理论指导下的政治制度，追求无阶级社会和按需分配。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">资本主义</h3>
+                    <p class="event-desc">以私有制和市场经济为基础的政治经济制度，追求利润最大化。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">福利国家</h3>
+                    <p class="event-desc">二战后北欧国家建立福利国家制度，提供全民医疗、教育、养老保障。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">新自由主义</h3>
+                    <p class="event-desc">20 世纪 80 年代兴起，强调自由市场、私有化、减少政府干预。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">民粹主义</h3>
+                    <p class="event-desc">21 世纪初兴起的政治思潮，强调代表"普通民众"对抗"精英阶层"。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">全球化</h3>
+                    <p class="event-desc">冷战后全球化加速，跨国组织和国际合作成为政治重要议题。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h3>📖 政治制度分类</h3>
+            <p>按权力来源：民主制、君主制、独裁制</p>
+            <p>按权力分配：单一制、联邦制、邦联制</p>
+            <p>按经济基础：资本主义、社会主义、混合经济</p>
+        </div>
+
+        <div class="content-section">
+            <h3>📊 现代政治趋势</h3>
+            <p>• 民主化浪潮：更多国家采用民主制度</p>
+            <p>• 区域一体化：欧盟、东盟等区域组织兴起</p>
+            <p>• 全球治理：联合国、WTO 等国际组织作用增强</p>
+            <p>• 数字化政治：社交媒体影响政治进程</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>体育史 - 人类历史</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 50%, #58d68d 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #fff, #f1f8e1, #dcedc8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle { color: #e0e0e0; font-size: 1.2em; }
+        .nav-back {
+            display: inline-block;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid #fff;
+        }
+        .nav-back:hover { background: rgba(255, 255, 255, 0.3); transform: translateY(-2px); }
+        .timeline { position: relative; padding: 20px 0; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #fff, #f1f8e1, #dcedc8);
+            border-radius: 2px;
+        }
+        .event {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+        }
+        .event:nth-child(odd) { align-self: flex-start; }
+        .event:nth-child(even) {
+            align-self: flex-end;
+            justify-content: flex-start;
+            margin-left: 50%;
+        }
+        .event-content {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 500px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .event-content:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+        .event-title {
+            font-size: 1.4em;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .event-desc { color: #e0e0e0; line-height: 1.6; font-size: 0.95em; }
+        .event-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            top: 30px;
+        }
+        .event:nth-child(odd) .event-dot { right: -10px; }
+        .event:nth-child(even) .event-dot { left: -10px; }
+        .content-section {
+            padding: 30px;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border-left: 4px solid #fff;
+        }
+        .content-section h3 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        .content-section p {
+            color: #e0e0e0;
+            line-height: 1.8;
+            text-align: left;
+        }
+        @media (max-width: 768px) {
+            .timeline::before { left: 20px; }
+            .event { width: 100%; padding-left: 50px; }
+            .event:nth-child(even) { margin-left: 0; }
+            .event-dot { left: 10px !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="nav-back">← 返回主页</a>
+            <h1>🏈 体育史</h1>
+            <p class="subtitle">History of Sports - 从古代奥运到现代竞技</p>
+        </header>
+
+        <div class="timeline">
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">古代奥运会</h3>
+                    <p class="event-desc">公元前 776 年希腊奥林匹亚，每 4 年举办，持续 1000 多年。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">现代奥运会</h3>
+                    <p class="event-desc">1896 年顾拜旦复兴，雅典首届现代奥运会。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">世界杯足球</h3>
+                    <p class="event-desc">1930 年首届乌拉圭世界杯，全球最受欢迎体育赛事。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">NBA 篮球</h3>
+                    <p class="event-desc">1946 年美国职业篮球联赛成立，全球化发展。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">网球大满贯</h3>
+                    <p class="event-desc">澳网、法网、温网、美网，网球最高荣誉赛事。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">高尔夫球</h3>
+                    <p class="event-desc">15 世纪苏格兰起源，四大满贯赛事历史悠久。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">F1 赛车</h3>
+                    <p class="event-desc">1950 年首届 F1 锦标赛，最高级别方程式赛车。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">极限运动</h3>
+                    <p class="event-desc">滑板、攀岩、冲浪等，X-Games 推动发展。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">电子竞技</h3>
+                    <p class="event-desc">21 世纪兴起，LOL、DOTA2 等赛事奖金破千万美元。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">马拉松</h3>
+                    <p class="event-desc">公元前 490 年历史典故，现代城市马拉松普及。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">游泳世锦赛</h3>
+                    <p class="event-desc">1973 年首届，水上运动最高级别赛事。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">田径世锦赛</h3>
+                    <p class="event-desc">1983 年首届，基础大项体育盛会。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">冬奥会</h3>
+                    <p class="event-desc">1924 年首届霞慕尼冬奥会，冰雪运动盛会。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">亚运会</h3>
+                    <p class="event-desc">1951 年首届新德里亚运会，亚洲最大综合运动会。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">英联邦运动会</h3>
+                    <p class="event-desc">1930 年首届，英联邦国家体育盛会。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">世界大学生运动会</h3>
+                    <p class="event-desc">1959 年首届，全球大学生体育盛会。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h3>📖 传统体育</h3>
+            <p>• 中国武术：少林、武当等门派，内外兼修</p>
+            <p>• 日本柔道：1882 年嘉纳治五郎创立，奥运项目</p>
+            <p>• 韩国跆拳道：1955 年命名，以腿法为主</p>
+            <p>• 泰国拳击：泰拳，站立格斗技术全面</p>
+        </div>
+
+        <div class="content-section">
+            <h3>📊 现代体育趋势</h3>
+            <p>• 瑜伽：古印度修行方式，全球健身运动</p>
+            <p>• 健身文化：健身房普及，健康生活方式</p>
+            <p>• 户外运动：徒步、骑行、露营兴起</p>
+            <p>• 女子体育：女性参与度大幅提升</p>
+        </div>
+    </div>
+</body>
+</html>

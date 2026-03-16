@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教育史 - 人类历史</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #4a7bc9 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #f39c12, #f1c40f, #f7dc6f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle { color: #a0a0a0; font-size: 1.2em; }
+        .nav-back {
+            display: inline-block;
+            padding: 12px 25px;
+            background: rgba(243, 156, 18, 0.2);
+            color: #f39c12;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid #f39c12;
+        }
+        .nav-back:hover { background: rgba(243, 156, 18, 0.3); transform: translateY(-2px); }
+        .timeline { position: relative; padding: 20px 0; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #f39c12, #f1c40f, #f7dc6f);
+            border-radius: 2px;
+        }
+        .event {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+        }
+        .event:nth-child(odd) { align-self: flex-start; }
+        .event:nth-child(even) {
+            align-self: flex-end;
+            justify-content: flex-start;
+            margin-left: 50%;
+        }
+        .event-content {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 500px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .event-content:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(243, 156, 18, 0.3);
+        }
+        .event-title {
+            font-size: 1.4em;
+            color: #f39c12;
+            margin-bottom: 10px;
+        }
+        .event-desc { color: #b0b0b0; line-height: 1.6; font-size: 0.95em; }
+        .event-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #f39c12;
+            border-radius: 50%;
+            top: 30px;
+        }
+        .event:nth-child(odd) .event-dot { right: -10px; }
+        .event:nth-child(even) .event-dot { left: -10px; }
+        .content-section {
+            padding: 30px;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border-left: 4px solid #f39c12;
+        }
+        .content-section h3 {
+            color: #f39c12;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        .content-section p {
+            color: #b0b0b0;
+            line-height: 1.8;
+            text-align: left;
+        }
+        @media (max-width: 768px) {
+            .timeline::before { left: 20px; }
+            .event { width: 100%; padding-left: 50px; }
+            .event:nth-child(even) { margin-left: 0; }
+            .event-dot { left: 10px !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="nav-back">← 返回主页</a>
+            <h1>📚 教育史</h1>
+            <p class="subtitle">History of Education - 从古代私塾到终身学习</p>
+        </header>
+
+        <div class="timeline">
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">古代私塾</h3>
+                    <p class="event-desc">古代中国民间教育形式，教授儒家经典和基础知识。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">科举制度</h3>
+                    <p class="event-desc">隋唐至清末的选官制度，通过考试选拔人才，影响教育内容。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">大学起源</h3>
+                    <p class="event-desc">11 世纪意大利博洛尼亚大学，欧洲最早大学，现代高等教育雏形。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">文艺复兴教育</h3>
+                    <p class="event-desc">14-16 世纪，人文主义教育兴起，重视古典学科和全面发展。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">义务教育</h3>
+                    <p class="event-desc">16 世纪德国率先实施，19 世纪欧美普及，保障公民基本教育权利。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">现代大学</h3>
+                    <p class="event-desc">19 世纪德国洪堡大学创立研究型大学模式，教学与科研结合。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">职业教育</h3>
+                    <p class="event-desc">工业革命后兴起，培养专业技术人才，双元制模式成功。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">远程教育</h3>
+                    <p class="event-desc">20 世纪初函授教育，后发展为广播电视大学，突破时空限制。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">在线教育</h3>
+                    <p class="event-desc">21 世纪互联网普及，MOOC、网课平台兴起，教育资源共享。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">终身学习</h3>
+                    <p class="event-desc">知识经济时代要求，学习贯穿一生，持续更新知识和技能。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">STEM 教育</h3>
+                    <p class="event-desc">科学、技术、工程、数学整合教育，培养创新能力和实践技能。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">素质教育</h3>
+                    <p class="event-desc">重视全面发展，培养创新精神、实践能力和社会责任感。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">孔子教育思想</h3>
+                    <p class="event-desc">有教无类、因材施教，奠定中国传统教育理念。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">苏格拉底教学法</h3>
+                    <p class="event-desc">问答式教学，启发思考，培养批判性思维。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">蒙台梭利教育</h3>
+                    <p class="event-desc">20 世纪初意大利，以儿童为中心，自主学习和感官训练。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">杜威教育理论</h3>
+                    <p class="event-desc">做中学、教育即生活，进步主义教育运动代表。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h3>📖 教育层次</h3>
+            <p>• 学前教育：3-6 岁幼儿启蒙教育</p>
+            <p>• 基础教育：小学和中学义务教育</p>
+            <p>• 高等教育：大学本科和研究生教育</p>
+            <p>• 继续教育：成人教育和职业培训</p>
+        </div>
+
+        <div class="content-section">
+            <h3>📊 未来教育趋势</h3>
+            <p>• 教育技术：AI、VR/AR 赋能教学</p>
+            <p>• 游戏化学习：提高学习兴趣和效果</p>
+            <p>• 个性化学习：因材施教的智能化实现</p>
+            <p>• 教育公平：缩小城乡和区域差距</p>
+        </div>
+    </div>
+</body>
+</html>

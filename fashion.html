@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服装时尚史 - 人类历史</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 50%, #be90d4 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #f5e6e6, #fadadd, #fce4ec);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle { color: #e0e0e0; font-size: 1.2em; }
+        .nav-back {
+            display: inline-block;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid #fff;
+        }
+        .nav-back:hover { background: rgba(255, 255, 255, 0.3); transform: translateY(-2px); }
+        .timeline { position: relative; padding: 20px 0; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #f5e6e6, #fadadd, #fce4ec);
+            border-radius: 2px;
+        }
+        .event {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+        }
+        .event:nth-child(odd) { align-self: flex-start; }
+        .event:nth-child(even) {
+            align-self: flex-end;
+            justify-content: flex-start;
+            margin-left: 50%;
+        }
+        .event-content {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 500px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .event-content:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(245, 230, 230, 0.3);
+        }
+        .event-title {
+            font-size: 1.4em;
+            color: #f5e6e6;
+            margin-bottom: 10px;
+        }
+        .event-desc { color: #e0e0e0; line-height: 1.6; font-size: 0.95em; }
+        .event-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #fce4ec;
+            border-radius: 50%;
+            top: 30px;
+        }
+        .event:nth-child(odd) .event-dot { right: -10px; }
+        .event:nth-child(even) .event-dot { left: -10px; }
+        .content-section {
+            padding: 30px;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border-left: 4px solid #fce4ec;
+        }
+        .content-section h3 {
+            color: #f5e6e6;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        .content-section p {
+            color: #e0e0e0;
+            line-height: 1.8;
+            text-align: left;
+        }
+        @media (max-width: 768px) {
+            .timeline::before { left: 20px; }
+            .event { width: 100%; padding-left: 50px; }
+            .event:nth-child(even) { margin-left: 0; }
+            .event-dot { left: 10px !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="nav-back">← 返回主页</a>
+            <h1>👕 服装时尚史</h1>
+            <p class="subtitle">History of Fashion - 从古代服饰到现代潮流</p>
+        </header>
+
+        <div class="timeline">
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">古代服饰</h3>
+                    <p class="event-desc">原始社会兽皮树叶，文明社会出现纺织和缝纫技术。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">丝绸起源</h3>
+                    <p class="event-desc">中国公元前 3000 年发明丝绸，成为珍贵贸易商品。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">纺织技术</h3>
+                    <p class="event-desc">纺车、织布机发明，提高纺织品生产效率。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">时装设计</h3>
+                    <p class="event-desc">19 世纪中叶，高级时装诞生，设计师成为时尚引领者。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">高级定制</h3>
+                    <p class="event-desc">巴黎高级时装公会成立，制定高级定制标准。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">成衣工业</h3>
+                    <p class="event-desc">20 世纪缝纫机普及，标准化成衣大规模生产。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">快时尚</h3>
+                    <p class="event-desc">Zara、H&M 等品牌，快速响应潮流，低价策略。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">可持续时尚</h3>
+                    <p class="event-desc">环保意识兴起，使用可再生材料和公平贸易。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">运动服饰</h3>
+                    <p class="event-desc">Nike、Adidas 等品牌，运动服装成为日常穿着。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">街头潮流</h3>
+                    <p class="event-desc">嘻哈文化影响，Supreme、Off-White 等潮牌兴起。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">奢侈品品牌</h3>
+                    <p class="event-desc">LV、Gucci、Chanel 等，高端时尚和身份象征。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">时尚周</h3>
+                    <p class="event-desc">巴黎、米兰、纽约、伦敦四大时装周，发布最新潮流。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">中国汉服</h3>
+                    <p class="event-desc">传统汉族服饰复兴，年轻人喜爱穿着汉服。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">日本和服</h3>
+                    <p class="event-desc">日本传统服饰，正式场合和节日穿着。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">印度纱丽</h3>
+                    <p class="event-desc">印度女性传统服饰，色彩鲜艳，款式多样。</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-content">
+                    <h3 class="event-title">苏格兰裙</h3>
+                    <p class="event-desc">苏格兰男性传统服饰，格子图案代表不同家族。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h3>📖 时尚元素</h3>
+            <p>• 牛仔文化：Levi's 发明牛仔裤，成为经典单品</p>
+            <p>• 高跟鞋历史：从男性鞋履到女性时尚标志</p>
+            <p>• 香水文化：古埃及起源，法国格拉斯成为香水之都</p>
+            <p>• 化妆品发展：从古代铅粉到现代安全化妆品</p>
+        </div>
+
+        <div class="content-section">
+            <h3>📊 未来时尚趋势</h3>
+            <p>• 智能穿戴：集成科技功能的服装和配饰</p>
+            <p>• 3D 打印服装：个性化定制和快速生产</p>
+            <p>• 虚拟时装：数字世界中的时尚表达</p>
+            <p>• 环保材料：可降解纤维和再生材料应用</p>
+        </div>
+    </div>
+</body>
+</html>
