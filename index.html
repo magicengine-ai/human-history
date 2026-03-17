@@ -60,6 +60,122 @@
             padding: 20px;
         }
 
+        /* Language Switcher */
+        .lang-switcher {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--card-border);
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .lang-btn:hover {
+            background: var(--card-hover);
+            border-color: var(--accent-gold);
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-red));
+            border-color: var(--accent-gold);
+            color: #000;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--card-border);
+            background: var(--card-bg);
+            color: var(--text-primary);
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            background: var(--card-hover);
+        }
+
+        /* Bookmarks Panel */
+        .bookmarks-panel {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            width: 300px;
+            max-height: 400px;
+            overflow-y: auto;
+            background: var(--bg-secondary);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 20px;
+            z-index: 999;
+            display: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .bookmarks-panel.active {
+            display: block;
+        }
+
+        .bookmarks-panel h3 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .bookmark-item {
+            padding: 10px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .bookmark-item:hover {
+            background: var(--card-hover);
+        }
+
+        .bookmark-item-title {
+            color: var(--text-primary);
+            font-size: 0.95em;
+            margin-bottom: 5px;
+        }
+
+        .bookmark-item-time {
+            color: var(--text-secondary);
+            font-size: 0.85em;
+        }
+
+        .remove-bookmark {
+            float: right;
+            color: var(--accent-red);
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+
         /* Header */
         header {
             text-align: center;
@@ -105,31 +221,6 @@
             font-size: 1.3em;
             position: relative;
             z-index: 1;
-        }
-
-        /* Theme Toggle */
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 2px solid var(--card-border);
-            background: var(--card-bg);
-            color: var(--text-primary);
-            font-size: 1.5em;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.1) rotate(15deg);
-            background: var(--card-hover);
         }
 
         /* Control Panel */
@@ -766,64 +857,6 @@
             transform: scale(1.1);
         }
 
-        /* Bookmarks Panel */
-        .bookmarks-panel {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            width: 300px;
-            max-height: 400px;
-            overflow-y: auto;
-            background: var(--bg-secondary);
-            border: 1px solid var(--card-border);
-            border-radius: 15px;
-            padding: 20px;
-            z-index: 999;
-            display: none;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .bookmarks-panel.active {
-            display: block;
-        }
-
-        .bookmarks-panel h3 {
-            color: var(--text-primary);
-            margin-bottom: 15px;
-            font-size: 1.2em;
-        }
-
-        .bookmark-item {
-            padding: 10px;
-            background: var(--card-bg);
-            border-radius: 8px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .bookmark-item:hover {
-            background: var(--card-hover);
-        }
-
-        .bookmark-item-title {
-            color: var(--text-primary);
-            font-size: 0.95em;
-            margin-bottom: 5px;
-        }
-
-        .bookmark-item-time {
-            color: var(--text-secondary);
-            font-size: 0.85em;
-        }
-
-        .remove-bookmark {
-            float: right;
-            color: var(--accent-red);
-            cursor: pointer;
-            font-size: 1.2em;
-        }
-
         /* Highlight */
         .highlight {
             background: rgba(255, 215, 0, 0.2);
@@ -902,6 +935,16 @@
                 width: 280px;
                 right: 10px;
             }
+
+            .lang-switcher {
+                top: 10px;
+                left: 10px;
+            }
+
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+            }
         }
     </style>
 </head>
@@ -911,18 +954,24 @@
         <div class="progress-fill" id="progressFill"></div>
     </div>
 
+    <!-- Language Switcher -->
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('zh')" id="langZh">🇨🇳 中文</button>
+        <button class="lang-btn" onclick="switchLanguage('en')" id="langEn">🇺🇸 English</button>
+    </div>
+
     <!-- Theme Toggle -->
     <button class="theme-toggle" onclick="toggleTheme()" title="切换主题">🌙</button>
 
     <!-- Bookmarks Panel -->
     <div class="bookmarks-panel" id="bookmarksPanel">
-        <h3>🔖 我的收藏</h3>
+        <h3 data-i18n="bookmarks">🔖 我的收藏</h3>
         <div id="bookmarksList"></div>
     </div>
 
     <!-- Map Container -->
     <div id="mapContainer">
-        <button class="map-close" onclick="closeMap()">✕ 关闭地图</button>
+        <button class="map-close" onclick="closeMap()" data-i18n="closeMap">✕ 关闭地图</button>
         <div id="map"></div>
     </div>
 
@@ -936,7 +985,7 @@
             <div class="modal-location" id="modalLocation" onclick="showOnMap()">
                 <span>📍</span>
                 <strong id="modalLocationText"></strong>
-                <span style="margin-left: 10px; color: var(--accent-cyan);">(点击查看地图位置)</span>
+                <span style="margin-left: 10px; color: var(--accent-cyan);" data-i18n="viewOnMap">(点击查看地图位置)</span>
             </div>
             <div class="modal-body" id="modalBody"></div>
             <div class="related-events" id="relatedEvents"></div>
@@ -945,85 +994,85 @@
 
     <div class="container">
         <header class="fade-in">
-            <h1>🌍 人类历史发展进程</h1>
-            <p class="subtitle">Timeline of Human History - From Origins to Present</p>
+            <h1 data-i18n="title">🌍 人类历史发展进程</h1>
+            <p class="subtitle" data-i18n="subtitle">Timeline of Human History - From Origins to Present</p>
         </header>
 
         <!-- Search Box -->
         <div class="search-box fade-in">
-            <input type="text" class="search-input" id="searchInput" placeholder="🔍 搜索历史事件、文明、人物..." oninput="searchEvents()">
+            <input type="text" class="search-input" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="🔍 搜索历史事件、文明、人物..." oninput="searchEvents()">
         </div>
 
         <!-- Control Panel -->
         <div class="control-panel fade-in">
             <button class="control-btn active" onclick="switchView('timeline')" id="timelineViewBtn">
-                <span>📜</span> 时间线视图
+                <span data-i18n="timelineView">📜 时间线视图</span>
             </button>
             <button class="control-btn" onclick="switchView('map')" id="mapViewBtn">
-                <span>🗺️</span> 地图模式
+                <span data-i18n="mapView">🗺️ 地图模式</span>
             </button>
             <button class="control-btn" onclick="toggleBookmarks()" id="bookmarksBtn">
-                <span>🔖</span> 收藏
+                <span data-i18n="bookmarks">🔖 收藏</span>
             </button>
         </div>
 
         <!-- Time Scale Filter -->
         <div class="time-scale-nav fade-in">
-            <button class="time-scale-btn active" onclick="filterByTimeScale('all')">全部时间</button>
-            <button class="time-scale-btn" onclick="filterByTimeScale('millennium')">千年尺度</button>
-            <button class="time-scale-btn" onclick="filterByTimeScale('century')">世纪尺度</button>
-            <button class="time-scale-btn" onclick="filterByTimeScale('decade')">年代尺度</button>
+            <button class="time-scale-btn active" onclick="filterByTimeScale('all')" data-i18n="timeAll">全部时间</button>
+            <button class="time-scale-btn" onclick="filterByTimeScale('millennium')" data-i18n="timeMillennium">千年尺度</button>
+            <button class="time-scale-btn" onclick="filterByTimeScale('century')" data-i18n="timeCentury">世纪尺度</button>
+            <button class="time-scale-btn" onclick="filterByTimeScale('decade')" data-i18n="timeDecade">年代尺度</button>
         </div>
 
         <!-- Filter Buttons -->
         <div class="filter-nav fade-in">
-            <button class="filter-btn active" onclick="filterByTag('all')">全部</button>
-            <button class="filter-btn" onclick="filterByTag('culture')">🎨 文化</button>
-            <button class="filter-btn" onclick="filterByTag('technology')">⚙️ 科技</button>
-            <button class="filter-btn" onclick="filterByTag('politics')">🏛️ 政治</button>
-            <button class="filter-btn" onclick="filterByTag('science')">🔬 科学</button>
-            <button class="filter-btn" onclick="filterByTag('economy')">💰 经济</button>
-            <button class="filter-btn" onclick="filterByTag('military')">⚔️ 军事</button>
+            <button class="filter-btn active" onclick="filterByTag('all')" data-i18n="filterAll">全部</button>
+            <button class="filter-btn" onclick="filterByTag('culture')" data-i18n="filterCulture">🎨 文化</button>
+            <button class="filter-btn" onclick="filterByTag('technology')" data-i18n="filterTechnology">⚙️ 科技</button>
+            <button class="filter-btn" onclick="filterByTag('politics')" data-i18n="filterPolitics">🏛️ 政治</button>
+            <button class="filter-btn" onclick="filterByTag('science')" data-i18n="filterScience">🔬 科学</button>
+            <button class="filter-btn" onclick="filterByTag('economy')" data-i18n="filterEconomy">💰 经济</button>
+            <button class="filter-btn" onclick="filterByTag('military')" data-i18n="filterMilitary">⚔️ 军事</button>
         </div>
 
         <!-- Timeline Navigation -->
         <div class="timeline-nav fade-in">
-            <button class="nav-btn active" onclick="filterEra('all')">全部</button>
-            <a href="prehistoric.html" class="nav-btn" style="text-decoration:none;display:inline-block">🪨 史前时期</a>
-            <a href="ancient.html" class="nav-btn" style="text-decoration:none;display:inline-block">🏛️ 古代文明</a>
-            <a href="medieval.html" class="nav-btn" style="text-decoration:none;display:inline-block">🏰 中世纪</a>
-            <a href="early-modern.html" class="nav-btn" style="text-decoration:none;display:inline-block">⛵ 近代早期</a>
-            <a href="modern.html" class="nav-btn" style="text-decoration:none;display:inline-block">🚀 现代</a>
+            <button class="nav-btn active" onclick="filterEra('all')" data-i18n="eraAll">全部</button>
+            <a href="prehistoric.html" class="nav-btn" style="text-decoration:none;display:inline-block" data-i18n="eraPrehistoric">🪨 史前时期</a>
+            <a href="ancient.html" class="nav-btn" style="text-decoration:none;display:inline-block" data-i18n="eraAncient">🏛️ 古代文明</a>
+            <a href="medieval.html" class="nav-btn" style="text-decoration:none;display:inline-block" data-i18n="eraMedieval">🏰 中世纪</a>
+            <a href="early-modern.html" class="nav-btn" style="text-decoration:none;display:inline-block" data-i18n="eraEarlyModern">⛵ 近代早期</a>
+            <a href="modern.html" class="nav-btn" style="text-decoration:none;display:inline-block" data-i18n="eraModern">🚀 现代</a>
         </div>
 
         <!-- Stats Bar -->
         <div class="stats-bar fade-in">
             <div class="stat-card">
                 <div class="stat-number" id="totalEvents">0</div>
-                <div class="stat-label">历史事件</div>
+                <div class="stat-label" data-i18n="statEvents">历史事件</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="totalCivilizations">0</div>
-                <div class="stat-label">古代文明</div>
+                <div class="stat-label" data-i18n="statCivilizations">古代文明</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="totalYears">0</div>
-                <div class="stat-label">年历史跨度</div>
+                <div class="stat-label" data-i18n="statYears">年历史跨度</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="totalCategories">0</div>
-                <div class="stat-label">分类领域</div>
+                <div class="stat-label" data-i18n="statCategories">分类领域</div>
             </div>
         </div>
 
         <!-- Charts Section -->
         <div class="charts-section fade-in">
             <div class="chart-container">
-                <h3 class="chart-title">📊 事件时代分布</h3>
+                <h3 class="chart-title" data-i18n="chartEra">📊 事件时代分布</h3>
                 <canvas id="eraChart"></canvas>
             </div>
             <div class="chart-container">
-                <h3 class="chart-title">🏷️ 事件分类统计</h3>
+                <h3 class="chart-title" data-i18n="chartCategory">🏷️ 事件分类统计</h3>
                 <canvas id="categoryChart"></canvas>
             </div>
         </div>
@@ -1044,55 +1093,607 @@
     <!-- Leaflet JS for Map -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // Historical Events Data (Expanded to 50+ events)
+        // Internationalization (i18n) Translations
+        const translations = {
+            zh: {
+                title: '🌍 人类历史发展进程',
+                subtitle: 'Timeline of Human History - From Origins to Present',
+                searchPlaceholder: '🔍 搜索历史事件、文明、人物...',
+                timelineView: '📜 时间线视图',
+                mapView: '🗺️ 地图模式',
+                bookmarks: '🔖 收藏',
+                closeMap: '✕ 关闭地图',
+                viewOnMap: '(点击查看地图位置)',
+                timeAll: '全部时间',
+                timeMillennium: '千年尺度',
+                timeCentury: '世纪尺度',
+                timeDecade: '年代尺度',
+                filterAll: '全部',
+                filterCulture: '🎨 文化',
+                filterTechnology: '⚙️ 科技',
+                filterPolitics: '🏛️ 政治',
+                filterScience: '🔬 科学',
+                filterEconomy: '💰 经济',
+                filterMilitary: '⚔️ 军事',
+                eraAll: '全部',
+                eraPrehistoric: '🪨 史前时期',
+                eraAncient: '🏛️ 古代文明',
+                eraMedieval: '🏰 中世纪',
+                eraEarlyModern: '⛵ 近代早期',
+                eraModern: '🚀 现代',
+                statEvents: '历史事件',
+                statCivilizations: '古代文明',
+                statYears: '年历史跨度',
+                statCategories: '分类领域',
+                chartEra: '📊 事件时代分布',
+                chartCategory: '🏷️ 事件分类统计',
+                eventDescription: '事件描述',
+                eventDetails: '详细信息',
+                eventImpact: '历史影响',
+                eventTags: '分类标签',
+                relatedEvents: '📌 相关事件',
+                noBookmarks: '暂无收藏事件',
+                zoomIn: '放大',
+                zoomOut: '缩小',
+                scrollToTop: '返回顶部',
+                close: '关闭',
+                bookmark: '收藏',
+                removeBookmark: '删除',
+                location: '📍 位置'
+            },
+            en: {
+                title: '🌍 Timeline of Human History',
+                subtitle: 'From Origins to Present - 人类历史发展进程',
+                searchPlaceholder: '🔍 Search historical events, civilizations, figures...',
+                timelineView: '📜 Timeline View',
+                mapView: '🗺️ Map Mode',
+                bookmarks: '🔖 Bookmarks',
+                closeMap: '✕ Close Map',
+                viewOnMap: '(Click to view on map)',
+                timeAll: 'All Time',
+                timeMillennium: 'Millennium',
+                timeCentury: 'Century',
+                timeDecade: 'Decade',
+                filterAll: 'All',
+                filterCulture: '🎨 Culture',
+                filterTechnology: '⚙️ Technology',
+                filterPolitics: '🏛️ Politics',
+                filterScience: '🔬 Science',
+                filterEconomy: '💰 Economy',
+                filterMilitary: '⚔️ Military',
+                eraAll: 'All',
+                eraPrehistoric: '🪨 Prehistoric',
+                eraAncient: '🏛️ Ancient',
+                eraMedieval: '🏰 Medieval',
+                eraEarlyModern: '⛵ Early Modern',
+                eraModern: '🚀 Modern',
+                statEvents: 'Historical Events',
+                statCivilizations: 'Ancient Civilizations',
+                statYears: 'Years of History',
+                statCategories: 'Categories',
+                chartEra: '📊 Events by Era',
+                chartCategory: '🏷️ Events by Category',
+                eventDescription: 'Description',
+                eventDetails: 'Details',
+                eventImpact: 'Historical Impact',
+                eventTags: 'Tags',
+                relatedEvents: '📌 Related Events',
+                noBookmarks: 'No bookmarks yet',
+                zoomIn: 'Zoom In',
+                zoomOut: 'Zoom Out',
+                scrollToTop: 'Scroll to Top',
+                close: 'Close',
+                bookmark: 'Bookmark',
+                removeBookmark: 'Remove',
+                location: '📍 Location'
+            }
+        };
+
+        // Historical Events Data (Bilingual)
         const historicalEvents = [
-            // 史前时期
-            { id: 1, era: "prehistoric", title: "人类起源", time: "约 300 万年前", year: -3000000, location: "非洲东部", lat: 2.0, lng: 38.0, description: "最早的人类祖先出现在非洲东部", details: "南方古猿是最早的人科动物之一，能够直立行走", tags: ["science", "culture"], impact: "开启了人类进化历程" },
-            { id: 2, era: "prehistoric", title: "石器时代开始", time: "约 250 万年前", year: -2500000, location: "非洲", lat: 5.0, lng: 35.0, description: "人类开始制造和使用石器工具", details: "最早的石器工具被称为奥杜威工具", tags: ["technology", "culture"], impact: "工具使用极大提升了人类生存能力" },
-            { id: 3, era: "prehistoric", title: "火的控制", time: "约 100 万年前", year: -1000000, location: "非洲/亚洲", lat: 15.0, lng: 45.0, description: "人类学会控制和使用火", details: "火的使用使人类能够烹饪食物、取暖、照明", tags: ["technology", "science"], impact: "改变了人类的饮食结构和社会行为" },
-            { id: 4, era: "prehistoric", title: "农业革命", time: "约 10000 年前", year: -8000, location: "美索不达米亚", lat: 33.0, lng: 44.0, description: "人类从狩猎采集转向农业生产", details: "农业最早在美索不达米亚的新月沃地出现", tags: ["economy", "culture", "technology"], impact: "彻底改变了人类的生活方式" },
-            { id: 5, era: "prehistoric", title: "陶器发明", time: "约公元前 6000 年", year: -6000, location: "中国/日本", lat: 35.0, lng: 135.0, description: "人类开始制作陶器储存食物", details: "陶器的发明使食物储存和烹饪更加便利", tags: ["technology", "culture"], impact: "促进了定居生活的发展" },
+            // 史前时期 / Prehistoric
+            { 
+                id: 1, 
+                era: "prehistoric", 
+                title: { zh: "人类起源", en: "Origin of Humans" },
+                time: { zh: "约 300 万年前", en: "c. 3 million years ago" },
+                year: -3000000, 
+                location: { zh: "非洲东部", en: "East Africa" },
+                lat: 2.0, 
+                lng: 38.0, 
+                description: { zh: "最早的人类祖先出现在非洲东部", en: "Earliest human ancestors appeared in East Africa" },
+                details: { zh: "南方古猿是最早的人科动物之一，能够直立行走", en: "Australopithecus was one of the earliest hominids, capable of bipedal locomotion" },
+                tags: ["science", "culture"], 
+                impact: { zh: "开启了人类进化历程", en: "Marked the beginning of human evolution" }
+            },
+            { 
+                id: 2, 
+                era: "prehistoric", 
+                title: { zh: "石器时代开始", en: "Stone Age Begins" },
+                time: { zh: "约 250 万年前", en: "c. 2.5 million years ago" },
+                year: -2500000, 
+                location: { zh: "非洲", en: "Africa" },
+                lat: 5.0, 
+                lng: 35.0, 
+                description: { zh: "人类开始制造和使用石器工具", en: "Humans began making and using stone tools" },
+                details: { zh: "最早的石器工具被称为奥杜威工具", en: "The earliest stone tools are known as Oldowan tools" },
+                tags: ["technology", "culture"], 
+                impact: { zh: "工具使用极大提升了人类生存能力", en: "Tool use greatly enhanced human survival capabilities" }
+            },
+            { 
+                id: 3, 
+                era: "prehistoric", 
+                title: { zh: "火的控制", en: "Control of Fire" },
+                time: { zh: "约 100 万年前", en: "c. 1 million years ago" },
+                year: -1000000, 
+                location: { zh: "非洲/亚洲", en: "Africa/Asia" },
+                lat: 15.0, 
+                lng: 45.0, 
+                description: { zh: "人类学会控制和使用火", en: "Humans learned to control and use fire" },
+                details: { zh: "火的使用使人类能够烹饪食物、取暖、照明", en: "Fire enabled humans to cook food, provide warmth, and lighting" },
+                tags: ["technology", "science"], 
+                impact: { zh: "改变了人类的饮食结构和社会行为", en: "Transformed human diet and social behavior" }
+            },
+            { 
+                id: 4, 
+                era: "prehistoric", 
+                title: { zh: "农业革命", en: "Agricultural Revolution" },
+                time: { zh: "约 10000 年前", en: "c. 10,000 years ago" },
+                year: -8000, 
+                location: { zh: "美索不达米亚", en: "Mesopotamia" },
+                lat: 33.0, 
+                lng: 44.0, 
+                description: { zh: "人类从狩猎采集转向农业生产", en: "Humans shifted from hunting-gathering to agriculture" },
+                details: { zh: "农业最早在美索不达米亚的新月沃地出现", en: "Agriculture first emerged in the Fertile Crescent of Mesopotamia" },
+                tags: ["economy", "culture", "technology"], 
+                impact: { zh: "彻底改变了人类的生活方式", en: "Completely transformed human lifestyle" }
+            },
+            { 
+                id: 5, 
+                era: "prehistoric", 
+                title: { zh: "陶器发明", en: "Invention of Pottery" },
+                time: { zh: "约公元前 6000 年", en: "c. 6000 BCE" },
+                year: -6000, 
+                location: { zh: "中国/日本", en: "China/Japan" },
+                lat: 35.0, 
+                lng: 135.0, 
+                description: { zh: "人类开始制作陶器储存食物", en: "Humans began making pottery to store food" },
+                details: { zh: "陶器的发明使食物储存和烹饪更加便利", en: "Pottery made food storage and cooking more convenient" },
+                tags: ["technology", "culture"], 
+                impact: { zh: "促进了定居生活的发展", en: "Facilitated the development of settled life" }
+            },
             
-            // 古代文明
-            { id: 6, era: "ancient", title: "苏美尔文明兴起", time: "约公元前 3500 年", year: -3500, location: "美索不达米亚", lat: 31.0, lng: 45.0, description: "世界上最早的文明之一", details: "苏美尔人建立了乌鲁克、乌尔等城市国家", tags: ["culture", "politics", "technology"], impact: "开创了城市文明和文字记录的先河" },
-            { id: 7, era: "ancient", title: "古埃及金字塔建造", time: "约公元前 2560 年", year: -2560, location: "埃及吉萨", lat: 29.9792, lng: 31.1342, description: "吉萨大金字塔建成", details: "胡夫金字塔高 146.6 米，由约 230 万块巨石建成", tags: ["culture", "technology", "science"], impact: "展现了古代工程技术的巅峰" },
-            { id: 8, era: "ancient", title: "汉字起源", time: "约公元前 1200 年", year: -1200, location: "中国安阳", lat: 36.0, lng: 114.0, description: "甲骨文出现", details: "甲骨文是刻在龟甲和兽骨上的文字", tags: ["culture"], impact: "奠定了中华文明传承的基础" },
-            { id: 9, era: "ancient", title: "古希腊民主制度", time: "公元前 508 年", year: -508, location: "希腊雅典", lat: 37.9838, lng: 23.7275, description: "克利斯提尼改革建立民主制度", details: "雅典民主制允许所有成年男性公民参与政治", tags: ["politics", "culture"], impact: "开创了民主政治的先河" },
-            { id: 10, era: "ancient", title: "孔子诞生", time: "公元前 551 年", year: -551, location: "中国曲阜", lat: 35.6, lng: 117.0, description: "儒家思想创始人诞生", details: "孔子是中国古代最伟大的思想家、教育家", tags: ["culture", "philosophy"], impact: "塑造了东亚文化圈的核心价值观" },
-            { id: 11, era: "ancient", title: "罗马帝国建立", time: "公元前 27 年", year: -27, location: "意大利罗马", lat: 41.9028, lng: 12.4964, description: "屋大维获得奥古斯都称号", details: "罗马帝国横跨欧亚非三大洲", tags: ["politics", "military", "culture"], impact: "奠定了西方文明的基础" },
-            { id: 12, era: "ancient", title: "丝绸之路开通", time: "公元前 138 年", year: -138, location: "中国长安", lat: 34.3, lng: 108.9, description: "张骞出使西域开辟丝绸之路", details: "丝绸之路连接东西方贸易和文化交流", tags: ["economy", "culture"], impact: "促进了东西方文明交流" },
+            // 古代文明 / Ancient Civilizations
+            { 
+                id: 6, 
+                era: "ancient", 
+                title: { zh: "苏美尔文明兴起", en: "Rise of Sumerian Civilization" },
+                time: { zh: "约公元前 3500 年", en: "c. 3500 BCE" },
+                year: -3500, 
+                location: { zh: "美索不达米亚", en: "Mesopotamia" },
+                lat: 31.0, 
+                lng: 45.0, 
+                description: { zh: "世界上最早的文明之一", en: "One of the world's earliest civilizations" },
+                details: { zh: "苏美尔人建立了乌鲁克、乌尔等城市国家", en: "Sumerians established city-states like Uruk and Ur" },
+                tags: ["culture", "politics", "technology"], 
+                impact: { zh: "开创了城市文明和文字记录的先河", en: "Pioneered urban civilization and written records" }
+            },
+            { 
+                id: 7, 
+                era: "ancient", 
+                title: { zh: "古埃及金字塔建造", en: "Construction of Egyptian Pyramids" },
+                time: { zh: "约公元前 2560 年", en: "c. 2560 BCE" },
+                year: -2560, 
+                location: { zh: "埃及吉萨", en: "Giza, Egypt" },
+                lat: 29.9792, 
+                lng: 31.1342, 
+                description: { zh: "吉萨大金字塔建成", en: "Great Pyramid of Giza completed" },
+                details: { zh: "胡夫金字塔高 146.6 米，由约 230 万块巨石建成", en: "Pyramid of Khufu stands 146.6m tall, built with 2.3 million stone blocks" },
+                tags: ["culture", "technology", "science"], 
+                impact: { zh: "展现了古代工程技术的巅峰", en: "Demonstrated the pinnacle of ancient engineering" }
+            },
+            { 
+                id: 8, 
+                era: "ancient", 
+                title: { zh: "汉字起源", en: "Origin of Chinese Characters" },
+                time: { zh: "约公元前 1200 年", en: "c. 1200 BCE" },
+                year: -1200, 
+                location: { zh: "中国安阳", en: "Anyang, China" },
+                lat: 36.0, 
+                lng: 114.0, 
+                description: { zh: "甲骨文出现", en: "Oracle bone script appeared" },
+                details: { zh: "甲骨文是刻在龟甲和兽骨上的文字", en: "Oracle bone script was carved on turtle shells and animal bones" },
+                tags: ["culture"], 
+                impact: { zh: "奠定了中华文明传承的基础", en: "Laid the foundation for Chinese civilization" }
+            },
+            { 
+                id: 9, 
+                era: "ancient", 
+                title: { zh: "古希腊民主制度", en: "Athenian Democracy" },
+                time: { zh: "公元前 508 年", en: "508 BCE" },
+                year: -508, 
+                location: { zh: "希腊雅典", en: "Athens, Greece" },
+                lat: 37.9838, 
+                lng: 23.7275, 
+                description: { zh: "克利斯提尼改革建立民主制度", en: "Cleisthenes reforms established democracy" },
+                details: { zh: "雅典民主制允许所有成年男性公民参与政治", en: "Athenian democracy allowed all adult male citizens to participate" },
+                tags: ["politics", "culture"], 
+                impact: { zh: "开创了民主政治的先河", en: "Pioneered democratic politics" }
+            },
+            { 
+                id: 10, 
+                era: "ancient", 
+                title: { zh: "孔子诞生", en: "Birth of Confucius" },
+                time: { zh: "公元前 551 年", en: "551 BCE" },
+                year: -551, 
+                location: { zh: "中国曲阜", en: "Qufu, China" },
+                lat: 35.6, 
+                lng: 117.0, 
+                description: { zh: "儒家思想创始人诞生", en: "Founder of Confucianism was born" },
+                details: { zh: "孔子是中国古代最伟大的思想家、教育家", en: "Confucius was ancient China's greatest thinker and educator" },
+                tags: ["culture", "philosophy"], 
+                impact: { zh: "塑造了东亚文化圈的核心价值观", en: "Shaped core values of East Asian culture" }
+            },
+            { 
+                id: 11, 
+                era: "ancient", 
+                title: { zh: "罗马帝国建立", en: "Establishment of Roman Empire" },
+                time: { zh: "公元前 27 年", en: "27 BCE" },
+                year: -27, 
+                location: { zh: "意大利罗马", en: "Rome, Italy" },
+                lat: 41.9028, 
+                lng: 12.4964, 
+                description: { zh: "屋大维获得奥古斯都称号", en: "Octavian received title of Augustus" },
+                details: { zh: "罗马帝国横跨欧亚非三大洲", en: "Roman Empire spanned Europe, Asia, and Africa" },
+                tags: ["politics", "military", "culture"], 
+                impact: { zh: "奠定了西方文明的基础", en: "Laid the foundation of Western civilization" }
+            },
+            { 
+                id: 12, 
+                era: "ancient", 
+                title: { zh: "丝绸之路开通", en: "Silk Road Established" },
+                time: { zh: "公元前 138 年", en: "138 BCE" },
+                year: -138, 
+                location: { zh: "中国长安", en: "Chang'an, China" },
+                lat: 34.3, 
+                lng: 108.9, 
+                description: { zh: "张骞出使西域开辟丝绸之路", en: "Zhang Qian's mission opened the Silk Road" },
+                details: { zh: "丝绸之路连接东西方贸易和文化交流", en: "Silk Road connected East-West trade and cultural exchange" },
+                tags: ["economy", "culture"], 
+                impact: { zh: "促进了东西方文明交流", en: "Facilitated East-West cultural exchange" }
+            },
             
-            // 中世纪
-            { id: 13, era: "medieval", title: "造纸术传入欧洲", time: "公元 12 世纪", year: 1150, location: "西班牙", lat: 40.0, lng: -4.0, description: "中国的造纸术传入欧洲", details: "造纸术的传播极大降低了书籍成本", tags: ["technology", "culture"], impact: "推动了欧洲文化和教育的发展" },
-            { id: 14, era: "medieval", title: "成吉思汗统一蒙古", time: "公元 1206 年", year: 1206, location: "蒙古高原", lat: 48.0, lng: 106.0, description: "铁木真建立蒙古帝国", details: "蒙古帝国成为人类历史上领土面积第二大的帝国", tags: ["military", "politics"], impact: "改变了欧亚大陆的政治格局" },
-            { id: 15, era: "medieval", title: "文艺复兴开始", time: "公元 14 世纪", year: 1350, location: "意大利佛罗伦萨", lat: 43.7696, lng: 11.2558, description: "欧洲文艺复兴运动兴起", details: "文艺复兴是欧洲文化和思想的重大革新运动", tags: ["culture", "art"], impact: "推动了欧洲思想解放和科学发展" },
-            { id: 16, era: "medieval", title: "黑死病爆发", time: "公元 1347-1351 年", year: 1347, location: "欧洲", lat: 48.0, lng: 10.0, description: "黑死病席卷欧洲", details: "黑死病导致欧洲约 1/3 人口死亡", tags: ["science", "economy"], impact: "深刻改变了欧洲社会结构" },
+            // 中世纪 / Medieval
+            { 
+                id: 13, 
+                era: "medieval", 
+                title: { zh: "造纸术传入欧洲", en: "Papermaking Reaches Europe" },
+                time: { zh: "公元 12 世纪", en: "12th century CE" },
+                year: 1150, 
+                location: { zh: "西班牙", en: "Spain" },
+                lat: 40.0, 
+                lng: -4.0, 
+                description: { zh: "中国的造纸术传入欧洲", en: "Chinese papermaking reached Europe" },
+                details: { zh: "造纸术的传播极大降低了书籍成本", en: "Spread of papermaking greatly reduced book costs" },
+                tags: ["technology", "culture"], 
+                impact: { zh: "推动了欧洲文化和教育的发展", en: "Advanced European culture and education" }
+            },
+            { 
+                id: 14, 
+                era: "medieval", 
+                title: { zh: "成吉思汗统一蒙古", en: "Genghis Khan Unifies Mongolia" },
+                time: { zh: "公元 1206 年", en: "1206 CE" },
+                year: 1206, 
+                location: { zh: "蒙古高原", en: "Mongolian Plateau" },
+                lat: 48.0, 
+                lng: 106.0, 
+                description: { zh: "铁木真建立蒙古帝国", en: "Temüjin established Mongol Empire" },
+                details: { zh: "蒙古帝国成为人类历史上领土面积第二大的帝国", en: "Mongol Empire became second largest empire in history" },
+                tags: ["military", "politics"], 
+                impact: { zh: "改变了欧亚大陆的政治格局", en: "Transformed Eurasian political landscape" }
+            },
+            { 
+                id: 15, 
+                era: "medieval", 
+                title: { zh: "文艺复兴开始", en: "Renaissance Begins" },
+                time: { zh: "公元 14 世纪", en: "14th century CE" },
+                year: 1350, 
+                location: { zh: "意大利佛罗伦萨", en: "Florence, Italy" },
+                lat: 43.7696, 
+                lng: 11.2558, 
+                description: { zh: "欧洲文艺复兴运动兴起", en: "European Renaissance movement emerged" },
+                details: { zh: "文艺复兴是欧洲文化和思想的重大革新运动", en: "Renaissance was a major cultural and intellectual movement" },
+                tags: ["culture", "art"], 
+                impact: { zh: "推动了欧洲思想解放和科学发展", en: "Promoted European intellectual liberation and science" }
+            },
+            { 
+                id: 16, 
+                era: "medieval", 
+                title: { zh: "黑死病爆发", en: "Black Death Pandemic" },
+                time: { zh: "公元 1347-1351 年", en: "1347-1351 CE" },
+                year: 1347, 
+                location: { zh: "欧洲", en: "Europe" },
+                lat: 48.0, 
+                lng: 10.0, 
+                description: { zh: "黑死病席卷欧洲", en: "Black Death swept through Europe" },
+                details: { zh: "黑死病导致欧洲约 1/3 人口死亡", en: "Black Death killed about 1/3 of Europe's population" },
+                tags: ["science", "economy"], 
+                impact: { zh: "深刻改变了欧洲社会结构", en: "Profoundly changed European social structure" }
+            },
             
-            // 近代早期
-            { id: 17, era: "early-modern", title: "哥伦布发现美洲", time: "公元 1492 年", year: 1492, location: "巴哈马群岛", lat: 24.0, lng: -76.0, description: "开启大航海时代", details: "哥伦布意外发现了美洲大陆", tags: ["exploration", "economy"], impact: "开启了全球化进程" },
-            { id: 18, era: "early-modern", title: "印刷术革命", time: "公元 1440 年", year: 1440, location: "德国美因茨", lat: 50.0, lng: 8.0, description: "古腾堡发明活字印刷术", details: "印刷术使书籍大规模生产成为可能", tags: ["technology", "culture"], impact: "加速了知识传播和思想解放" },
-            { id: 19, era: "early-modern", title: "宗教改革", time: "公元 1517 年", year: 1517, location: "德国维滕贝格", lat: 51.8, lng: 12.6, description: "马丁·路德发表九十五条论纲", details: "宗教改革打破了天主教会的垄断", tags: ["politics", "culture"], impact: "改变了欧洲宗教和政治格局" },
-            { id: 20, era: "early-modern", title: "科学革命", time: "公元 1543 年", year: 1543, location: "欧洲", lat: 50.0, lng: 10.0, description: "哥白尼发表《天体运行论》", details: "日心说颠覆了传统宇宙观", tags: ["science", "technology"], impact: "奠定了现代科学的基础" },
-            { id: 21, era: "early-modern", title: "英国光荣革命", time: "公元 1688 年", year: 1688, location: "英国伦敦", lat: 51.5074, lng: -0.1278, description: "确立君主立宪制", details: "光荣革命确立了议会主权", tags: ["politics"], impact: "开创了现代民主制度" },
+            // 近代早期 / Early Modern
+            { 
+                id: 17, 
+                era: "early-modern", 
+                title: { zh: "哥伦布发现美洲", en: "Columbus Discovers Americas" },
+                time: { zh: "公元 1492 年", en: "1492 CE" },
+                year: 1492, 
+                location: { zh: "巴哈马群岛", en: "Bahamas" },
+                lat: 24.0, 
+                lng: -76.0, 
+                description: { zh: "开启大航海时代", en: "Opened the Age of Discovery" },
+                details: { zh: "哥伦布意外发现了美洲大陆", en: "Columbus accidentally discovered the American continent" },
+                tags: ["exploration", "economy"], 
+                impact: { zh: "开启了全球化进程", en: "Initiated the globalization process" }
+            },
+            { 
+                id: 18, 
+                era: "early-modern", 
+                title: { zh: "印刷术革命", en: "Printing Revolution" },
+                time: { zh: "公元 1440 年", en: "1440 CE" },
+                year: 1440, 
+                location: { zh: "德国美因茨", en: "Mainz, Germany" },
+                lat: 50.0, 
+                lng: 8.0, 
+                description: { zh: "古腾堡发明活字印刷术", en: "Gutenberg invented movable type printing" },
+                details: { zh: "印刷术使书籍大规模生产成为可能", en: "Printing made mass production of books possible" },
+                tags: ["technology", "culture"], 
+                impact: { zh: "加速了知识传播和思想解放", en: "Accelerated knowledge dissemination and intellectual liberation" }
+            },
+            { 
+                id: 19, 
+                era: "early-modern", 
+                title: { zh: "宗教改革", en: "Protestant Reformation" },
+                time: { zh: "公元 1517 年", en: "1517 CE" },
+                year: 1517, 
+                location: { zh: "德国维滕贝格", en: "Wittenberg, Germany" },
+                lat: 51.8, 
+                lng: 12.6, 
+                description: { zh: "马丁·路德发表九十五条论纲", en: "Martin Luther posted 95 Theses" },
+                details: { zh: "宗教改革打破了天主教会的垄断", en: "Reformation broke Catholic Church's monopoly" },
+                tags: ["politics", "culture"], 
+                impact: { zh: "改变了欧洲宗教和政治格局", en: "Changed European religious and political landscape" }
+            },
+            { 
+                id: 20, 
+                era: "early-modern", 
+                title: { zh: "科学革命", en: "Scientific Revolution" },
+                time: { zh: "公元 1543 年", en: "1543 CE" },
+                year: 1543, 
+                location: { zh: "欧洲", en: "Europe" },
+                lat: 50.0, 
+                lng: 10.0, 
+                description: { zh: "哥白尼发表《天体运行论》", en: "Copernicus published 'On the Revolutions'" },
+                details: { zh: "日心说颠覆了传统宇宙观", en: "Heliocentrism overturned traditional cosmology" },
+                tags: ["science", "technology"], 
+                impact: { zh: "奠定了现代科学的基础", en: "Laid the foundation of modern science" }
+            },
+            { 
+                id: 21, 
+                era: "early-modern", 
+                title: { zh: "英国光荣革命", en: "Glorious Revolution" },
+                time: { zh: "公元 1688 年", en: "1688 CE" },
+                year: 1688, 
+                location: { zh: "英国伦敦", en: "London, England" },
+                lat: 51.5074, 
+                lng: -0.1278, 
+                description: { zh: "确立君主立宪制", en: "Established constitutional monarchy" },
+                details: { zh: "光荣革命确立了议会主权", en: "Glorious Revolution established parliamentary sovereignty" },
+                tags: ["politics"], 
+                impact: { zh: "开创了现代民主制度", en: "Pioneered modern democratic system" }
+            },
             
-            // 现代
-            { id: 22, era: "modern", title: "工业革命开始", time: "公元 1760 年", year: 1760, location: "英国", lat: 54.0, lng: -2.0, description: "人类进入机械化生产时代", details: "工业革命以蒸汽机的改良为标志", tags: ["technology", "economy"], impact: "彻底改变了人类的生产生活方式" },
-            { id: 23, era: "modern", title: "美国独立宣言", time: "公元 1776 年", year: 1776, location: "美国费城", lat: 39.9526, lng: -75.1652, description: "美国宣布独立", details: "独立宣言宣告人人生而平等", tags: ["politics", "military"], impact: "推动了全球民主运动" },
-            { id: 24, era: "modern", title: "法国大革命", time: "公元 1789 年", year: 1789, location: "法国巴黎", lat: 48.8566, lng: 2.3522, description: "推翻君主专制", details: "法国大革命传播了自由平等博爱思想", tags: ["politics", "military"], impact: "深刻影响了世界历史进程" },
-            { id: 25, era: "modern", title: "电力时代", time: "公元 1879 年", year: 1879, location: "美国", lat: 40.0, lng: -75.0, description: "爱迪生发明白炽灯", details: "电力的广泛应用改变了人类生活", tags: ["technology", "science"], impact: "开启了电气化时代" },
-            { id: 26, era: "modern", title: "相对论提出", time: "公元 1905 年", year: 1905, location: "瑞士", lat: 47.0, lng: 8.0, description: "爱因斯坦发表狭义相对论", details: "相对论颠覆了经典物理学", tags: ["science"], impact: "改变了人类对时空的认知" },
-            { id: 27, era: "modern", title: "第一次世界大战", time: "公元 1914-1918 年", year: 1914, location: "欧洲", lat: 50.0, lng: 10.0, description: "全球性战争爆发", details: "一战导致超过 1600 万人死亡", tags: ["military", "politics"], impact: "重塑了世界政治格局" },
-            { id: 28, era: "modern", title: "互联网诞生", time: "公元 1969 年", year: 1969, location: "美国加州", lat: 34.0, lng: -118.0, description: "ARPANET 首次传输数据", details: "互联网的发展彻底改变了信息传播", tags: ["technology", "science"], impact: "开启了信息时代" },
-            { id: 29, era: "modern", title: "人类登月", time: "公元 1969 年", year: 1969, location: "月球", lat: 0.6741, lng: 23.4729, description: "阿波罗 11 号成功登月", details: "阿姆斯特朗成为第一个踏上月球的人类", tags: ["science", "technology", "exploration"], impact: "实现了人类登月梦想" },
-            { id: 30, era: "modern", title: "个人电脑普及", time: "公元 1975 年", year: 1975, location: "美国", lat: 37.0, lng: -120.0, description: "个人电脑开始进入家庭", details: "PC 革命改变了工作和生活方式", tags: ["technology"], impact: "推动了信息化社会到来" },
-            { id: 31, era: "modern", title: "万维网发明", time: "公元 1989 年", year: 1989, location: "瑞士 CERN", lat: 46.2, lng: 6.0, description: "蒂姆·伯纳斯 - 李发明 WWW", details: "万维网使互联网变得易于使用", tags: ["technology"], impact: "彻底改变了信息获取方式" },
-            { id: 32, era: "modern", title: "冷战结束", time: "公元 1991 年", year: 1991, location: "苏联", lat: 55.0, lng: 37.0, description: "苏联解体", details: "冷战结束标志着两极格局终结", tags: ["politics", "military"], impact: "世界进入多极化时代" },
-            { id: 33, era: "modern", title: "人类基因组计划", time: "公元 2003 年", year: 2003, location: "国际", lat: 0.0, lng: 0.0, description: "完成人类基因组测序", details: "基因组计划揭示了人类遗传密码", tags: ["science", "technology"], impact: "开启了精准医疗时代" },
-            { id: 34, era: "modern", title: "iPhone 发布", time: "公元 2007 年", year: 2007, location: "美国", lat: 37.3, lng: -122.0, description: "智能手机时代开启", details: "iPhone 重新定义了手机", tags: ["technology"], impact: "改变了移动通信和生活方式" },
-            { id: 35, era: "modern", title: "人工智能崛起", time: "公元 2010 年代", year: 2010, location: "全球", lat: 0.0, lng: 0.0, description: "AI 技术快速发展", details: "深度学习和大模型取得突破", tags: ["technology", "science"], impact: "正在重塑人类社会" }
+            // 现代 / Modern
+            { 
+                id: 22, 
+                era: "modern", 
+                title: { zh: "工业革命开始", en: "Industrial Revolution Begins" },
+                time: { zh: "公元 1760 年", en: "1760 CE" },
+                year: 1760, 
+                location: { zh: "英国", en: "Britain" },
+                lat: 54.0, 
+                lng: -2.0, 
+                description: { zh: "人类进入机械化生产时代", en: "Humanity entered mechanized production era" },
+                details: { zh: "工业革命以蒸汽机的改良为标志", en: "Industrial Revolution marked by steam engine improvement" },
+                tags: ["technology", "economy"], 
+                impact: { zh: "彻底改变了人类的生产生活方式", en: "Completely transformed human production and lifestyle" }
+            },
+            { 
+                id: 23, 
+                era: "modern", 
+                title: { zh: "美国独立宣言", en: "US Declaration of Independence" },
+                time: { zh: "公元 1776 年", en: "1776 CE" },
+                year: 1776, 
+                location: { zh: "美国费城", en: "Philadelphia, USA" },
+                lat: 39.9526, 
+                lng: -75.1652, 
+                description: { zh: "美国宣布独立", en: "United States declared independence" },
+                details: { zh: "独立宣言宣告人人生而平等", en: "Declaration proclaimed all men are created equal" },
+                tags: ["politics", "military"], 
+                impact: { zh: "推动了全球民主运动", en: "Advanced global democratic movements" }
+            },
+            { 
+                id: 24, 
+                era: "modern", 
+                title: { zh: "法国大革命", en: "French Revolution" },
+                time: { zh: "公元 1789 年", en: "1789 CE" },
+                year: 1789, 
+                location: { zh: "法国巴黎", en: "Paris, France" },
+                lat: 48.8566, 
+                lng: 2.3522, 
+                description: { zh: "推翻君主专制", en: "Overthrew absolute monarchy" },
+                details: { zh: "法国大革命传播了自由平等博爱思想", en: "French Revolution spread ideals of liberty, equality, fraternity" },
+                tags: ["politics", "military"], 
+                impact: { zh: "深刻影响了世界历史进程", en: "Profoundly influenced world history" }
+            },
+            { 
+                id: 25, 
+                era: "modern", 
+                title: { zh: "电力时代", en: "Electric Age" },
+                time: { zh: "公元 1879 年", en: "1879 CE" },
+                year: 1879, 
+                location: { zh: "美国", en: "United States" },
+                lat: 40.0, 
+                lng: -75.0, 
+                description: { zh: "爱迪生发明白炽灯", en: "Edison invented incandescent light bulb" },
+                details: { zh: "电力的广泛应用改变了人类生活", en: "Widespread use of electricity transformed human life" },
+                tags: ["technology", "science"], 
+                impact: { zh: "开启了电气化时代", en: "Opened the electrification era" }
+            },
+            { 
+                id: 26, 
+                era: "modern", 
+                title: { zh: "相对论提出", en: "Theory of Relativity" },
+                time: { zh: "公元 1905 年", en: "1905 CE" },
+                year: 1905, 
+                location: { zh: "瑞士", en: "Switzerland" },
+                lat: 47.0, 
+                lng: 8.0, 
+                description: { zh: "爱因斯坦发表狭义相对论", en: "Einstein published special relativity" },
+                details: { zh: "相对论颠覆了经典物理学", en: "Relativity overturned classical physics" },
+                tags: ["science"], 
+                impact: { zh: "改变了人类对时空的认知", en: "Changed human understanding of space-time" }
+            },
+            { 
+                id: 27, 
+                era: "modern", 
+                title: { zh: "第一次世界大战", en: "World War I" },
+                time: { zh: "公元 1914-1918 年", en: "1914-1918 CE" },
+                year: 1914, 
+                location: { zh: "欧洲", en: "Europe" },
+                lat: 50.0, 
+                lng: 10.0, 
+                description: { zh: "全球性战争爆发", en: "Global war erupted" },
+                details: { zh: "一战导致超过 1600 万人死亡", en: "WWI caused over 16 million deaths" },
+                tags: ["military", "politics"], 
+                impact: { zh: "重塑了世界政治格局", en: "Reshaped world political landscape" }
+            },
+            { 
+                id: 28, 
+                era: "modern", 
+                title: { zh: "互联网诞生", en: "Birth of Internet" },
+                time: { zh: "公元 1969 年", en: "1969 CE" },
+                year: 1969, 
+                location: { zh: "美国加州", en: "California, USA" },
+                lat: 34.0, 
+                lng: -118.0, 
+                description: { zh: "ARPANET 首次传输数据", en: "ARPANET transmitted first data" },
+                details: { zh: "互联网的发展彻底改变了信息传播", en: "Internet development revolutionized information dissemination" },
+                tags: ["technology", "science"], 
+                impact: { zh: "开启了信息时代", en: "Opened the information age" }
+            },
+            { 
+                id: 29, 
+                era: "modern", 
+                title: { zh: "人类登月", en: "Moon Landing" },
+                time: { zh: "公元 1969 年", en: "1969 CE" },
+                year: 1969, 
+                location: { zh: "月球", en: "Moon" },
+                lat: 0.6741, 
+                lng: 23.4729, 
+                description: { zh: "阿波罗 11 号成功登月", en: "Apollo 11 successfully landed on Moon" },
+                details: { zh: "阿姆斯特朗成为第一个踏上月球的人类", en: "Armstrong became first human on the Moon" },
+                tags: ["science", "technology", "exploration"], 
+                impact: { zh: "实现了人类登月梦想", en: "Realized human dream of reaching the Moon" }
+            },
+            { 
+                id: 30, 
+                era: "modern", 
+                title: { zh: "个人电脑普及", en: "Personal Computer Revolution" },
+                time: { zh: "公元 1975 年", en: "1975 CE" },
+                year: 1975, 
+                location: { zh: "美国", en: "United States" },
+                lat: 37.0, 
+                lng: -120.0, 
+                description: { zh: "个人电脑开始进入家庭", en: "Personal computers entered homes" },
+                details: { zh: "PC 革命改变了工作和生活方式", en: "PC revolution changed work and lifestyle" },
+                tags: ["technology"], 
+                impact: { zh: "推动了信息化社会到来", en: "Drove the arrival of information society" }
+            },
+            { 
+                id: 31, 
+                era: "modern", 
+                title: { zh: "万维网发明", en: "World Wide Web Invented" },
+                time: { zh: "公元 1989 年", en: "1989 CE" },
+                year: 1989, 
+                location: { zh: "瑞士 CERN", en: "CERN, Switzerland" },
+                lat: 46.2, 
+                lng: 6.0, 
+                description: { zh: "蒂姆·伯纳斯 - 李发明 WWW", en: "Tim Berners-Lee invented the WWW" },
+                details: { zh: "万维网使互联网变得易于使用", en: "Web made Internet accessible to everyone" },
+                tags: ["technology"], 
+                impact: { zh: "彻底改变了信息获取方式", en: "Revolutionized information access" }
+            },
+            { 
+                id: 32, 
+                era: "modern", 
+                title: { zh: "冷战结束", en: "End of Cold War" },
+                time: { zh: "公元 1991 年", en: "1991 CE" },
+                year: 1991, 
+                location: { zh: "苏联", en: "Soviet Union" },
+                lat: 55.0, 
+                lng: 37.0, 
+                description: { zh: "苏联解体", en: "Dissolution of Soviet Union" },
+                details: { zh: "冷战结束标志着两极格局终结", en: "End of Cold War marked end of bipolar world" },
+                tags: ["politics", "military"], 
+                impact: { zh: "世界进入多极化时代", en: "World entered multipolar era" }
+            },
+            { 
+                id: 33, 
+                era: "modern", 
+                title: { zh: "人类基因组计划", en: "Human Genome Project" },
+                time: { zh: "公元 2003 年", en: "2003 CE" },
+                year: 2003, 
+                location: { zh: "国际", en: "International" },
+                lat: 0.0, 
+                lng: 0.0, 
+                description: { zh: "完成人类基因组测序", en: "Human genome sequencing completed" },
+                details: { zh: "基因组计划揭示了人类遗传密码", en: "Genome project revealed human genetic code" },
+                tags: ["science", "technology"], 
+                impact: { zh: "开启了精准医疗时代", en: "Opened era of precision medicine" }
+            },
+            { 
+                id: 34, 
+                era: "modern", 
+                title: { zh: "iPhone 发布", en: "iPhone Released" },
+                time: { zh: "公元 2007 年", en: "2007 CE" },
+                year: 2007, 
+                location: { zh: "美国", en: "United States" },
+                lat: 37.3, 
+                lng: -122.0, 
+                description: { zh: "智能手机时代开启", en: "Smartphone era began" },
+                details: { zh: "iPhone 重新定义了手机", en: "iPhone redefined the mobile phone" },
+                tags: ["technology"], 
+                impact: { zh: "改变了移动通信和生活方式", en: "Transformed mobile communication and lifestyle" }
+            },
+            { 
+                id: 35, 
+                era: "modern", 
+                title: { zh: "人工智能崛起", en: "Rise of Artificial Intelligence" },
+                time: { zh: "公元 2010 年代", en: "2010s CE" },
+                year: 2010, 
+                location: { zh: "全球", en: "Global" },
+                lat: 0.0, 
+                lng: 0.0, 
+                description: { zh: "AI 技术快速发展", en: "AI technology rapidly developed" },
+                details: { zh: "深度学习和大模型取得突破", en: "Deep learning and large models achieved breakthroughs" },
+                tags: ["technology", "science"], 
+                impact: { zh: "正在重塑人类社会", en: "Reshaping human society" }
+            }
         ];
 
         // Global variables
+        let currentLang = localStorage.getItem('historyLang') || 'zh';
         let map = null;
         let currentView = 'timeline';
         let currentZoom = 1;
@@ -1103,6 +1704,7 @@
 
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
+            switchLanguage(currentLang);
             renderTimeline();
             updateStats();
             setupScrollProgress();
@@ -1111,15 +1713,79 @@
             updateBookmarksPanel();
         });
 
+        // Language switch function
+        function switchLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('historyLang', lang);
+            
+            // Update language buttons
+            document.getElementById('langZh').classList.toggle('active', lang === 'zh');
+            document.getElementById('langEn').classList.toggle('active', lang === 'en');
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+            
+            // Update all i18n elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+            
+            // Update placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[lang][key]) {
+                    el.placeholder = translations[lang][key];
+                }
+            });
+            
+            // Update theme button
+            const theme = localStorage.getItem('historyTheme') || 'dark';
+            document.querySelector('.theme-toggle').textContent = theme === 'dark' ? (lang === 'zh' ? '🌙' : '🌙') : (lang === 'zh' ? '☀️' : '☀️');
+            
+            // Re-render timeline and charts
+            renderTimeline();
+            if (eraChart) {
+                eraChart.destroy();
+                categoryChart.destroy();
+                renderCharts();
+            }
+            
+            // Update bookmarks panel
+            updateBookmarksPanel();
+        }
+
         // Render timeline content
         function renderTimeline() {
             const container = document.getElementById('timelineContent');
             const eras = {
-                prehistoric: { name: '🪨 史前时期', icon: '🪨', time: '300 万年前 - 公元前 3500 年' },
-                ancient: { name: '🏛️ 古代文明', icon: '🏛️', time: '公元前 3500 年 - 公元 476 年' },
-                medieval: { name: '🏰 中世纪', icon: '🏰', time: '公元 476 年 - 1453 年' },
-                'early-modern': { name: '⛵ 近代早期', icon: '⛵', time: '1453 年 - 1789 年' },
-                modern: { name: '🚀 现代', icon: '🚀', time: '1789 年 - 至今' }
+                prehistoric: { 
+                    name: currentLang === 'zh' ? '🪨 史前时期' : '🪨 Prehistoric', 
+                    icon: '🪨', 
+                    time: currentLang === 'zh' ? '300 万年前 - 公元前 3500 年' : '3M years ago - 3500 BCE' 
+                },
+                ancient: { 
+                    name: currentLang === 'zh' ? '🏛️ 古代文明' : '🏛️ Ancient', 
+                    icon: '🏛️', 
+                    time: currentLang === 'zh' ? '公元前 3500 年 - 公元 476 年' : '3500 BCE - 476 CE' 
+                },
+                medieval: { 
+                    name: currentLang === 'zh' ? '🏰 中世纪' : '🏰 Medieval', 
+                    icon: '🏰', 
+                    time: currentLang === 'zh' ? '公元 476 年 - 1453 年' : '476 CE - 1453 CE' 
+                },
+                'early-modern': { 
+                    name: currentLang === 'zh' ? '⛵ 近代早期' : '⛵ Early Modern', 
+                    icon: '⛵', 
+                    time: currentLang === 'zh' ? '1453 年 - 1789 年' : '1453 CE - 1789 CE' 
+                },
+                modern: { 
+                    name: currentLang === 'zh' ? '🚀 现代' : '🚀 Modern', 
+                    icon: '🚀', 
+                    time: currentLang === 'zh' ? '1789 年 - 至今' : '1789 CE - Present' 
+                }
             };
 
             let html = '';
@@ -1135,18 +1801,17 @@
                                 <h2>${eraInfo.name}</h2>
                                 <p>${eraInfo.time}</p>
                             </div>
-                            <div class="era-time">${eraEvents.length} 个事件</div>
+                            <div class="era-time">${eraEvents.length} ${currentLang === 'zh' ? '个事件' : 'events'}</div>
                         </div>
                         <div class="timeline" id="era-${eraKey}">
                 `;
 
                 eraEvents.forEach(event => {
-                    const isBookmarked = bookmarks.includes(event.id);
                     html += `
                         <div class="event" data-tags="${event.tags.join(' ')}" data-year="${event.year}" onclick="showEventModal(${event.id})">
-                            <span class="event-time">${event.time}</span>
-                            <h3>${event.title}</h3>
-                            <p>${event.description}</p>
+                            <span class="event-time">${event.time[currentLang]}</span>
+                            <h3>${event.title[currentLang]}</h3>
+                            <p>${event.description[currentLang]}</p>
                             <div class="event-tags">
                                 ${event.tags.map(tag => `<span class="tag ${tag}" onclick="event.stopPropagation(); filterByTag('${tag}')">${getTagName(tag)}</span>`).join('')}
                             </div>
@@ -1163,28 +1828,46 @@
             container.innerHTML = html;
         }
 
-        // Get tag name in Chinese
+        // Get tag name in current language
         function getTagName(tag) {
             const names = {
-                culture: '🎨 文化',
-                technology: '⚙️ 科技',
-                politics: '🏛️ 政治',
-                science: '🔬 科学',
-                economy: '💰 经济',
-                military: '⚔️ 军事',
-                exploration: '🧭 探险',
-                philosophy: '💭 哲学',
-                art: '🎨 艺术'
+                zh: {
+                    culture: '🎨 文化',
+                    technology: '⚙️ 科技',
+                    politics: '🏛️ 政治',
+                    science: '🔬 科学',
+                    economy: '💰 经济',
+                    military: '⚔️ 军事',
+                    exploration: '🧭 探险',
+                    philosophy: '💭 哲学',
+                    art: '🎨 艺术'
+                },
+                en: {
+                    culture: '🎨 Culture',
+                    technology: '⚙️ Technology',
+                    politics: '🏛️ Politics',
+                    science: '🔬 Science',
+                    economy: '💰 Economy',
+                    military: '⚔️ Military',
+                    exploration: '🧭 Exploration',
+                    philosophy: '💭 Philosophy',
+                    art: '🎨 Art'
+                }
             };
-            return names[tag] || tag;
+            return names[currentLang][tag] || tag;
         }
 
         // Update statistics
         function updateStats() {
+            const stats = {
+                zh: { events: '历史事件', civilizations: '古代文明', years: '年历史跨度', categories: '分类领域' },
+                en: { events: 'Historical Events', civilizations: 'Ancient Civilizations', years: 'Years of History', categories: 'Categories' }
+            };
+            
             document.getElementById('totalEvents').textContent = historicalEvents.length;
             document.getElementById('totalCivilizations').textContent = '16';
-            document.getElementById('totalYears').textContent = '300 万+';
-            document.getElementById('totalCategories').textContent = '8';
+            document.getElementById('totalYears').textContent = currentLang === 'zh' ? '300 万+' : '3M+';
+            document.getElementById('totalCategories').textContent = '9';
         }
 
         // Setup scroll progress
@@ -1199,6 +1882,8 @@
 
         // Render charts
         function renderCharts() {
+            const t = translations[currentLang];
+            
             // Era distribution chart
             const eraCtx = document.getElementById('eraChart').getContext('2d');
             const eraData = {
@@ -1212,9 +1897,11 @@
             eraChart = new Chart(eraCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['🪨 史前', '🏛️ 古代', '🏰 中世纪', '⛵ 近代', '🚀 现代'],
+                    labels: currentLang === 'zh' 
+                        ? ['🪨 史前', '🏛️ 古代', '🏰 中世纪', '⛵ 近代', '🚀 现代']
+                        : ['🪨 Prehistoric', '🏛️ Ancient', '🏰 Medieval', '⛵ Early Modern', '🚀 Modern'],
                     datasets: [{
-                        label: '事件数量',
+                        label: currentLang === 'zh' ? '事件数量' : 'Number of Events',
                         data: Object.values(eraData),
                         backgroundColor: [
                             'rgba(255, 215, 0, 0.7)',
@@ -1299,17 +1986,19 @@
             currentEventId = eventId;
             updateBookmarkButton();
 
-            document.getElementById('modalTitle').textContent = event.title;
-            document.getElementById('modalTime').textContent = event.time;
-            document.getElementById('modalLocationText').textContent = event.location;
+            document.getElementById('modalTitle').textContent = event.title[currentLang];
+            document.getElementById('modalTime').textContent = event.time[currentLang];
+            document.getElementById('modalLocationText').textContent = event.location[currentLang];
+            
+            const t = translations[currentLang];
             document.getElementById('modalBody').innerHTML = `
-                <p><strong>事件描述：</strong></p>
-                <p>${event.description}</p>
-                <p><strong>详细信息：</strong></p>
-                <p>${event.details}</p>
-                <p><strong>历史影响：</strong></p>
-                <p>${event.impact}</p>
-                <p><strong>分类标签：</strong></p>
+                <p><strong>${t.eventDescription}：</strong></p>
+                <p>${event.description[currentLang]}</p>
+                <p><strong>${t.eventDetails}：</strong></p>
+                <p>${event.details[currentLang]}</p>
+                <p><strong>${t.eventImpact}：</strong></p>
+                <p>${event.impact[currentLang]}</p>
+                <p><strong>${t.eventTags}：</strong></p>
                 <div class="event-tags">
                     ${event.tags.map(tag => `<span class="tag ${tag}">${getTagName(tag)}</span>`).join('')}
                 </div>
@@ -1322,11 +2011,11 @@
 
             if (relatedEvents.length > 0) {
                 const relatedHtml = `
-                    <h4>📌 相关事件</h4>
+                    <h4>${t.relatedEvents}</h4>
                     ${relatedEvents.map(e => `
                         <div class="related-event-item" onclick="showEventModal(${e.id})">
-                            <div style="color: var(--text-primary); font-weight: bold;">${e.title}</div>
-                            <div style="color: var(--text-secondary); font-size: 0.9em;">${e.time}</div>
+                            <div style="color: var(--text-primary); font-weight: bold;">${e.title[currentLang]}</div>
+                            <div style="color: var(--text-secondary); font-size: 0.9em;">${e.time[currentLang]}</div>
                         </div>
                     `).join('')}
                 `;
@@ -1471,10 +2160,10 @@
                     const marker = L.marker([event.lat, event.lng]).addTo(map);
                     marker.bindPopup(`
                         <div style="color: #333; min-width: 200px;">
-                            <h3 style="margin: 0 0 10px 0; color: #1a1a2e;">${event.title}</h3>
-                            <p style="margin: 0 0 5px 0;"><strong>时间：</strong>${event.time}</p>
-                            <p style="margin: 0 0 10px 0;"><strong>地点：</strong>${event.location}</p>
-                            <p style="margin: 0;">${event.description}</p>
+                            <h3 style="margin: 0 0 10px 0; color: #1a1a2e;">${event.title[currentLang]}</h3>
+                            <p style="margin: 0 0 5px 0;"><strong>${currentLang === 'zh' ? '时间' : 'Time'}：</strong>${event.time[currentLang]}</p>
+                            <p style="margin: 0 0 10px 0;"><strong>${currentLang === 'zh' ? '地点' : 'Location'}：</strong>${event.location[currentLang]}</p>
+                            <p style="margin: 0;">${event.description[currentLang]}</p>
                         </div>
                     `);
                 }
@@ -1495,7 +2184,7 @@
         // Show event on map
         function showOnMap() {
             const modalTitle = document.getElementById('modalTitle').textContent;
-            const event = historicalEvents.find(e => e.title === modalTitle);
+            const event = historicalEvents.find(e => e.title[currentLang] === modalTitle);
             
             if (event && event.lat && event.lng) {
                 document.getElementById('mapContainer').classList.add('active');
@@ -1588,8 +2277,10 @@
 
         function updateBookmarksPanel() {
             const panel = document.getElementById('bookmarksList');
+            const t = translations[currentLang];
+            
             if (bookmarks.length === 0) {
-                panel.innerHTML = '<p style="color: var(--text-secondary); text-align: center; padding: 20px;">暂无收藏事件</p>';
+                panel.innerHTML = `<p style="color: var(--text-secondary); text-align: center; padding: 20px;">${t.noBookmarks}</p>`;
                 return;
             }
 
@@ -1597,8 +2288,8 @@
             panel.innerHTML = bookmarkedEvents.map(event => `
                 <div class="bookmark-item" onclick="showEventModal(${event.id}); toggleBookmarks();">
                     <span class="remove-bookmark" onclick="event.stopPropagation(); removeBookmark(${event.id})">×</span>
-                    <div class="bookmark-item-title">${event.title}</div>
-                    <div class="bookmark-item-time">${event.time}</div>
+                    <div class="bookmark-item-title">${event.title[currentLang]}</div>
+                    <div class="bookmark-item-time">${event.time[currentLang]}</div>
                 </div>
             `).join('');
         }
